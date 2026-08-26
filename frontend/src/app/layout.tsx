@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { sora, plusJakartaSans } from "@/lib/fonts";
 import { AppProviders } from "@/providers/app-providers";
 import { CookieBanner } from "@/components/ui/cookie-banner";
+import { BackToTop } from "@/components/ui/back-to-top";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -50,6 +51,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <AppProviders>
           {children}
           <CookieBanner />
+          <BackToTop />
         </AppProviders>
       </body>
     </html>
