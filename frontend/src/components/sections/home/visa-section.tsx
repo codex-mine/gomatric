@@ -1,72 +1,161 @@
-import Link from 'next/link';
-import { Section } from '@/components/layout/section';
-import { Container } from '@/components/ui/container';
+"use client";
 
-const steps = [
-  { label: 'Consult', description: 'Expert advice on requirements.' },
-  { label: 'Documents', description: 'Gather and verify papers.' },
-  { label: 'Application', description: 'Submission and fee payment.' },
-  { label: 'Processing', description: 'Track your visa status.' },
-  { label: 'Decision', description: 'Receive your approved visa.' },
+import { useEffect, useRef } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { CheckCircle2, ArrowRight } from "lucide-react";
+import { Container } from "@/components/ui/container";
+
+const VISA_FEATURES = [
+  {
+    title: "Document Verification",
+    description: "Thorough review to ensure all your paperwork is flawless before submission.",
+  },
+  {
+    title: "Application Processing",
+    description: "Fast-tracked submission and ongoing status tracking until approval.",
+  },
+  {
+    title: "Interview Preparation",
+    description: "Expert guidance and mock sessions for embassy interviews.",
+  },
 ];
 
 export function VisaSection() {
-  return (
-    <Section variant="surface" className="py-20 md:py-32 overflow-hidden border-t border-border/50 relative">
-      {/* Background Travel Vectors — Passport Stamp & Trajectory */}
-      <div className="absolute top-10 left-10 w-72 h-72 pointer-events-none opacity-[0.035] select-none -rotate-12">
-        <svg viewBox="0 0 200 200" fill="none" className="w-full h-full stroke-[#061474]">
-          <circle cx="100" cy="100" r="90" strokeWidth="2" strokeDasharray="6 3" />
-          <circle cx="100" cy="100" r="75" strokeWidth="1" />
-          <rect x="35" y="80" width="130" height="40" rx="4" strokeWidth="1.5" />
-          <line x1="40" y1="92" x2="160" y2="92" strokeWidth="1" />
-          <line x1="40" y1="108" x2="160" y2="108" strokeWidth="1" />
-        </svg>
-      </div>
+  const sectionRef = useRef<HTMLElement>(null);
 
-      <Container className="relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-          <div>
-            <h2 className="text-4xl md:text-6xl font-bold font-sora text-text-primary leading-tight mb-6">
-              Less Paperwork.<br />
-              <span className="text-brand-primary">More Possibilities.</span>
-            </h2>
-            <p className="text-lg text-text-secondary mb-10 max-w-md">
-              Navigating visa requirements can be complex. Our expert team simplifies the process, maximizing your chances of approval with personalized guidance.
-            </p>
-            <Link 
-              href="/visa" 
-              className="inline-flex items-center justify-center h-12 px-8 rounded-[10px] bg-brand-accent text-white font-medium hover:bg-brand-accent-dark transition-colors shadow-md shadow-brand-accent/20"
-            >
-              Apply for Visa &rarr;
-            </Link>
-          </div>
+  useEffect(() => {
+    if (typeof window === "undefined" || !sectionRef.current) return;
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    const ctx = gsap.context(() => {
+      // Left Image Animation
+      gsap.from(".gsap-visa-image", {
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top 88%",
+          toggleActions: "play none none none",
+        },
+        x: -30,
+        opacity: 0,
+        duration: 0.8,
+        ease: "power3.out",
+      });
+
+      // Right Content Box Animation
+      gsap.from(".gsap-visa-content", {
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top 88%",
+          toggleActions: "play none none none",
+        },
+        x: 30,
+        opacity: 0,
+        duration: 0.8,
+        ease: "power3.out",
+      });
+
+      // Bullets Stagger
+      gsap.from(".gsap-visa-feature", {
+        scrollTrigger: {
+          trigger: ".gsap-visa-content",
+          start: "top 85%",
+          toggleActions: "play none none none",
+        },
+        y: 20,
+        opacity: 0,
+        stagger: 0.12,
+        duration: 0.6,
+        delay: 0.2,
+        ease: "power2.out",
+      });
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
+
+  return (
+    <section ref={sectionRef} className="py-20 md:py-28 bg-[#F8FAFC]/50 relative overflow-hidden">
+      <Container className="max-w-7xl">
+        {/* Split-Banner Card Container */}
+        <div className="grid grid-cols-1 lg:grid-cols-12   overflow-hidden shadow-xl border border-slate-100 items-stretch bg-white">
           
-          <div className="relative py-12 px-4">
-            {/* Background decorative elements */}
-            <div className="absolute top-0 right-0 w-64 h-64 bg-brand-primary/5 rounded-full blur-3xl -z-10" />
-            <div className="absolute bottom-0 left-0 w-48 h-48 bg-brand-accent/5 rounded-full blur-2xl -z-10" />
+          {/* ======================================================== */}
+          {/* Left Column: Real Open Passport & Visa Photo             */}
+          {/* ======================================================== */}
+          <div className="lg:col-span-6 gsap-visa-image relative min-h-[380px] sm:min-h-[440px] lg:min-h-[540px] w-full overflow-hidden bg-slate-900 group">
+            <Image
+              src="https://images.unsplash.com/photo-1544717305-2782549b5136?q=80&w=1200&auto=format&fit=crop"
+              alt="Real Passports with Approved Visa Page"
+              fill
+              sizes="(max-width: 1024px) 100vw, 50vw"
+              className="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
+            />
+            {/* Subtle natural lighting vignette */}
+            <div className="absolute inset-0 bg-black/10 group-hover:bg-black/5 transition-colors duration-500" />
+          </div>
+
+          {/* ======================================================== */}
+          {/* Right Column: Deep Navy Feature Box (Span 6)             */}
+          {/* ======================================================== */}
+          <div className="lg:col-span-6 gsap-visa-content bg-[#061474] p-8 sm:p-10 md:p-14 lg:p-16 flex flex-col justify-center relative overflow-hidden text-white">
             
-            <div className="relative border-l-2 border-brand-accent/20 pl-8 space-y-12 ml-4">
-              {steps.map((step, index) => (
-                <div key={index} className="relative">
-                  {/* Waypoint dot */}
-                  <div className="absolute -left-[41px] top-1 w-5 h-5 bg-white border-2 border-brand-accent rounded-full flex items-center justify-center">
-                    <div className="w-2 h-2 bg-brand-accent rounded-full" />
+            {/* Background Transparent Passport Stamp Vector */}
+            <div className="absolute -top-10 -right-10 w-72 h-72 pointer-events-none opacity-[0.04] select-none rotate-12">
+              <svg viewBox="0 0 200 200" fill="none" className="w-full h-full stroke-white">
+                <circle cx="100" cy="100" r="90" strokeWidth="2" strokeDasharray="6 3" />
+                <circle cx="100" cy="100" r="72" strokeWidth="1.25" />
+                <rect x="35" y="75" width="130" height="50" rx="6" strokeWidth="1.5" />
+              </svg>
+            </div>
+
+            <div className="relative z-10">
+              {/* Heading */}
+              <h2 className="font-sora text-3xl sm:text-4xl md:text-[42px] font-bold text-white leading-[1.18] tracking-tight mb-4">
+                Seamless Visa <br className="hidden sm:block" />
+                Processing
+              </h2>
+
+              {/* Subtitle */}
+              <p className="text-white/80 text-sm sm:text-base leading-relaxed mb-8 max-w-lg">
+                Navigate complex visa requirements with our expert team. We provide end-to-end assistance for tourist, business, and transit visas across major destinations worldwide.
+              </p>
+
+              {/* 3 Feature Bullets */}
+              <div className="space-y-6 mb-8">
+                {VISA_FEATURES.map((feature, idx) => (
+                  <div key={idx} className="gsap-visa-feature flex items-start gap-3.5">
+                    <div className="shrink-0 mt-0.5">
+                      <CheckCircle2 className="w-5 h-5 text-[#ED1B26]" />
+                    </div>
+                    <div>
+                      <h4 className="font-sora font-semibold text-base sm:text-lg text-white mb-1">
+                        {feature.title}
+                      </h4>
+                      <p className="text-white/75 text-xs sm:text-sm leading-relaxed max-w-md">
+                        {feature.description}
+                      </p>
+                    </div>
                   </div>
-                  
-                  <h4 className="text-xl font-sora font-semibold text-text-primary mb-1">
-                    {index + 1}. {step.label}
-                  </h4>
-                  <p className="text-text-secondary">
-                    {step.description}
-                  </p>
-                </div>
-              ))}
+                ))}
+              </div>
+
+              {/* CTA Button */}
+              <Link
+                href="/visa"
+                className="inline-flex items-center gap-2.5 px-7 py-3.5 bg-[#ED1B26] hover:bg-[#C4141E] text-white font-semibold text-sm sm:text-base rounded-xl transition-all shadow-lg shadow-[#ED1B26]/30 hover:shadow-xl hover:scale-[1.02] active:scale-[0.98] w-fit group"
+              >
+                <span>Explore Visa Services</span>
+                <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+              </Link>
             </div>
           </div>
+
         </div>
       </Container>
-    </Section>
+    </section>
   );
 }

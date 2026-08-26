@@ -21,7 +21,7 @@ export default function HomePage() {
       <DestinationsSection />
       <VisaSection />
       <ToursSection />
-      <WhySection />
+      {/* <WhySection /> */}
       <TestimonialsSection />
       <HowItWorksSection />
       <CtaFinalSection />
