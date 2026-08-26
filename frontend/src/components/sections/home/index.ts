@@ -1,0 +1,9 @@
+export { HeroSection } from './hero-section';
+export { ServicesSection } from './services-section';
+export { DestinationsSection } from './destinations-section';
+export { VisaSection } from './visa-section';
+export { ToursSection } from './tours-section';
+export { WhySection } from './why-section';
+export { TestimonialsSection } from './testimonials-section';
+export { HowItWorksSection } from './how-it-works-section';
+export { CtaFinalSection } from './cta-final-section';
