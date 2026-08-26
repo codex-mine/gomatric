@@ -6,7 +6,6 @@ import { usePathname } from "next/navigation";
 import gsap from "gsap";
 import { ChevronDown, ArrowRight, Menu, Search } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { Logo } from "./logo";
 import { MobileNav } from "./mobile-nav";
 
 interface DropdownItem {
@@ -27,8 +26,10 @@ const VISA_DROPDOWN_ITEMS: DropdownItem[] = [
 export function Navbar() {
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
   const [isVisaDropdownOpen, setIsVisaDropdownOpen] = useState(false);
-  const pathname = usePathname();
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
 
+  const pathname = usePathname();
   const navContainerRef = useRef<HTMLDivElement>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -38,6 +39,22 @@ export function Navbar() {
 
   const handleCloseMobileNav = useCallback(() => {
     setIsMobileNavOpen(false);
+  }, []);
+
+  // Track scroll position
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 60) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   // GSAP Entrance Animation on mount
@@ -63,13 +80,16 @@ export function Navbar() {
     if (isVisaDropdownOpen) {
       gsap.fromTo(
         dropdownRef.current,
-        { opacity: 0, y: 8, scale: 0.98 },
-        { opacity: 1, y: 0, scale: 1, duration: 0.2, ease: "power2.out" }
+        { opacity: 0, y: 10, scale: 0.96 },
+        { opacity: 1, y: 0, scale: 1, duration: 0.25, ease: "power2.out" }
       );
     }
   }, [isVisaDropdownOpen]);
 
-  // Check active states
+  // Determine if navbar is in minimized state
+  const isMinimized = isScrolled && !isHovered;
+
+  // Check active routes
   const isToursActive = pathname.startsWith("/tours");
   const isVisaActive = pathname.startsWith("/visa");
   const isServicesActive = pathname.startsWith("/services");
@@ -77,21 +97,64 @@ export function Navbar() {
 
   return (
     <>
-      <header className="fixed top-0 left-0 right-0 z-50 pt-3 md:pt-4 px-3 sm:px-6 lg:px-8 pointer-events-none">
+      <header className="fixed top-0 left-0 right-0 z-50 pt-3 md:pt-4 px-3 sm:px-6 lg:px-8 pointer-events-none flex justify-center">
         <div
           ref={navContainerRef}
-          className="max-w-7xl mx-auto bg-white/95 backdrop-blur-md rounded-2xl md:rounded-[20px] border border-slate-200/80 shadow-lg shadow-slate-900/[0.04] px-4 md:px-7 py-3 flex items-center justify-between pointer-events-auto transition-all duration-300"
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => {
+            setIsHovered(false);
+            setIsVisaDropdownOpen(false);
+          }}
+          className={cn(
+            "pointer-events-auto bg-white/95 backdrop-blur-md border border-slate-200/80 shadow-lg flex items-center justify-between relative transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] will-change-[width,max-width,padding,transform]",
+            isMinimized
+              ? "w-[68px] sm:w-[76px] h-[52px] md:h-[56px] rounded-full px-3 justify-center shadow-xl shadow-slate-900/15 ring-2 ring-[#ED1B26]/20 cursor-pointer hover:scale-105"
+              : "w-full max-w-7xl rounded-2xl md:rounded-[20px] px-4 md:px-7 py-3 shadow-slate-900/[0.04]"
+          )}
         >
-          {/* Left: Brand Logo */}
-          <Logo />
+          {/* ======================================================== */}
+          {/* Logo Section                                             */}
+          {/* ======================================================== */}
+          <div className="flex items-center shrink-0">
+            <Link
+              href="/"
+              className="flex items-center gap-2.5 group select-none"
+            >
+              {/* Red Circular Logo Icon with G */}
+              <div className="w-8 h-8 md:w-9 md:h-9 rounded-full bg-[#ED1B26] flex items-center justify-center text-white shadow-sm ring-2 ring-[#ED1B26]/20 transition-transform duration-500 group-hover:scale-105 shrink-0">
+                <span className="font-sora font-extrabold text-base md:text-lg leading-none translate-y-[-0.5px]">
+                  G
+                </span>
+              </div>
 
-          {/* Center: Desktop Navigation Links */}
-          <nav className="hidden lg:flex items-center gap-7 xl:gap-9 text-[15px]">
-            {/* Tours Link (Active Red Indicator with bar) */}
+              {/* Brand Text */}
+              <span
+                className={cn(
+                  "font-sora font-bold text-xl md:text-[22px] text-[#061474] tracking-tight transition-all duration-500 whitespace-nowrap",
+                  isMinimized ? "opacity-0 w-0 max-w-0 overflow-hidden" : "opacity-100 w-auto"
+                )}
+              >
+                GoMatric
+              </span>
+            </Link>
+          </div>
+
+          {/* ======================================================== */}
+          {/* Center: Desktop Navigation Links                         */}
+          {/* ======================================================== */}
+          <nav
+            className={cn(
+              "items-center gap-7 xl:gap-9 text-[15px] transition-all duration-500 ease-out",
+              isMinimized
+                ? "hidden opacity-0 pointer-events-none"
+                : "hidden lg:flex opacity-100 pointer-events-auto delay-100"
+            )}
+          >
+            {/* Tours Link */}
             <Link
               href="/tours"
               className={cn(
-                "relative font-medium py-1 transition-colors duration-200",
+                "relative font-medium py-1 transition-colors duration-200 whitespace-nowrap",
                 isToursActive
                   ? "text-[#ED1B26] font-semibold"
                   : "text-slate-700 hover:text-[#ED1B26]"
@@ -103,7 +166,7 @@ export function Navbar() {
               )}
             </Link>
 
-            {/* Visa with Dropdown */}
+            {/* Visa Dropdown */}
             <div
               className="relative"
               onMouseEnter={() => setIsVisaDropdownOpen(true)}
@@ -112,7 +175,7 @@ export function Navbar() {
               <Link
                 href="/visa"
                 className={cn(
-                  "flex items-center gap-1 font-medium py-1 transition-colors duration-200",
+                  "flex items-center gap-1 font-medium py-1 transition-colors duration-200 whitespace-nowrap",
                   isVisaActive
                     ? "text-[#ED1B26] font-semibold"
                     : "text-slate-700 hover:text-[#061474]"
@@ -127,13 +190,13 @@ export function Navbar() {
                 />
               </Link>
 
-              {/* Visa Dropdown Card */}
+              {/* Visa Dropdown Card (Unclipped, Above All Elements) */}
               {isVisaDropdownOpen && (
                 <div
                   ref={dropdownRef}
-                  className="absolute top-full -left-4 pt-3 w-80 z-50"
+                  className="absolute top-full -left-6 pt-3.5 w-80 z-50 pointer-events-auto"
                 >
-                  <div className="bg-white rounded-2xl border border-slate-200/80 shadow-xl shadow-slate-900/10 p-3 space-y-1">
+                  <div className="bg-white rounded-2xl border border-slate-200/90 shadow-2xl shadow-slate-900/15 p-3 space-y-1">
                     {VISA_DROPDOWN_ITEMS.map((item) => (
                       <Link
                         key={item.title}
@@ -160,7 +223,7 @@ export function Navbar() {
             <Link
               href="/services"
               className={cn(
-                "relative font-medium py-1 transition-colors duration-200",
+                "relative font-medium py-1 transition-colors duration-200 whitespace-nowrap",
                 isServicesActive
                   ? "text-[#061474] font-semibold"
                   : "text-slate-700 hover:text-[#061474]"
@@ -173,7 +236,7 @@ export function Navbar() {
             <Link
               href="/contact"
               className={cn(
-                "relative font-medium py-1 transition-colors duration-200",
+                "relative font-medium py-1 transition-colors duration-200 whitespace-nowrap",
                 isConsultationActive
                   ? "text-[#061474] font-semibold"
                   : "text-slate-700 hover:text-[#061474]"
@@ -183,26 +246,42 @@ export function Navbar() {
             </Link>
           </nav>
 
-          {/* Right Side Action Items */}
-          <div className="hidden lg:flex items-center gap-6">
+          {/* ======================================================== */}
+          {/* Right Side Action Items (Desktop)                        */}
+          {/* ======================================================== */}
+          <div
+            className={cn(
+              "items-center gap-6 transition-all duration-500 ease-out",
+              isMinimized
+                ? "hidden opacity-0 pointer-events-none"
+                : "hidden lg:flex opacity-100 pointer-events-auto delay-100"
+            )}
+          >
             <Link
               href="/contact"
-              className="text-[#061474] hover:text-[#ED1B26] font-semibold text-sm transition-colors"
+              className="text-[#061474] hover:text-[#ED1B26] font-semibold text-sm transition-colors whitespace-nowrap"
             >
               Contact Us
             </Link>
 
             <Link
               href="/booking"
-              className="h-11 px-6 rounded-xl bg-[#061474] hover:bg-[#030A3A] text-white font-semibold text-sm flex items-center justify-center gap-1.5 transition-all shadow-sm hover:shadow-md hover:scale-[1.02] active:scale-[0.98] group"
+              className="h-11 px-6 rounded-xl bg-[#061474] hover:bg-[#030A3A] text-white font-semibold text-sm flex items-center justify-center gap-1.5 transition-all shadow-sm hover:shadow-md hover:scale-[1.02] active:scale-[0.98] group whitespace-nowrap"
             >
               <span>Get Started</span>
               <ArrowRight className="w-4 h-4 text-white transition-transform duration-300 group-hover:translate-x-1" />
             </Link>
           </div>
 
-          {/* Mobile Right Controls: Search + Hamburger */}
-          <div className="flex lg:hidden items-center gap-2">
+          {/* ======================================================== */}
+          {/* Mobile Right Controls: Search + Hamburger                */}
+          {/* ======================================================== */}
+          <div
+            className={cn(
+              "items-center gap-2",
+              isMinimized ? "hidden" : "flex lg:hidden"
+            )}
+          >
             <button
               type="button"
               onClick={handleOpenMobileNav}
@@ -220,6 +299,7 @@ export function Navbar() {
               <Menu className="w-6 h-6" />
             </button>
           </div>
+
         </div>
       </header>
 

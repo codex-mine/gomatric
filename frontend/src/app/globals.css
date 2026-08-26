@@ -66,24 +66,18 @@
   --color-error: var(--error);
   --color-info: var(--info);
 
-  /* Secondary button */
-  --color-brand-secondary: #F4F5FF;
+  /* Radius */
+  --radius-xs: var(--radius-xs);
+  --radius-sm: var(--radius-sm);
+  --radius-md: var(--radius-md);
+  --radius-lg: var(--radius-lg);
+  --radius-xl: var(--radius-xl);
+  --radius-2xl: var(--radius-2xl);
+  --radius-pill: var(--radius-pill);
 
   /* Fonts */
   --font-sora: var(--font-sora);
-  --font-body: var(--font-body);
-
-  /* Container */
-  --container-lg: 1280px;
-  --container-xl: 1440px;
-
-  /* Breakpoints */
-  --breakpoint-xs: 375px;
-  --breakpoint-sm: 640px;
-  --breakpoint-md: 768px;
-  --breakpoint-lg: 1024px;
-  --breakpoint-xl: 1280px;
-  --breakpoint-2xl: 1440px;
+  --font-plus-jakarta: var(--font-plus-jakarta-sans);
 }
 
 /* ========================================
@@ -92,28 +86,19 @@
 
 html {
   scroll-behavior: smooth;
-}
-
-body {
-  background: var(--background);
-  color: var(--text-primary);
-  font-family: var(--font-body), system-ui, -apple-system, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Specific focus visible for buttons and interactive links */
-button:focus-visible,
-a:focus-visible {
-  outline: 2px solid var(--brand-primary);
-  outline-offset: 2px;
+body {
+  font-family: var(--font-plus-jakarta), system-ui, -apple-system, sans-serif;
+  color: var(--text-primary);
+  background-color: var(--background);
 }
 
-/* Remove default focus outline on form inputs - use clean 1px ring only */
-input,
-select,
-textarea {
-  outline: none !important;
+/* Headings use Sora */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-sora), system-ui, -apple-system, sans-serif;
 }
 
 /* Selection */
@@ -138,6 +123,36 @@ textarea {
 
 ::-webkit-scrollbar-thumb:hover {
   background: var(--text-muted);
+}
+
+/* Lenis smooth scrolling rules */
+html.lenis, html.lenis body {
+  height: auto !important;
+  min-height: 100%;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
+/* Input Global Overrides */
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none !important;
+  box-shadow: none !important;
 }
 
 /* Reduced motion */

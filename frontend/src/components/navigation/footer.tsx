@@ -9,6 +9,10 @@ import { Logo } from "./logo";
 
 export function Footer() {
   const footerRef = useRef<HTMLElement>(null);
+  const globeShapeRef = useRef<HTMLDivElement>(null);
+  const flightPathShapeRef = useRef<HTMLDivElement>(null);
+  const airplaneVectorRef = useRef<SVGGElement>(null);
+  const compassShapeRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (typeof window === "undefined" || !footerRef.current) return;
@@ -16,6 +20,77 @@ export function Footer() {
     gsap.registerPlugin(ScrollTrigger);
 
     const ctx = gsap.context(() => {
+      // ========================================================
+      // SCROLL-MATCHED BACKGROUND VECTOR SHAPE PARALLAX & ANIMATIONS
+      // ========================================================
+
+      // 1. Globe Parallax & Rotation driven by Scroll
+      if (globeShapeRef.current) {
+        gsap.to(globeShapeRef.current, {
+          scrollTrigger: {
+            trigger: footerRef.current,
+            start: "top bottom",
+            end: "bottom bottom",
+            scrub: 1,
+          },
+          rotation: 50,
+          y: 60,
+          scale: 1.18,
+          ease: "none",
+        });
+      }
+
+      // 2. Flight Trajectory & Moving Airplane on Scroll
+      if (flightPathShapeRef.current) {
+        gsap.to(flightPathShapeRef.current, {
+          scrollTrigger: {
+            trigger: footerRef.current,
+            start: "top bottom",
+            end: "bottom bottom",
+            scrub: 1.2,
+          },
+          x: -40,
+          y: -20,
+          ease: "none",
+        });
+      }
+
+      if (airplaneVectorRef.current) {
+        gsap.to(airplaneVectorRef.current, {
+          scrollTrigger: {
+            trigger: footerRef.current,
+            start: "top bottom",
+            end: "bottom bottom",
+            scrub: 1.5,
+          },
+          x: 140,
+          y: -45,
+          rotation: 32,
+          ease: "none",
+        });
+      }
+
+      // 3. Compass Rose Parallax & Reverse Rotation on Scroll
+      if (compassShapeRef.current) {
+        gsap.to(compassShapeRef.current, {
+          scrollTrigger: {
+            trigger: footerRef.current,
+            start: "top bottom",
+            end: "bottom bottom",
+            scrub: 1.3,
+          },
+          rotation: -65,
+          scale: 1.22,
+          x: 40,
+          y: -30,
+          ease: "none",
+        });
+      }
+
+      // ========================================================
+      // CONTENT ENTRANCE ANIMATIONS
+      // ========================================================
+
       // CTA Section Animation
       gsap.from(".gsap-footer-cta-text", {
         scrollTrigger: {
@@ -23,10 +98,10 @@ export function Footer() {
           start: "top 90%",
           toggleActions: "play none none none",
         },
-        y: 30,
+        y: 25,
         opacity: 0,
-        duration: 0.8,
-        ease: "power3.out",
+        duration: 0.7,
+        ease: "power2.out",
       });
 
       gsap.from(".gsap-footer-cta-btn", {
@@ -35,10 +110,10 @@ export function Footer() {
           start: "top 90%",
           toggleActions: "play none none none",
         },
-        scale: 0.94,
+        scale: 0.95,
         opacity: 0,
         duration: 0.6,
-        delay: 0.15,
+        delay: 0.1,
         ease: "power2.out",
       });
 
@@ -49,11 +124,11 @@ export function Footer() {
           start: "top 88%",
           toggleActions: "play none none none",
         },
-        y: 24,
+        y: 20,
         opacity: 0,
-        stagger: 0.1,
-        duration: 0.7,
-        ease: "power3.out",
+        stagger: 0.08,
+        duration: 0.65,
+        ease: "power2.out",
       });
 
       // Social Icons Stagger Pop
@@ -65,23 +140,10 @@ export function Footer() {
         },
         scale: 0.8,
         opacity: 0,
-        stagger: 0.06,
+        stagger: 0.05,
         duration: 0.4,
-        delay: 0.25,
+        delay: 0.15,
         ease: "back.out(1.5)",
-      });
-
-      // Bottom Bar Fade
-      gsap.from(".gsap-footer-bottom", {
-        scrollTrigger: {
-          trigger: ".gsap-footer-bottom",
-          start: "top 98%",
-          toggleActions: "play none none none",
-        },
-        opacity: 0,
-        y: 10,
-        duration: 0.6,
-        ease: "power2.out",
       });
     }, footerRef);
 
@@ -90,77 +152,84 @@ export function Footer() {
 
   return (
     <footer ref={footerRef} className="bg-[#040E56] text-white relative overflow-hidden">
+      
       {/* ======================================================== */}
-      {/* TRAVEL BACKGROUND VECTOR GRAPHICS & TRANSPARENT SHAPES */}
+      {/* SCROLL-ANIMATED TRAVEL BACKGROUND VECTORS               */}
       {/* ======================================================== */}
 
-      {/* 1. Subtle World Globe / Lat-Long Grid (Top Right) */}
-      <div className="absolute -top-16 -right-24 w-[480px] h-[480px] pointer-events-none opacity-[0.04]">
-        <svg viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full stroke-white">
+      {/* 1. Scroll-Rotating World Globe (Top Right) */}
+      <div
+        ref={globeShapeRef}
+        className="absolute -top-20 -right-20 w-[500px] h-[500px] pointer-events-none opacity-[0.05] origin-center will-change-transform"
+      >
+        <svg viewBox="0 0 400 400" fill="none" className="w-full h-full stroke-white">
           <circle cx="200" cy="200" r="180" strokeWidth="1.5" />
           <circle cx="200" cy="200" r="130" strokeWidth="1" strokeDasharray="4 4" />
           <circle cx="200" cy="200" r="75" strokeWidth="1" />
-          {/* Latitude & Longitude ellipse arcs */}
           <ellipse cx="200" cy="200" rx="180" ry="80" strokeWidth="1" />
           <ellipse cx="200" cy="200" rx="80" ry="180" strokeWidth="1" />
           <line x1="20" y1="200" x2="380" y2="200" strokeWidth="1" />
           <line x1="200" y1="20" x2="200" y2="380" strokeWidth="1" />
-          {/* Compass 45-degree ticks */}
           <line x1="72" y1="72" x2="328" y2="328" strokeWidth="1" strokeDasharray="3 3" />
           <line x1="328" y1="72" x2="72" y2="328" strokeWidth="1" strokeDasharray="3 3" />
         </svg>
       </div>
 
-      {/* 2. Curved Flight Trajectory / Flight Route Line with Airplane (Middle Background) */}
-      <div className="absolute top-12 left-0 right-0 w-full h-[320px] pointer-events-none overflow-hidden opacity-[0.06]">
-        <svg viewBox="0 0 1440 320" fill="none" preserveAspectRatio="none" className="w-full h-full">
-          {/* Main flight arc 1 */}
+      {/* 2. Scroll-Moving Flight Route Line & Airplane Vector */}
+      <div
+        ref={flightPathShapeRef}
+        className="absolute top-10 left-0 right-0 w-full h-[360px] pointer-events-none overflow-hidden opacity-[0.08] will-change-transform"
+      >
+        <svg viewBox="0 0 1440 360" fill="none" preserveAspectRatio="none" className="w-full h-full">
+          {/* Main Flight Trajectory Arc */}
           <path
-            d="M -50,220 C 320,40 680,290 1100,80 C 1280,0 1420,120 1520,60"
+            d="M -50,240 C 300,30 680,290 1080,70 C 1260,0 1420,120 1520,60"
             stroke="white"
             strokeWidth="1.75"
             strokeDasharray="8 8"
           />
-          {/* Secondary flight arc 2 */}
+          {/* Secondary Red Accent Arc */}
           <path
-            d="M 120,300 C 450,150 820,50 1350,220"
+            d="M 100,320 C 420,140 820,40 1380,240"
             stroke="#ED1B26"
-            strokeWidth="1.5"
-            strokeDasharray="5 5"
-            className="opacity-40"
+            strokeWidth="1.75"
+            strokeDasharray="6 6"
+            className="opacity-60"
           />
-          {/* Waypoint markers along the route */}
-          <circle cx="320" cy="130" r="4" fill="white" />
+          {/* Waypoints */}
+          <circle cx="300" cy="125" r="4" fill="white" />
           <circle cx="680" cy="190" r="5" fill="#ED1B26" />
-          <circle cx="1100" cy="80" r="4" fill="white" />
-          {/* Airplane Silhouette vector */}
-          <g transform="translate(680, 175) rotate(22) scale(0.9)">
+          <circle cx="1080" cy="70" r="4" fill="white" />
+          
+          {/* Airplane Silhouette that moves across along the scroll */}
+          <g ref={airplaneVectorRef} transform="translate(620, 160) rotate(20) scale(1.1)">
             <path
               d="M12 2L15 9L22 10L17 14L18.5 21L12 17.5L5.5 21L7 14L2 10L9 9L12 2Z"
-              fill="white"
-              opacity="0.8"
+              fill="#ED1B26"
+              className="drop-shadow-[0_0_8px_rgba(237,27,38,0.6)]"
             />
           </g>
         </svg>
       </div>
 
-      {/* 3. Navigation Compass Rose & Coordinate Dial (Bottom Left Background) */}
-      <div className="absolute -bottom-20 -left-20 w-80 h-80 pointer-events-none opacity-[0.04]">
+      {/* 3. Scroll-Rotating Compass Rose & Coordinates (Bottom Left) */}
+      <div
+        ref={compassShapeRef}
+        className="absolute -bottom-24 -left-24 w-96 h-96 pointer-events-none opacity-[0.05] origin-center will-change-transform"
+      >
         <svg viewBox="0 0 300 300" fill="none" className="w-full h-full stroke-white">
           <circle cx="150" cy="150" r="140" strokeWidth="1" strokeDasharray="3 3" />
           <circle cx="150" cy="150" r="100" strokeWidth="1" />
-          {/* Compass Diamond Star */}
           <polygon points="150,30 162,138 270,150 162,162 150,270 138,162 30,150 138,138" strokeWidth="1.5" />
           <polygon points="150,70 157,143 230,150 157,157 150,230 143,157 70,150 143,143" strokeWidth="0.75" strokeDasharray="2 2" />
         </svg>
       </div>
 
-     
-      {/* Red Route accent element at top edge */}
-      <div className="absolute top-0 left-0 right-0 h-[2px] bg-brand-accent opacity-80" />
+      {/* Top Red Trajectory Hairline Border */}
+      <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#ED1B26] to-transparent opacity-80 z-10" />
 
       {/* ======================================================== */}
-      {/* FOOTER CONTENT */}
+      {/* FOOTER CONTENT                                          */}
       {/* ======================================================== */}
 
       {/* Top CTA Banner Section */}
