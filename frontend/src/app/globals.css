@@ -102,10 +102,18 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Focus visible ring */
-:focus-visible {
+/* Specific focus visible for buttons and interactive links */
+button:focus-visible,
+a:focus-visible {
   outline: 2px solid var(--brand-primary);
   outline-offset: 2px;
+}
+
+/* Remove default focus outline on form inputs - use clean 1px ring only */
+input,
+select,
+textarea {
+  outline: none !important;
 }
 
 /* Selection */

@@ -304,8 +304,8 @@ export function Footer() {
               </li>
               <li className="flex items-center gap-3">
                 <Mail className="w-4 h-4 text-[#ED1B26] shrink-0" />
-                <a href="mailto:hello@gomatric.com" className="hover:text-white transition-colors">
-                  hello@gomatric.com
+                <a href="mailto:gometricofficial@gmail.com" className="hover:text-white transition-colors">
+                  gometricofficial@gmail.com
                 </a>
               </li>
             </ul>

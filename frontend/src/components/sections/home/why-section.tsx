@@ -37,8 +37,25 @@ const reasons = [
 
 export function WhySection() {
   return (
-    <Section variant="navy" className="py-20 md:py-32 bg-brand-primary-dark text-white">
-      <Container>
+    <Section variant="navy" className="py-20 md:py-32 bg-brand-primary-dark text-white relative overflow-hidden">
+      {/* Background Travel Vectors — Compass Dial & Coordinate Grid */}
+      <div className="absolute top-1/2 -left-20 -translate-y-1/2 w-96 h-96 pointer-events-none opacity-[0.03] select-none">
+        <svg viewBox="0 0 300 300" fill="none" className="w-full h-full stroke-white">
+          <circle cx="150" cy="150" r="140" strokeWidth="1.5" strokeDasharray="4 4" />
+          <circle cx="150" cy="150" r="90" strokeWidth="1" />
+          <polygon points="150,20 160,140 280,150 160,160 150,280 140,160 20,150 140,140" strokeWidth="1" />
+        </svg>
+      </div>
+
+      <div className="absolute -bottom-16 right-10 w-80 h-80 pointer-events-none opacity-[0.03] select-none">
+        <svg viewBox="0 0 300 300" fill="none" className="w-full h-full stroke-white">
+          <ellipse cx="150" cy="150" rx="140" ry="60" strokeWidth="1" strokeDasharray="5 5" />
+          <ellipse cx="150" cy="150" rx="60" ry="140" strokeWidth="1" strokeDasharray="5 5" />
+          <circle cx="150" cy="150" r="140" strokeWidth="1" />
+        </svg>
+      </div>
+
+      <Container className="relative z-10">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold font-sora mb-4">Why GoMatric?</h2>
           <p className="text-lg text-white/70 max-w-2xl mx-auto">
@@ -51,7 +68,7 @@ export function WhySection() {
             const Icon = reason.icon;
             return (
               <div key={index} className="flex flex-col items-center text-center group">
-                <div className="w-16 h-16 rounded-2xl bg-white/10 flex items-center justify-center mb-6 text-brand-accent group-hover:bg-brand-accent group-hover:text-white transition-all duration-300">
+                <div className="w-16 h-16 rounded-2xl bg-white/10 flex items-center justify-center mb-6 text-brand-accent group-hover:bg-brand-accent group-hover:text-white transition-all duration-300 shadow-sm">
                   <Icon size={32} strokeWidth={1.5} />
                 </div>
                 <h3 className="text-xl font-sora font-semibold mb-3">{reason.title}</h3>

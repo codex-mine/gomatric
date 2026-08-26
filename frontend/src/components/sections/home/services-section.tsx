@@ -45,8 +45,18 @@ const services = [
 
 export function ServicesSection() {
   return (
-    <Section variant="default" className="py-20 md:py-32">
-      <Container>
+    <Section variant="default" className="py-20 md:py-32 relative overflow-hidden">
+      {/* Background Travel Vectors */}
+      <div className="absolute top-10 right-0 w-96 h-96 pointer-events-none opacity-[0.03] select-none">
+        <svg viewBox="0 0 400 400" fill="none" className="w-full h-full stroke-[#061474]">
+          <circle cx="200" cy="200" r="180" strokeWidth="1.5" />
+          <ellipse cx="200" cy="200" rx="180" ry="70" strokeWidth="1" strokeDasharray="6 4" />
+          <ellipse cx="200" cy="200" rx="70" ry="180" strokeWidth="1" strokeDasharray="6 4" />
+          <path d="M 50,300 Q 200,100 350,250" stroke="#ED1B26" strokeWidth="2" strokeDasharray="4 4" />
+        </svg>
+      </div>
+
+      <Container className="relative z-10">
         <SectionHeading subtitle="SERVICES" title="Choose Your Path" />
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-12">
@@ -55,8 +65,13 @@ export function ServicesSection() {
             return (
               <div 
                 key={index} 
-                className="relative bg-white border border-border rounded-[14px] p-8 hover:shadow-md hover:-translate-y-1 transition-all duration-300 group"
+                className="relative bg-white border border-border rounded-[14px] p-8 hover:shadow-md hover:-translate-y-1 transition-all duration-300 group overflow-hidden"
               >
+                {/* Background Card Silhouette Watermark */}
+                <div className="absolute -bottom-6 -right-6 w-24 h-24 pointer-events-none opacity-[0.03] select-none group-hover:scale-110 transition-transform duration-500">
+                  <Icon className="w-full h-full text-brand-primary" />
+                </div>
+
                 {/* Editorial Number */}
                 <span className="absolute top-4 right-6 text-6xl font-sora font-bold text-brand-primary/5 pointer-events-none">
                   {String(index + 1).padStart(2, '0')}

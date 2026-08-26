@@ -1,8 +1,6 @@
 import Link from 'next/link';
 import { Section } from '@/components/layout/section';
 import { Container } from '@/components/ui/container';
-import { RouteLine } from '@/components/visual/route-line';
-import { Waypoint } from '@/components/visual/waypoint';
 
 const steps = [
   { label: 'Consult', description: 'Expert advice on requirements.' },
@@ -14,8 +12,19 @@ const steps = [
 
 export function VisaSection() {
   return (
-    <Section variant="surface" className="py-20 md:py-32 overflow-hidden border-t border-border/50">
-      <Container>
+    <Section variant="surface" className="py-20 md:py-32 overflow-hidden border-t border-border/50 relative">
+      {/* Background Travel Vectors — Passport Stamp & Trajectory */}
+      <div className="absolute top-10 left-10 w-72 h-72 pointer-events-none opacity-[0.035] select-none -rotate-12">
+        <svg viewBox="0 0 200 200" fill="none" className="w-full h-full stroke-[#061474]">
+          <circle cx="100" cy="100" r="90" strokeWidth="2" strokeDasharray="6 3" />
+          <circle cx="100" cy="100" r="75" strokeWidth="1" />
+          <rect x="35" y="80" width="130" height="40" rx="4" strokeWidth="1.5" />
+          <line x1="40" y1="92" x2="160" y2="92" strokeWidth="1" />
+          <line x1="40" y1="108" x2="160" y2="108" strokeWidth="1" />
+        </svg>
+      </div>
+
+      <Container className="relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           <div>
             <h2 className="text-4xl md:text-6xl font-bold font-sora text-text-primary leading-tight mb-6">
@@ -27,7 +36,7 @@ export function VisaSection() {
             </p>
             <Link 
               href="/visa" 
-              className="inline-flex items-center justify-center h-12 px-8 rounded-[10px] bg-brand-accent text-white font-medium hover:bg-brand-accent-dark transition-colors"
+              className="inline-flex items-center justify-center h-12 px-8 rounded-[10px] bg-brand-accent text-white font-medium hover:bg-brand-accent-dark transition-colors shadow-md shadow-brand-accent/20"
             >
               Apply for Visa &rarr;
             </Link>

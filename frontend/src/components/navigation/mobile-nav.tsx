@@ -211,7 +211,7 @@ export function MobileNav({ isOpen, onClose }: MobileNavProps) {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search destinations..."
-              className="w-full h-11 pl-10 pr-4 bg-[#F8FAFC] border border-slate-200/80 rounded-xl text-sm text-[#0F172A] placeholder:text-slate-400 focus:outline-none focus:border-[#061474] focus:bg-white transition-all"
+              className="w-full h-11 pl-10 pr-4 bg-[#F8FAFC] border border-slate-200/80 rounded-xl text-sm text-[#0F172A] placeholder:text-slate-400 outline-none focus:outline-none focus:ring-1 focus:ring-slate-300 focus:border-slate-300 focus:bg-white transition-colors"
             />
           </form>
 
