@@ -21,15 +21,15 @@ export function Logo({
     <Link
       href="/"
       onClick={onClick}
-      className={cn("flex items-center gap-2.5 group select-none", className)}
+      className={cn("flex items-center gap-3 group select-none", className)}
     >
       {/* Large Crisp Emblem Icon */}
-      <div className="relative w-9 h-9 sm:w-10 sm:h-10 rounded-full overflow-hidden shrink-0 transition-transform duration-300 group-hover:scale-105 shadow-xs">
+      <div className="relative w-11 h-11 sm:w-12 sm:h-12 rounded-full overflow-hidden shrink-0 transition-transform duration-300 group-hover:scale-105 shadow-xs">
         <Image
           src="/fav.png"
           alt="GoMatric"
           fill
-          sizes="40px"
+          sizes="56px"
           priority
           className="object-contain"
         />
@@ -39,7 +39,7 @@ export function Logo({
       {showText && (
         <span
           className={cn(
-            "font-sora font-bold text-xl sm:text-[22px] tracking-tight transition-colors duration-300",
+            "font-sora font-bold text-2xl sm:text-[26px] tracking-tight transition-colors duration-300",
             isWhite ? "text-white" : "text-[#061474]"
           )}
         >

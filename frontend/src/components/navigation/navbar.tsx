@@ -109,7 +109,7 @@ export function Navbar() {
           className={cn(
             "pointer-events-auto bg-white/95 backdrop-blur-md border border-slate-200/80 shadow-sm flex items-center justify-between relative transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] will-change-[width,max-width,padding,transform]",
             isMinimized
-              ? "w-[68px] sm:w-[76px] h-[52px] md:h-[56px] rounded-full px-3 justify-center shadow-sm ring-1 ring-[#ED1B26]/20 cursor-pointer hover:scale-105"
+              ? "w-[76px] sm:w-[84px] h-[56px] md:h-[60px] rounded-full px-3.5 justify-center shadow-sm ring-1 ring-[#ED1B26]/20 cursor-pointer hover:scale-105"
               : "w-full max-w-7xl rounded-2xl md:rounded-[20px] px-4 md:px-7 py-3 shadow-sm"
           )}
         >
@@ -119,15 +119,15 @@ export function Navbar() {
           <div className="flex items-center shrink-0">
             <Link
               href="/"
-              className="flex items-center gap-2.5 group select-none"
+              className="flex items-center gap-3 group select-none"
             >
               {/* Large Crisp Emblem Icon */}
-              <div className="relative w-9 h-9 sm:w-10 sm:h-10 rounded-full overflow-hidden shrink-0 transition-transform duration-300 group-hover:scale-105 shadow-xs">
+              <div className="relative w-10 h-10 sm:w-11 sm:h-11 md:w-12 md:h-12 rounded-full overflow-hidden shrink-0 transition-transform duration-300 group-hover:scale-105 shadow-xs">
                 <Image
                   src="/fav.png"
                   alt="GoMatric"
                   fill
-                  sizes="40px"
+                  sizes="56px"
                   priority
                   className="object-contain"
                 />
@@ -136,7 +136,7 @@ export function Navbar() {
               {/* Horizontal Brand Typography */}
               <span
                 className={cn(
-                  "font-sora font-bold text-xl sm:text-[22px] text-[#061474] tracking-tight transition-all duration-500 whitespace-nowrap",
+                  "font-sora font-bold text-2xl sm:text-[25px] text-[#061474] tracking-tight transition-all duration-500 whitespace-nowrap",
                   isMinimized ? "opacity-0 w-0 max-w-0 overflow-hidden" : "opacity-100 w-auto"
                 )}
               >
