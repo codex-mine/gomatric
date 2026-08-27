@@ -14,7 +14,9 @@ class ApiClient {
     body?: unknown,
     options?: RequestOptions
   ): Promise<T> {
-    const url = `${this.baseUrl}${endpoint}`;
+    // Ensure endpoint has leading slash
+    const cleanEndpoint = endpoint.startsWith("/") ? endpoint : `/${endpoint}`;
+    const url = `${this.baseUrl}${cleanEndpoint}`;
 
     let token: string | null = null;
     if (typeof window !== "undefined") {
@@ -55,9 +57,15 @@ class ApiClient {
     }
 
     const json = await response.json();
-    // Support NestJS TransformResponseInterceptor: { success: true, data: ... }
-    if (json && typeof json === "object" && "success" in json && "data" in json) {
-      return json.data as T;
+
+    // Support NestJS TransformResponseInterceptor: { success: true, data: ..., meta?: ... }
+    if (json && typeof json === "object" && "success" in json) {
+      if ("meta" in json && "data" in json) {
+        return { data: json.data, meta: json.meta } as T;
+      }
+      if ("data" in json) {
+        return json.data as T;
+      }
     }
 
     return json as T;

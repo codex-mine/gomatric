@@ -1,0 +1,54 @@
+export enum VisaCategory {
+  TOURIST = 'TOURIST',
+  BUSINESS = 'BUSINESS',
+  STUDENT = 'STUDENT',
+  WORK = 'WORK',
+  TRANSIT = 'TRANSIT',
+  MEDICAL = 'MEDICAL',
+  FAMILY_VISIT = 'FAMILY_VISIT',
+  RELIGIOUS_UMRAH = 'RELIGIOUS_UMRAH',
+  OTHER = 'OTHER',
+}
+
+export enum VisaEntryType {
+  SINGLE = 'SINGLE',
+  DOUBLE = 'DOUBLE',
+  MULTIPLE = 'MULTIPLE',
+}
+
+export enum ProcessingTimeUnit {
+  HOURS = 'HOURS',
+  DAYS = 'DAYS',
+  WEEKS = 'WEEKS',
+  MONTHS = 'MONTHS',
+}
+
+export enum DocumentCategory {
+  IDENTIFICATION = 'IDENTIFICATION',
+  FINANCIAL = 'FINANCIAL',
+  EMPLOYMENT = 'EMPLOYMENT',
+  TRAVEL = 'TRAVEL',
+  ACCOMMODATION = 'ACCOMMODATION',
+  SPONSORSHIP = 'SPONSORSHIP',
+  LEGAL = 'LEGAL',
+  OTHER = 'OTHER',
+}
+
+export enum ApplicantType {
+  ALL = 'ALL',
+  ADULT = 'ADULT',
+  MINOR = 'MINOR',
+  EMPLOYED = 'EMPLOYED',
+  SELF_EMPLOYED = 'SELF_EMPLOYED',
+  STUDENT = 'STUDENT',
+  RETIRED = 'RETIRED',
+  SPONSORED = 'SPONSORED',
+  UNEMPLOYED = 'UNEMPLOYED',
+}
+
+export enum AppointmentBookingType {
+  ONLINE = 'ONLINE',
+  WALK_IN = 'WALK_IN',
+  AGENCY_ASSISTED = 'AGENCY_ASSISTED',
+  NOT_REQUIRED = 'NOT_REQUIRED',
+}
