@@ -64,10 +64,14 @@ export class DatabaseSeederService implements OnApplicationBootstrap {
   ) {}
 
   async onApplicationBootstrap() {
-    await this.seedUsers();
-    await this.seedCountries();
-    await this.seedVisaTypes();
-    await this.seedVisaServices();
+    try {
+      await this.seedUsers();
+      await this.seedCountries();
+      await this.seedVisaTypes();
+      await this.seedVisaServices();
+    } catch (err: any) {
+      this.logger.warn(`Database seeding skipped or encountered error: ${err.message}`);
+    }
   }
 
   async seedUsers() {

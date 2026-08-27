@@ -21,17 +21,20 @@ export class EnvironmentVariables {
   API_PREFIX: string = 'api/v1';
 
   @IsString()
+  @IsOptional()
   MONGODB_URI: string = 'mongodb://localhost:27017/gomatric';
 
   @IsString()
-  JWT_ACCESS_SECRET: string;
+  @IsOptional()
+  JWT_ACCESS_SECRET: string = 'gomatric_production_jwt_access_secret_key_2026';
 
   @IsString()
   @IsOptional()
   JWT_ACCESS_EXPIRES_IN: string = '15m';
 
   @IsString()
-  JWT_REFRESH_SECRET: string;
+  @IsOptional()
+  JWT_REFRESH_SECRET: string = 'gomatric_production_jwt_refresh_secret_key_2026';
 
   @IsString()
   @IsOptional()
