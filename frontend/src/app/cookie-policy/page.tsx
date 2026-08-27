@@ -1,84 +1,257 @@
-import { Metadata } from 'next';
-import { PageShell } from '@/components/layout/page-shell';
-import { Section } from '@/components/layout/section';
-import { PageHero } from '@/components/layout/hero';
-import { Container } from '@/components/layout/container';
+"use client";
 
-export const metadata: Metadata = {
-  title: 'Cookie Policy | GoMatric',
-  description: 'How we use cookies to improve your experience.',
-};
+import { useState, useEffect } from "react";
+import { PageShell } from "@/components/layout/page-shell";
+import { PageHero } from "@/components/layout/page-hero";
+import { Container } from "@/components/ui/container";
+import {
+  Cookie,
+  Layers,
+  CheckCircle2,
+  BarChart3,
+  Sliders,
+  Settings2,
+  Mail,
+} from "lucide-react";
+import { cn } from "@/lib/utils";
+
+interface CookieSection {
+  id: string;
+  number: string;
+  title: string;
+  icon: typeof Cookie;
+  content: React.ReactNode;
+}
+
+const COOKIE_SECTIONS: CookieSection[] = [
+  {
+    id: "what-are-cookies",
+    number: "01",
+    title: "What Are Cookies",
+    icon: Cookie,
+    content: (
+      <>
+        <p>
+          Cookies are compact text files stored on your computer or mobile device when you interact with online platforms. They enable the website to recognize your browser, retain preferences, and optimize your navigation flow.
+        </p>
+      </>
+    ),
+  },
+  {
+    id: "types-of-cookies",
+    number: "02",
+    title: "Types of Cookies We Use",
+    icon: Layers,
+    content: (
+      <>
+        <p>
+          GoMatric utilizes both first-party cookies (set directly by our infrastructure) and third-party cookies (set by certified partners such as payment gateways, map providers, and analytics services):
+        </p>
+      </>
+    ),
+  },
+  {
+    id: "essential-cookies",
+    number: "03",
+    title: "Essential Cookies",
+    icon: CheckCircle2,
+    content: (
+      <>
+        <p>
+          Strictly necessary cookies required to operate our travel booking engine, secure transactions, and maintain authenticated user sessions. These cannot be disabled without impairing core functionality.
+        </p>
+      </>
+    ),
+  },
+  {
+    id: "analytics-cookies",
+    number: "04",
+    title: "Analytics & Performance",
+    icon: BarChart3,
+    content: (
+      <>
+        <p>
+          These cookies collect aggregated, anonymized metrics on how travelers browse our tours and visa packages, assisting us in enhancing platform performance and responsiveness.
+        </p>
+      </>
+    ),
+  },
+  {
+    id: "preference-cookies",
+    number: "05",
+    title: "Preference & Customization",
+    icon: Sliders,
+    content: (
+      <>
+        <p>
+          Preference cookies record your chosen currency, destination favorites, and search filters so you do not need to reconfigure them on every return visit.
+        </p>
+      </>
+    ),
+  },
+  {
+    id: "managing-cookies",
+    number: "06",
+    title: "Managing Your Cookie Settings",
+    icon: Settings2,
+    content: (
+      <>
+        <p>
+          You hold the right to modify or withdraw cookie consent at any time through your browser settings or our on-screen Cookie Preference center.
+        </p>
+      </>
+    ),
+  },
+  {
+    id: "contact-team",
+    number: "07",
+    title: "Contact Privacy Team",
+    icon: Mail,
+    content: (
+      <>
+        <p>
+          For queries concerning our cookie policy or tracking technologies, please contact our team:
+        </p>
+        <div className="mt-5 p-6 rounded-2xl bg-[#F8FAFC] border border-slate-200/80 text-sm text-slate-700 space-y-2 shadow-xs">
+          <div>
+            <strong className="text-[#061474] font-semibold">Email:</strong>{" "}
+            <a
+              href="mailto:privacy@gomatric.com"
+              className="text-[#ED1B26] hover:underline font-medium"
+            >
+              privacy@gomatric.com
+            </a>
+          </div>
+          <div>
+            <strong className="text-[#061474] font-semibold">Address:</strong>{" "}
+            <span>GoMatric Headquarters, 100 Global Way, Metropolis, NY 10001</span>
+          </div>
+        </div>
+      </>
+    ),
+  },
+];
 
 export default function CookiePolicyPage() {
+  const [activeSection, setActiveSection] = useState<string>("what-are-cookies");
+
+  // ScrollSpy listener
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY + 200;
+
+      for (const section of COOKIE_SECTIONS) {
+        const el = document.getElementById(section.id);
+        if (el) {
+          const top = el.offsetTop;
+          const height = el.offsetHeight;
+          if (scrollPosition >= top && scrollPosition < top + height) {
+            setActiveSection(section.id);
+            break;
+          }
+        }
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const handleNavClick = (id: string) => {
+    setActiveSection(id);
+    const element = document.getElementById(id);
+    if (element) {
+      const topOffset = element.offsetTop - 120;
+      window.scrollTo({
+        top: topOffset,
+        behavior: "smooth",
+      });
+    }
+  };
+
   return (
     <PageShell>
       <PageHero
         title="Cookie Policy"
         subtitle="LEGAL"
-        className="py-20 md:py-28" // compact hero
+        description="Learn how GoMatric uses cookies and tracking technologies to optimize your travel booking experience."
       />
-      <Section className="py-12 md:py-20">
-        <Container>
-          <div className="grid lg:grid-cols-[250px_1fr] gap-12 items-start">
-            {/* Sticky TOC on desktop */}
-            <div className="hidden lg:block sticky top-24">
-              <h3 className="font-sora font-semibold mb-4 text-text-primary">Contents</h3>
-              <nav className="flex flex-col space-y-3 text-sm font-medium text-text-secondary">
-                <a href="#what-are-cookies" className="hover:text-brand-primary transition-colors">What Cookies Are</a>
-                <a href="#types-of-cookies" className="hover:text-brand-primary transition-colors">Types of Cookies</a>
-                <a href="#essential" className="hover:text-brand-primary transition-colors">Essential Cookies</a>
-                <a href="#analytics" className="hover:text-brand-primary transition-colors">Analytics Cookies</a>
-                <a href="#preferences" className="hover:text-brand-primary transition-colors">Preference Cookies</a>
-                <a href="#managing-cookies" className="hover:text-brand-primary transition-colors">Managing Cookies</a>
-                <a href="#contact" className="hover:text-brand-primary transition-colors">Contact</a>
+
+      <section className="py-14 md:py-20 bg-white min-h-screen">
+        <Container className="max-w-7xl">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+            
+            {/* Left Column: Sticky Table of Contents (Span 4) */}
+            <aside className="lg:col-span-4 sticky top-28 hidden lg:block">
+              <nav className="space-y-1 pr-4">
+                {COOKIE_SECTIONS.map((section) => {
+                  const isActive = activeSection === section.id;
+                  return (
+                    <button
+                      key={section.id}
+                      type="button"
+                      onClick={() => handleNavClick(section.id)}
+                      className={cn(
+                        "w-full flex items-center gap-3.5 py-2.5 px-3 rounded-xl text-left text-sm transition-all duration-200 cursor-pointer group",
+                        isActive
+                          ? "text-[#ED1B26] font-bold"
+                          : "text-slate-600 hover:text-[#061474] font-medium"
+                      )}
+                    >
+                      <span
+                        className={cn(
+                          "font-mono text-xs transition-colors shrink-0",
+                          isActive ? "text-[#ED1B26]" : "text-slate-400 group-hover:text-slate-600"
+                        )}
+                      >
+                        {section.number}
+                      </span>
+                      <span className="truncate">{section.title}</span>
+                    </button>
+                  );
+                })}
               </nav>
+            </aside>
+
+            {/* Right Column: Content Blocks (Span 8) */}
+            <div className="lg:col-span-8 space-y-12 lg:space-y-16">
+              {COOKIE_SECTIONS.map((section) => {
+                const Icon = section.icon;
+                return (
+                  <article
+                    key={section.id}
+                    id={section.id}
+                    className="scroll-mt-32 pb-12 border-b border-slate-100 last:border-0 last:pb-0"
+                  >
+                    {/* Section Header */}
+                    <div className="flex items-start justify-between gap-4 mb-5">
+                      <div className="flex items-baseline gap-2.5">
+                        <span className="font-mono text-xl sm:text-2xl font-bold text-[#061474]/40 select-none">
+                          {section.number}
+                        </span>
+                        <h2 className="font-sora font-bold text-2xl sm:text-3xl text-[#061474] leading-tight">
+                          {section.title}
+                        </h2>
+                      </div>
+
+                      {/* Pure Borderless, Backgroundless Vector SVG Icon */}
+                      <div className="text-slate-300 shrink-0 select-none pointer-events-none">
+                        <Icon className="w-10 h-10 sm:w-12 sm:h-12 stroke-[1.25]" />
+                      </div>
+                    </div>
+
+                    {/* Section Content Body */}
+                    <div className="space-y-4 text-slate-600 text-[15px] sm:text-base leading-relaxed">
+                      {section.content}
+                    </div>
+                  </article>
+                );
+              })}
             </div>
 
-            {/* Content */}
-            <div className="prose prose-slate max-w-[760px] mx-auto lg:mx-0 prose-headings:font-sora prose-headings:font-bold prose-h2:text-2xl prose-h2:mt-10 prose-p:text-base md:prose-p:text-[17px] prose-p:leading-relaxed text-text-secondary">
-              <p className="text-sm font-medium">Last updated: {new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</p>
-
-              <h2 id="what-are-cookies">What Are Cookies</h2>
-              <p>
-                Cookies are small text files that are stored on your computer or mobile device when you visit a website. They are widely used in order to make websites work, or work more efficiently, as well as to provide information to the owners of the site.
-              </p>
-
-              <h2 id="types-of-cookies">Types of Cookies We Use</h2>
-              <p>
-                We use different types of cookies to run the GoMatric website and provide our services. Some are set by us (first-party cookies) and some are set by third parties (third-party cookies).
-              </p>
-
-              <h2 id="essential">Essential Cookies</h2>
-              <p>
-                These cookies are strictly necessary to provide you with services available through our website and to use some of its features. Because these cookies are strictly necessary to deliver the website, you cannot refuse them without impacting how our site functions.
-              </p>
-
-              <h2 id="analytics">Analytics Cookies</h2>
-              <p>
-                These cookies collect information that is used either in aggregate form to help us understand how our website is being used or how effective our marketing campaigns are, or to help us customize our website and application for you in order to enhance your experience.
-              </p>
-
-              <h2 id="preferences">Preference Cookies</h2>
-              <p>
-                These cookies allow our website to remember choices you make (such as your language preference or the region you are in) and provide enhanced, more personal features.
-              </p>
-
-              <h2 id="managing-cookies">Managing Cookies</h2>
-              <p>
-                You have the right to decide whether to accept or reject cookies. You can set or amend your web browser controls to accept or refuse cookies. If you choose to reject cookies, you may still use our website though your access to some functionality and areas of our website may be restricted.
-              </p>
-              <p>
-                As the means by which you can refuse cookies through your web browser controls vary from browser-to-browser, you should visit your browser&apos;s help menu for more information.
-              </p>
-
-              <h2 id="contact">Contact Information</h2>
-              <p>
-                If you have any questions about our use of cookies or other technologies, please email us at privacy@gomatric.com.
-              </p>
-            </div>
           </div>
         </Container>
-      </Section>
+      </section>
     </PageShell>
   );
 }

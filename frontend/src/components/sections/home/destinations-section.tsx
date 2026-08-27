@@ -97,7 +97,7 @@ export function DestinationsSection() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="py-20 md:py-28 bg-white relative overflow-hidden">
+    <section ref={sectionRef} className="py-14 md:py-18 bg-white relative overflow-hidden">
       <Container className="max-w-7xl">
         {/* Section Header */}
         <div className="gsap-dest-header flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
@@ -130,7 +130,7 @@ export function DestinationsSection() {
           <div className="lg:col-span-6">
             <Link
               href={`/destinations/${DESTINATIONS[0].slug}`}
-              className="gsap-dest-card group relative block w-full h-[440px] sm:h-[500px] lg:h-full min-h-[480px] lg:min-h-[580px] rounded-[24px] overflow-hidden bg-slate-900 shadow-md hover:shadow-2xl transition-all duration-500 hover:-translate-y-1.5"
+              className="gsap-dest-card group relative block w-full h-[440px] sm:h-[500px] lg:h-full min-h-[480px] lg:min-h-[580px] rounded-[24px] overflow-hidden bg-slate-900 shadow-sm transition-all duration-500 hover:-translate-y-1"
             >
               {/* Secondary Hover Image (Layered Underneath) */}
               <Image
@@ -192,7 +192,7 @@ export function DestinationsSection() {
             {/* Top Right: Bali Card */}
             <Link
               href={`/destinations/${DESTINATIONS[1].slug}`}
-              className="gsap-dest-card group relative block w-full h-[260px] sm:h-[278px] rounded-[24px] overflow-hidden bg-slate-900 shadow-md hover:shadow-2xl transition-all duration-500 hover:-translate-y-1.5"
+              className="gsap-dest-card group relative block w-full h-[260px] sm:h-[278px] rounded-[24px] overflow-hidden bg-slate-900 shadow-sm transition-all duration-500 hover:-translate-y-1"
             >
               {/* Secondary Hover Image (Layered Underneath) */}
               <Image
@@ -241,7 +241,7 @@ export function DestinationsSection() {
               {/* Singapore Card */}
               <Link
                 href={`/destinations/${DESTINATIONS[2].slug}`}
-                className="gsap-dest-card group relative block w-full h-[250px] sm:h-[278px] rounded-[24px] overflow-hidden bg-slate-900 shadow-md hover:shadow-2xl transition-all duration-500 hover:-translate-y-1.5"
+                className="gsap-dest-card group relative block w-full h-[250px] sm:h-[278px] rounded-[24px] overflow-hidden bg-slate-900 shadow-sm transition-all duration-500 hover:-translate-y-1"
               >
                 {/* Secondary Hover Image (Layered Underneath) */}
                 <Image
@@ -287,7 +287,7 @@ export function DestinationsSection() {
               {/* Switzerland Card */}
               <Link
                 href={`/destinations/${DESTINATIONS[3].slug}`}
-                className="gsap-dest-card group relative block w-full h-[250px] sm:h-[278px] rounded-[24px] overflow-hidden bg-slate-900 shadow-md hover:shadow-2xl transition-all duration-500 hover:-translate-y-1.5"
+                className="gsap-dest-card group relative block w-full h-[250px] sm:h-[278px] rounded-[24px] overflow-hidden bg-slate-900 shadow-sm transition-all duration-500 hover:-translate-y-1"
               >
                 {/* Secondary Hover Image (Layered Underneath) */}
                 <Image

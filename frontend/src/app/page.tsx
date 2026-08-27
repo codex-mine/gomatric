@@ -1,4 +1,4 @@
-import { PageShell } from '@/components/layout/page-shell';
+import { PageShell } from "@/components/layout/page-shell";
 import {
   HeroSection,
   StatsSection,
@@ -6,11 +6,9 @@ import {
   DestinationsSection,
   VisaSection,
   ToursSection,
-  WhySection,
   TestimonialsSection,
   HowItWorksSection,
-  CtaFinalSection,
-} from '@/components/sections/home';
+} from "@/components/sections/home";
 
 export default function HomePage() {
   return (
@@ -21,10 +19,8 @@ export default function HomePage() {
       <DestinationsSection />
       <VisaSection />
       <ToursSection />
-      {/* <WhySection /> */}
       <TestimonialsSection />
       <HowItWorksSection />
-      <CtaFinalSection />
     </PageShell>
   );
 }

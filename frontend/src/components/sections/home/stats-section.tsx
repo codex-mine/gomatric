@@ -42,9 +42,9 @@ export function StatsSection() {
           start: "top 90%",
           toggleActions: "play none none none",
         },
-        y: 24,
-        stagger: 0.12,
-        duration: 0.7,
+        y: 20,
+        stagger: 0.1,
+        duration: 0.65,
         ease: "power2.out",
       });
     }, sectionRef);
@@ -55,7 +55,7 @@ export function StatsSection() {
   return (
     <section
       ref={sectionRef}
-      className="relative z-10 bg-white border-b border-slate-100 pt-36 sm:pt-40 md:pt-44 pb-16 md:pb-20 overflow-hidden"
+      className="relative z-10 bg-white border-b border-slate-100 pt-28 sm:pt-32 md:pt-36 pb-10 md:pb-12 overflow-hidden"
     >
       {/* Background Subtle Travel Coordinate Watermark */}
       <div className="absolute inset-0 pointer-events-none select-none z-0 opacity-[0.025]">
@@ -68,12 +68,12 @@ export function StatsSection() {
       </div>
 
       <Container className="max-w-6xl relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-0 text-center items-center">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-0 text-center items-center">
           
           {/* Stat 1 */}
           <div className="gsap-stat-item md:px-8 flex flex-col items-center text-center justify-center group">
-            <div className="flex items-center justify-center gap-2.5 mb-2">
-              <span className="font-sora font-bold text-4xl sm:text-5xl md:text-[48px] text-[#061474] leading-none tracking-tight">
+            <div className="flex items-center justify-center gap-2.5 mb-1.5">
+              <span className="font-sora font-bold text-4xl sm:text-5xl md:text-[46px] text-[#061474] leading-none tracking-tight">
                 {STATS[0].value}
               </span>
               <span className="w-2.5 h-2.5 rounded-full bg-[#ED1B26] shrink-0 group-hover:scale-150 transition-transform duration-300 shadow-sm" />
@@ -81,15 +81,15 @@ export function StatsSection() {
             <h3 className="text-slate-800 text-base md:text-lg font-semibold font-sora">
               {STATS[0].label}
             </h3>
-            <p className="text-slate-400 text-xs md:text-sm mt-1 max-w-xs">
+            <p className="text-slate-400 text-xs md:text-sm mt-0.5 max-w-xs">
               {STATS[0].subtext}
             </p>
           </div>
 
           {/* Stat 2 */}
           <div className="gsap-stat-item md:border-l md:border-slate-200/80 md:px-8 flex flex-col items-center text-center justify-center group">
-            <div className="flex items-center justify-center gap-2.5 mb-2">
-              <span className="font-sora font-bold text-4xl sm:text-5xl md:text-[48px] text-[#061474] leading-none tracking-tight">
+            <div className="flex items-center justify-center gap-2.5 mb-1.5">
+              <span className="font-sora font-bold text-4xl sm:text-5xl md:text-[46px] text-[#061474] leading-none tracking-tight">
                 {STATS[1].value}
               </span>
               <span className="w-2.5 h-2.5 rounded-full bg-[#ED1B26] shrink-0 group-hover:scale-150 transition-transform duration-300 shadow-sm" />
@@ -97,15 +97,15 @@ export function StatsSection() {
             <h3 className="text-slate-800 text-base md:text-lg font-semibold font-sora">
               {STATS[1].label}
             </h3>
-            <p className="text-slate-400 text-xs md:text-sm mt-1 max-w-xs">
+            <p className="text-slate-400 text-xs md:text-sm mt-0.5 max-w-xs">
               {STATS[1].subtext}
             </p>
           </div>
 
           {/* Stat 3 */}
           <div className="gsap-stat-item md:border-l md:border-slate-200/80 md:px-8 flex flex-col items-center text-center justify-center group">
-            <div className="flex items-center justify-center gap-2.5 mb-2">
-              <span className="font-sora font-bold text-4xl sm:text-5xl md:text-[48px] text-[#061474] leading-none tracking-tight">
+            <div className="flex items-center justify-center gap-2.5 mb-1.5">
+              <span className="font-sora font-bold text-4xl sm:text-5xl md:text-[46px] text-[#061474] leading-none tracking-tight">
                 {STATS[2].value}
               </span>
               <span className="w-2.5 h-2.5 rounded-full bg-[#ED1B26] shrink-0 group-hover:scale-150 transition-transform duration-300 shadow-sm" />
@@ -113,7 +113,7 @@ export function StatsSection() {
             <h3 className="text-slate-800 text-base md:text-lg font-semibold font-sora">
               {STATS[2].label}
             </h3>
-            <p className="text-slate-400 text-xs md:text-sm mt-1 max-w-xs">
+            <p className="text-slate-400 text-xs md:text-sm mt-0.5 max-w-xs">
               {STATS[2].subtext}
             </p>
           </div>

@@ -161,7 +161,7 @@ export function TestimonialsSection() {
   return (
     <section
       ref={sectionRef}
-      className="py-20 md:py-28 bg-white relative overflow-hidden border-t border-slate-100"
+      className="py-14 md:py-18 bg-white relative overflow-hidden border-t border-slate-100"
     >
       <Container className="max-w-7xl">
         {/* Section Header */}
@@ -186,7 +186,7 @@ export function TestimonialsSection() {
             {/* Left Column: Large Featured Photo Story Card (Span 7)    */}
             {/* ======================================================== */}
             <div className="lg:col-span-7">
-              <div className="group relative block w-full h-[480px] sm:h-[540px] lg:h-[580px] rounded-[28px] overflow-hidden bg-slate-900 shadow-md hover:shadow-xl transition-all duration-500">
+              <div className="group relative block w-full h-[480px] sm:h-[540px] lg:h-[580px] rounded-[28px] overflow-hidden bg-slate-900 shadow-sm transition-all duration-500">
                 {/* Background Photo with subtle zoom */}
                 <Image
                   src={currentSet.featured.image}
@@ -239,7 +239,7 @@ export function TestimonialsSection() {
             <div className="lg:col-span-5 flex flex-col justify-between gap-6">
               
               {/* Card 1 */}
-              <div className="bg-white rounded-[24px] p-7 md:p-8 border border-slate-100 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between flex-1">
+              <div className="bg-white rounded-[24px] p-7 md:p-8 border border-slate-100 shadow-sm flex flex-col justify-between flex-1">
                 <div>
                   <div className="text-slate-400 font-serif text-2xl font-bold leading-none mb-3">
                     &ldquo;&ldquo;
@@ -259,7 +259,7 @@ export function TestimonialsSection() {
               </div>
 
               {/* Card 2 */}
-              <div className="bg-white rounded-[24px] p-7 md:p-8 border border-slate-100 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between flex-1">
+              <div className="bg-white rounded-[24px] p-7 md:p-8 border border-slate-100 shadow-sm flex flex-col justify-between flex-1">
                 <div>
                   <div className="text-slate-400 font-serif text-2xl font-bold leading-none mb-3">
                     &ldquo;&ldquo;

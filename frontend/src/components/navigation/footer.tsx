@@ -247,7 +247,7 @@ export function Footer() {
           <div className="gsap-footer-cta-btn shrink-0">
             <Link
               href="/booking"
-              className="inline-flex items-center justify-center gap-2.5 px-8 py-4 bg-[#ED1B26] hover:bg-[#C4141E] text-white font-semibold text-base rounded-xl transition-all shadow-lg shadow-[#ED1B26]/30 hover:shadow-xl hover:scale-[1.02] active:scale-[0.98] group whitespace-nowrap"
+              className="inline-flex items-center justify-center gap-2.5 px-8 py-4 bg-[#ED1B26] hover:bg-[#C4141E] text-white font-semibold text-base rounded-xl transition-all shadow-sm hover:scale-[1.02] active:scale-[0.98] group whitespace-nowrap"
             >
               <span>Start Your Journey</span>
               <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />

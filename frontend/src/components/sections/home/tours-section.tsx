@@ -56,26 +56,25 @@ export function ToursSection() {
       // Header Animation
       gsap.from(".gsap-tours-header", {
         scrollTrigger: {
-          trigger: ".gsap-tours-header",
-          start: "top 90%",
+          trigger: sectionRef.current,
+          start: "top 92%",
           toggleActions: "play none none none",
         },
-        y: 25,
-        opacity: 0,
-        duration: 0.7,
+        y: 20,
+        duration: 0.65,
         ease: "power2.out",
       });
 
-      // Cards Stagger Animation
+      // Cards Stagger Animation - Animate Y position only to ensure 100% visibility
       gsap.from(".gsap-tour-card", {
         scrollTrigger: {
-          trigger: ".gsap-tours-grid",
+          trigger: sectionRef.current,
           start: "top 88%",
           toggleActions: "play none none none",
         },
-        y: 35,
-        stagger: 0.12,
-        duration: 0.75,
+        y: 25,
+        stagger: 0.08,
+        duration: 0.65,
         ease: "power2.out",
       });
     }, sectionRef);
@@ -84,10 +83,10 @@ export function ToursSection() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="py-20 md:py-28 bg-[#F8FAFC]/60 border-t border-slate-100 relative overflow-hidden">
+    <section ref={sectionRef} className="py-14 md:py-18 bg-[#F8FAFC]/60 border-t border-slate-100 relative overflow-hidden">
       <Container className="max-w-7xl">
         {/* Section Header (Centered) */}
-        <div className="gsap-tours-header text-center max-w-3xl mx-auto mb-14">
+        <div className="gsap-tours-header text-center max-w-3xl mx-auto mb-12">
           <h2 className="font-sora text-3xl sm:text-4xl md:text-5xl font-bold text-[#061474] leading-tight mb-3">
             Featured Tour Packages
           </h2>
@@ -97,12 +96,12 @@ export function ToursSection() {
         </div>
 
         {/* 3-Column Card Grid */}
-        <div className="gsap-tours-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {TOUR_PACKAGES.map((pkg, index) => (
             <Link
               key={index}
               href={`/tours/${pkg.slug}`}
-              className="gsap-tour-card group relative flex flex-col bg-white rounded-[24px] overflow-hidden border border-slate-100 shadow-md hover:shadow-2xl transition-all duration-500 hover:-translate-y-2"
+              className="gsap-tour-card group relative flex flex-col bg-white rounded-[24px] overflow-hidden border border-slate-100 shadow-sm transition-all duration-300 hover:-translate-y-1 opacity-100"
             >
               {/* Image Container */}
               <div className="relative h-[250px] sm:h-[260px] w-full overflow-hidden bg-slate-900">
@@ -116,7 +115,7 @@ export function ToursSection() {
 
                 {/* Duration Badge (Top Right) */}
                 <div className="absolute top-4 right-4 z-10">
-                  <span className="inline-flex items-center px-3.5 py-1.5 rounded-full bg-white/90 backdrop-blur-md text-[#061474] text-[11px] font-bold tracking-wider shadow-sm">
+                  <span className="inline-flex items-center px-3.5 py-1.5 rounded-full bg-white/90 backdrop-blur-md text-[#061474] text-[11px] font-bold shadow-sm">
                     {pkg.duration}
                   </span>
                 </div>

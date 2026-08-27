@@ -124,8 +124,8 @@ export function PageHero({
           {/* ====================================================== */}
           <div className="md:col-span-8 flex flex-col items-start text-left">
             {subtitle && (
-              <div className="gsap-ph-item inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-white/10 backdrop-blur-md border border-white/15 text-white/90 text-[11px] font-semibold uppercase tracking-wider mb-2">
-                 <span>{subtitle}</span>
+              <div className="gsap-ph-item inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-white/10 backdrop-blur-md border border-white/15 text-white/90 text-[11px] font-semibold uppercase mb-2">
+                <span>{subtitle}</span>
               </div>
             )}
 

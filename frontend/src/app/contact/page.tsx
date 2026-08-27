@@ -67,7 +67,7 @@ export default function ContactPage() {
             <div className="lg:col-span-5 space-y-6">
               
               {/* Card 1: Call Us */}
-              <div className="bg-white rounded-[22px] p-6 sm:p-7 border border-slate-100 shadow-sm hover:shadow-md transition-all group">
+              <div className="bg-white rounded-[22px] p-6 sm:p-7 border border-slate-100 shadow-sm transition-all group">
                 <div className="flex items-start gap-4">
                   <div className="w-10 h-10 rounded-xl bg-[#061474]/5 flex items-center justify-center text-[#061474] shrink-0 group-hover:bg-[#061474] group-hover:text-white transition-colors">
                     <Phone className="w-5 h-5" />
@@ -90,7 +90,7 @@ export default function ContactPage() {
               </div>
 
               {/* Card 2: Email */}
-              <div className="bg-white rounded-[22px] p-6 sm:p-7 border border-slate-100 shadow-sm hover:shadow-md transition-all group">
+              <div className="bg-white rounded-[22px] p-6 sm:p-7 border border-slate-100 shadow-sm transition-all group">
                 <div className="flex items-start gap-4">
                   <div className="w-10 h-10 rounded-xl bg-[#061474]/5 flex items-center justify-center text-[#061474] shrink-0 group-hover:bg-[#061474] group-hover:text-white transition-colors">
                     <Mail className="w-5 h-5" />
@@ -113,7 +113,7 @@ export default function ContactPage() {
               </div>
 
               {/* Card 3: Global Office & Map */}
-              <div className="bg-white rounded-[22px] p-6 sm:p-7 pb-0 sm:pb-0 border border-slate-100 shadow-sm hover:shadow-md transition-all overflow-hidden group">
+              <div className="bg-white rounded-[22px] p-6 sm:p-7 pb-0 sm:pb-0 border border-slate-100 shadow-sm transition-all overflow-hidden group">
                 <div className="flex items-start gap-4 mb-4">
                   <div className="w-10 h-10 rounded-xl bg-[#061474]/5 flex items-center justify-center text-[#061474] shrink-0 group-hover:bg-[#061474] group-hover:text-white transition-colors">
                     <MapPin className="w-5 h-5" />
@@ -140,8 +140,8 @@ export default function ContactPage() {
                   />
                   {/* Subtle Map Overlay with Location Pin Indicator */}
                   <div className="absolute inset-0 bg-[#061474]/15 backdrop-blur-[1px] flex items-center justify-center">
-                    <div className="flex items-center gap-2 bg-white/95 backdrop-blur-md px-3.5 py-1.5 rounded-full shadow-lg border border-slate-200/80">
-                      <span className="w-2.5 h-2.5 rounded-full bg-[#ED1B26] animate-ping" />
+                    <div className="flex items-center gap-2 bg-white/95 backdrop-blur-md px-3.5 py-1.5 rounded-full shadow-sm border border-slate-200/80">
+                      <span className="w-2.5 h-2.5 rounded-full bg-[#ED1B26]" />
                       <span className="font-sora font-bold text-xs text-[#061474]">
                         GoMatric NYC HQ
                       </span>
@@ -156,7 +156,7 @@ export default function ContactPage() {
             {/* Right Column: Send an Inquiry Form (Span 7)              */}
             {/* ======================================================== */}
             <div className="lg:col-span-7">
-              <div className="bg-white rounded-[26px] p-8 sm:p-10 md:p-12 border border-slate-100 shadow-md">
+              <div className="bg-white rounded-[26px] p-8 sm:p-10 md:p-12 border border-slate-100 shadow-sm">
                 <h2 className="font-sora text-2xl sm:text-3xl font-bold text-[#061474] mb-8">
                   Send an Inquiry
                 </h2>

@@ -106,10 +106,10 @@ export function Navbar() {
             setIsVisaDropdownOpen(false);
           }}
           className={cn(
-            "pointer-events-auto bg-white/95 backdrop-blur-md border border-slate-200/80 shadow-lg flex items-center justify-between relative transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] will-change-[width,max-width,padding,transform]",
+            "pointer-events-auto bg-white/95 backdrop-blur-md border border-slate-200/80 shadow-sm flex items-center justify-between relative transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] will-change-[width,max-width,padding,transform]",
             isMinimized
-              ? "w-[68px] sm:w-[76px] h-[52px] md:h-[56px] rounded-full px-3 justify-center shadow-xl shadow-slate-900/15 ring-2 ring-[#ED1B26]/20 cursor-pointer hover:scale-105"
-              : "w-full max-w-7xl rounded-2xl md:rounded-[20px] px-4 md:px-7 py-3 shadow-slate-900/[0.04]"
+              ? "w-[68px] sm:w-[76px] h-[52px] md:h-[56px] rounded-full px-3 justify-center shadow-sm ring-1 ring-[#ED1B26]/20 cursor-pointer hover:scale-105"
+              : "w-full max-w-7xl rounded-2xl md:rounded-[20px] px-4 md:px-7 py-3 shadow-sm"
           )}
         >
           {/* ======================================================== */}
@@ -130,7 +130,7 @@ export function Navbar() {
               {/* Brand Text */}
               <span
                 className={cn(
-                  "font-sora font-bold text-xl md:text-[22px] text-[#061474] tracking-tight transition-all duration-500 whitespace-nowrap",
+                  "font-sora font-bold text-xl md:text-[22px] text-[#061474] transition-all duration-500 whitespace-nowrap",
                   isMinimized ? "opacity-0 w-0 max-w-0 overflow-hidden" : "opacity-100 w-auto"
                 )}
               >
@@ -196,7 +196,7 @@ export function Navbar() {
                   ref={dropdownRef}
                   className="absolute top-full -left-6 pt-3.5 w-80 z-50 pointer-events-auto"
                 >
-                  <div className="bg-white rounded-2xl border border-slate-200/90 shadow-2xl shadow-slate-900/15 p-3 space-y-1">
+                  <div className="bg-white rounded-2xl border border-slate-200/90 shadow-sm p-3 space-y-1">
                     {VISA_DROPDOWN_ITEMS.map((item) => (
                       <Link
                         key={item.title}
