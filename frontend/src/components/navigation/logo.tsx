@@ -21,25 +21,25 @@ export function Logo({
     <Link
       href="/"
       onClick={onClick}
-      className={cn("flex items-center gap-3 group select-none", className)}
+      className={cn("flex items-center gap-1.5 group select-none", className)}
     >
-      {/* Large Crisp Emblem Icon */}
-      <div className="relative w-11 h-11 sm:w-12 sm:h-12 rounded-full overflow-hidden shrink-0 transition-transform duration-300 group-hover:scale-105 shadow-xs">
+      {/* Crisp Circular Emblem */}
+      <div className="relative w-[40px] h-[40px] sm:w-[44px] sm:h-[44px] md:w-[46px] md:h-[46px] rounded-full overflow-hidden shrink-0 transition-transform duration-300 group-hover:scale-105">
         <Image
           src="/fav.png"
           alt="GoMatric"
           fill
-          sizes="56px"
+          sizes="64px"
           priority
-          className="object-contain"
+          className="object-contain scale-105"
         />
       </div>
 
-      {/* Horizontal Brand Typography */}
+      {/* Matching GoMatric Bold Typography (refined size) */}
       {showText && (
         <span
           className={cn(
-            "font-sora font-bold text-2xl sm:text-[26px] tracking-tight transition-colors duration-300",
+            "font-sora font-extrabold text-[16px] sm:text-[17px] md:text-[18px] tracking-[-0.02em] transition-colors duration-300 leading-none",
             isWhite ? "text-white" : "text-[#061474]"
           )}
         >

@@ -40,6 +40,27 @@
   --radius-pill: 999px;
 }
 
+.dark {
+  /* Brand Colors */
+  --brand-primary: #3B82F6;
+  --brand-primary-dark: #1D4ED8;
+  --brand-primary-hover: #60A5FA;
+  --brand-accent: #EF4444;
+  --brand-accent-dark: #DC2626;
+
+  /* Backgrounds */
+  --background: #0B1120;
+  --surface: #0F172A;
+
+  /* Text */
+  --text-primary: #F8FAFC;
+  --text-secondary: #CBD5E1;
+  --text-muted: #94A3B8;
+
+  /* Border */
+  --border: #1E293B;
+}
+
 /* ========================================
    Tailwind v4 Theme — GoMatric
    ======================================== */

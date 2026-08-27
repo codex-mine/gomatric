@@ -16,6 +16,7 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Logo } from "./logo";
+import { ThemeToggle } from "@/components/ui/theme-toggle";
 
 interface MobileNavProps {
   isOpen: boolean;
@@ -171,17 +172,18 @@ export function MobileNav({ isOpen, onClose }: MobileNavProps) {
       {/* Drawer Container */}
       <div
         ref={drawerRef}
-        className="relative z-10 w-full max-w-[380px] sm:max-w-[400px] h-full bg-white flex flex-col justify-between shadow-2xl overflow-y-auto"
+        className="relative z-10 w-full max-w-[380px] sm:max-w-[400px] h-full bg-white dark:bg-slate-900 flex flex-col justify-between shadow-2xl overflow-y-auto"
       >
         {/* Top Header Bar */}
-        <div className="sticky top-0 z-20 bg-white px-6 pt-6 pb-4 flex items-center justify-between border-b border-slate-100">
+        <div className="sticky top-0 z-20 bg-white dark:bg-slate-900 px-6 pt-6 pb-4 flex items-center justify-between border-b border-slate-100 dark:border-slate-800">
           <Logo onClick={onClose} />
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2">
+            <ThemeToggle />
             <button
               type="button"
               onClick={() => searchInputRef.current?.focus()}
-              className="p-2 text-slate-700 hover:text-[#061474] rounded-full hover:bg-slate-100 transition-colors"
+              className="p-2 text-slate-700 dark:text-slate-300 hover:text-[#061474] dark:hover:text-white rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
               aria-label="Search"
             >
               <Search className="w-5 h-5" />
@@ -189,7 +191,7 @@ export function MobileNav({ isOpen, onClose }: MobileNavProps) {
             <button
               type="button"
               onClick={onClose}
-              className="p-2 text-slate-700 hover:text-[#ED1B26] rounded-full hover:bg-slate-100 transition-colors"
+              className="p-2 text-slate-700 dark:text-slate-300 hover:text-[#ED1B26] dark:hover:text-[#ED1B26] rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
               aria-label="Close menu"
             >
               <X className="w-6 h-6" />
