@@ -21,6 +21,14 @@ export const metadata: Metadata = {
     "travel solutions",
   ],
   authors: [{ name: "GoMatric" }],
+  icons: {
+    icon: [
+      { url: "/fav.png", type: "image/png" },
+      { url: "/favicon.png", type: "image/png" },
+    ],
+    shortcut: "/fav.png",
+    apple: "/fav.png",
+  },
   openGraph: {
     type: "website",
     locale: "en_US",

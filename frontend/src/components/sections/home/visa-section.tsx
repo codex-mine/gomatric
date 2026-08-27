@@ -88,7 +88,7 @@ export function VisaSection() {
           {/* ======================================================== */}
           <div className="lg:col-span-6 gsap-visa-image relative min-h-[380px] sm:min-h-[440px] lg:min-h-[540px] w-full overflow-hidden bg-slate-900 group">
             <Image
-              src="https://images.unsplash.com/photo-1544717305-2782549b5136?q=80&w=1200&auto=format&fit=crop"
+              src="/passport.png"
               alt="Real Passports with Approved Visa Page"
               fill
               sizes="(max-width: 1024px) 100vw, 50vw"

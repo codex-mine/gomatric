@@ -15,6 +15,7 @@ import {
   Share2,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { Logo } from "./logo";
 
 interface MobileNavProps {
   isOpen: boolean;
@@ -174,11 +175,7 @@ export function MobileNav({ isOpen, onClose }: MobileNavProps) {
       >
         {/* Top Header Bar */}
         <div className="sticky top-0 z-20 bg-white px-6 pt-6 pb-4 flex items-center justify-between border-b border-slate-100">
-          <Link href="/" onClick={onClose} className="flex items-center">
-            <span className="font-sora font-bold text-2xl text-[#061474] tracking-tight">
-              GoMatric
-            </span>
-          </Link>
+          <Logo onClick={onClose} />
 
           <div className="flex items-center gap-3">
             <button

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef, useCallback } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import gsap from "gsap";
@@ -120,22 +121,30 @@ export function Navbar() {
               href="/"
               className="flex items-center gap-2.5 group select-none"
             >
-              {/* Red Circular Logo Icon with G */}
-              <div className="w-8 h-8 md:w-9 md:h-9 rounded-full bg-[#ED1B26] flex items-center justify-center text-white shadow-sm ring-2 ring-[#ED1B26]/20 transition-transform duration-500 group-hover:scale-105 shrink-0">
-                <span className="font-sora font-extrabold text-base md:text-lg leading-none translate-y-[-0.5px]">
-                  G
-                </span>
-              </div>
-
-              {/* Brand Text */}
-              <span
-                className={cn(
-                  "font-sora font-bold text-xl md:text-[22px] text-[#061474] transition-all duration-500 whitespace-nowrap",
-                  isMinimized ? "opacity-0 w-0 max-w-0 overflow-hidden" : "opacity-100 w-auto"
-                )}
-              >
-                GoMatric
-              </span>
+              {/* Minimized Favicon Icon */}
+              {isMinimized ? (
+                <div className="relative w-8 h-8 rounded-full overflow-hidden shrink-0 shadow-sm ring-1 ring-[#ED1B26]/20 group-hover:scale-105 transition-transform duration-300">
+                  <Image
+                    src="/fav.png"
+                    alt="GoMatric"
+                    fill
+                    sizes="32px"
+                    className="object-contain"
+                  />
+                </div>
+              ) : (
+                /* Full Brand Logo */
+                <div className="relative h-8 md:h-9 w-auto flex items-center shrink-0">
+                  <Image
+                    src="/logo.png"
+                    alt="GoMatric Logo"
+                    width={145}
+                    height={36}
+                    priority
+                    className="h-8 md:h-9 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
+                  />
+                </div>
+              )}
             </Link>
           </div>
 
