@@ -30,12 +30,12 @@ export default function NotFound() {
 
         <div className="flex flex-col sm:flex-row items-center gap-4">
           <Link href="/">
-            <Button size="lg" className="h-14 px-8 rounded-[10px] bg-brand-primary hover:bg-brand-primary-hover text-lg w-full sm:w-auto">
-              <Home className="w-5 h-5 mr-2" /> Back Home
+            <Button size="lg" className="h-14 px-8 rounded-md bg-brand-primary hover:bg-brand-primary-hover text-lg w-full sm:w-auto">
+              Return Home
             </Button>
           </Link>
-          <Link href="/destinations">
-            <Button size="lg" variant="outline" className="h-14 px-8 rounded-[10px] border-brand-primary text-brand-primary hover:bg-brand-primary/5 text-lg w-full sm:w-auto">
+          <Link href="/contact">
+            <Button size="lg" variant="outline" className="h-14 px-8 rounded-md border-brand-primary text-brand-primary hover:bg-brand-primary/5 text-lg w-full sm:w-auto">
               Explore Destinations <ArrowRight className="w-5 h-5 ml-2" />
             </Button>
           </Link>

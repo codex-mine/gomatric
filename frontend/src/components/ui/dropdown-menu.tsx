@@ -48,7 +48,7 @@ const DropdownMenuTrigger = React.forwardRef<HTMLButtonElement, React.ButtonHTML
           type="button"
           aria-haspopup="true"
           aria-expanded={context.open}
-          className={cn("focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary rounded-[10px]", className)}
+          className={cn("focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary rounded-md", className)}
           {...props}
         />
       </div>
@@ -92,7 +92,7 @@ const DropdownMenuContent = React.forwardRef<HTMLDivElement, React.HTMLAttribute
           else if (ref) ref.current = node;
         }}
         className={cn(
-          "absolute z-50 mt-2 w-56 rounded-[10px] bg-white border border-border shadow-md animate-in fade-in-0 zoom-in-95 duration-100",
+          "absolute z-50 mt-2 w-56 rounded-md bg-white border border-border shadow-md animate-in fade-in-0 zoom-in-95 duration-100",
           alignmentClasses[align],
           className
         )}

@@ -39,7 +39,7 @@ export function ToursClient() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         {filteredTours.map((tour) => (
-          <Card key={tour.id} className="overflow-hidden rounded-[14px] border-border group hover:shadow-xl transition-all duration-300">
+          <Card key={tour.id} className="overflow-hidden rounded-md border-border group hover:shadow-xl transition-all duration-300">
             <div className="relative aspect-[4/3] overflow-hidden bg-gradient-to-br from-brand-primary/20 to-brand-primary/5">
               <Image
                 src={tour.image?.src || '/images/placeholder.jpg'}
@@ -85,7 +85,7 @@ export function ToursClient() {
               </div>
 
               <Link href={`/tours/${tour.slug || tour.id}`} className="block">
-                <Button className="w-full rounded-[10px] h-12 group-hover:bg-brand-primary-hover bg-surface text-brand-primary border border-brand-primary/20 hover:text-white transition-colors">
+                <Button className="w-full rounded-md h-12 group-hover:bg-brand-primary-hover bg-surface text-brand-primary border border-brand-primary/20 hover:text-white transition-colors">
                   View Journey <ArrowRight className="ml-2 w-4 h-4" />
                 </Button>
               </Link>

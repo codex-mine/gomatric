@@ -38,7 +38,7 @@ export default function TrackingPage() {
 
       <Section>
         <Container className="max-w-3xl">
-          <div className="bg-white border border-border p-8 md:p-12 rounded-[14px] shadow-sm mb-12">
+          <div className="bg-white border border-border p-8 md:p-12 rounded-md shadow-sm mb-12">
             <form onSubmit={handleSearch} className="flex flex-col md:flex-row gap-4">
               <div className="relative flex-grow">
                 <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-text-muted w-5 h-5" />
@@ -46,24 +46,24 @@ export default function TrackingPage() {
                   value={refNumber}
                   onChange={(e) => setRefNumber(e.target.value)}
                   placeholder="Enter your reference number (e.g. GM-2026-XXXX)"
-                  className="pl-12 h-14 text-lg rounded-[10px]"
+                  className="pl-12 h-14 text-lg rounded-md"
                 />
               </div>
-              <Button type="submit" disabled={status === "loading"} className="h-14 px-8 rounded-[10px] text-base font-semibold">
+              <Button type="submit" disabled={status === "loading"} className="h-14 px-8 rounded-md text-base font-semibold">
                 {status === "loading" ? "Searching..." : "Track Application →"}
               </Button>
             </form>
           </div>
 
           {status === "error" && (
-            <div className="bg-red-50 border border-red-200 text-red-700 p-6 rounded-[14px] text-center">
+            <div className="bg-red-50 border border-red-200 text-red-700 p-6 rounded-md text-center">
               <p className="font-semibold text-lg">Application Not Found</p>
               <p className="mt-2">Please check your reference number and try again, or contact support if you need assistance.</p>
             </div>
           )}
 
           {status === "found" && (
-            <div className="bg-surface border border-border rounded-[14px] p-8 md:p-12">
+            <div className="bg-surface border border-border rounded-md p-8 md:p-12">
               <div className="flex items-center gap-4 mb-8 pb-8 border-b border-border">
                 <div className="w-12 h-12 bg-brand-primary text-white rounded-full flex items-center justify-center">
                   <FileText className="w-6 h-6" />

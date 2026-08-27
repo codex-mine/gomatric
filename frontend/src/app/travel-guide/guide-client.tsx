@@ -42,7 +42,7 @@ export function GuideClient() {
       {featured && (
         <Link href={`/travel-guide/${featured.slug || featured.id}`} className="block mb-20 group">
           <div className="grid lg:grid-cols-2 gap-8 items-center">
-            <div className="relative aspect-[4/3] lg:aspect-square rounded-[20px] overflow-hidden bg-brand-primary/10">
+            <div className="relative aspect-[4/3] lg:aspect-square rounded-md overflow-hidden bg-brand-primary/10">
               <Image
                 src={featured.image?.src || featured.coverImage?.src || '/images/placeholder.jpg'}
                 alt={featured.title}
@@ -77,7 +77,7 @@ export function GuideClient() {
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16">
         {rest.map((article) => (
           <Link key={article.id} href={`/travel-guide/${article.slug || article.id}`} className="group block">
-            <div className="relative aspect-[3/2] rounded-[16px] overflow-hidden mb-6 bg-brand-primary/10">
+            <div className="relative aspect-[3/2] rounded-md overflow-hidden mb-6 bg-brand-primary/10">
               <Image
                 src={article.image?.src || article.coverImage?.src || '/images/placeholder.jpg'}
                 alt={article.title}

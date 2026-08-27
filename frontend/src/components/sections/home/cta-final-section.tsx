@@ -23,13 +23,13 @@ export function CtaFinalSection() {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link 
               href="/contact" 
-              className="w-full sm:w-auto inline-flex items-center justify-center h-14 px-8 rounded-[10px] bg-brand-accent text-white font-semibold text-lg hover:bg-brand-accent-dark transition-colors"
+              className="w-full sm:w-auto inline-flex items-center justify-center h-14 px-8 rounded-md bg-brand-accent text-white font-semibold text-lg hover:bg-brand-accent-dark transition-colors"
             >
               Start Your Journey &rarr;
             </Link>
             <Link 
               href="/about" 
-              className="w-full sm:w-auto inline-flex items-center justify-center h-14 px-8 rounded-[10px] border-2 border-white/30 text-white font-semibold text-lg hover:bg-white/10 transition-colors"
+              className="w-full sm:w-auto inline-flex items-center justify-center h-14 px-8 rounded-md border-2 border-white/30 text-white font-semibold text-lg hover:bg-white/10 transition-colors"
             >
               Contact Us
             </Link>

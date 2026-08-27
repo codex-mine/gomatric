@@ -80,7 +80,7 @@ export default async function TourDetailPage({ params }: { params: Promise<{ slu
                 <h2 className="font-sora text-3xl font-bold mb-6 text-text-primary">Highlights</h2>
                 <div className="grid sm:grid-cols-2 gap-4">
                   {(tour.highlights || ['Guided city tours', 'Premium accommodation', 'Airport transfers', 'Daily breakfast']).map((highlight, idx) => (
-                    <div key={idx} className="flex items-start bg-white p-4 rounded-[10px] border border-border">
+                    <div key={idx} className="flex items-start bg-white p-4 rounded-md border border-border">
                       <Check className="w-5 h-5 text-brand-accent mt-0.5 mr-3 flex-shrink-0" />
                       <span className="text-text-secondary font-medium">{highlight}</span>
                     </div>
@@ -104,7 +104,7 @@ export default async function TourDetailPage({ params }: { params: Promise<{ slu
                         className="absolute -left-[39px] top-1"
                         active={true}
                       />
-                      <div className="bg-white p-6 rounded-[14px] border border-border shadow-sm">
+                      <div className="bg-white p-6 rounded-md border border-border shadow-sm">
                         <div className="text-brand-accent font-sora font-bold text-sm tracking-wider uppercase mb-2">Day {item.day}</div>
                         <h3 className="font-sora text-xl font-semibold mb-3">{item.title}</h3>
                         <p className="text-text-secondary">
@@ -150,7 +150,7 @@ export default async function TourDetailPage({ params }: { params: Promise<{ slu
 
             {/* Sticky Sidebar */}
             <div className="lg:col-span-1">
-              <div className="sticky top-24 bg-white rounded-[14px] border border-border shadow-lg p-6 lg:p-8">
+              <div className="sticky top-24 bg-white rounded-md border border-border shadow-lg p-6 lg:p-8">
                 <div className="mb-6">
                   <p className="text-text-muted text-sm mb-1">Starting from</p>
                   <div className="font-sora font-bold text-4xl text-brand-primary">
@@ -170,10 +170,10 @@ export default async function TourDetailPage({ params }: { params: Promise<{ slu
                   </div>
                 </div>
 
-                <Button className="w-full h-14 rounded-[10px] text-lg bg-brand-accent hover:bg-brand-accent-dark mb-4">
+                <Button className="w-full h-14 rounded-md text-lg bg-brand-accent hover:bg-brand-accent-dark mb-4">
                   Book Now
                 </Button>
-                <Button variant="outline" className="w-full h-14 rounded-[10px] text-lg border-brand-primary text-brand-primary hover:bg-brand-primary/5">
+                <Button variant="outline" className="w-full h-14 rounded-md text-lg border-brand-primary text-brand-primary hover:bg-brand-primary/5">
                   Download Itinerary
                 </Button>
               </div>

@@ -81,7 +81,7 @@ export function VisaSection() {
     <section ref={sectionRef} className="py-14 md:py-18 bg-[#F8FAFC]/50 relative overflow-hidden">
       <Container className="max-w-7xl">
         {/* Split-Banner Card Container */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 rounded-[24px] overflow-hidden shadow-sm border border-slate-100 items-stretch bg-white">
+        <div className="grid grid-cols-1 lg:grid-cols-12 rounded-md overflow-hidden shadow-sm border border-slate-100 items-stretch bg-white">
           
           {/* ======================================================== */}
           {/* Left Column: Real Open Passport & Visa Photo             */}
@@ -146,7 +146,7 @@ export function VisaSection() {
               {/* CTA Button */}
               <Link
                 href="/visa"
-                className="inline-flex items-center gap-2.5 px-7 py-3.5 bg-[#ED1B26] hover:bg-[#C4141E] text-white font-semibold text-sm sm:text-base rounded-xl transition-all shadow-sm hover:scale-[1.02] active:scale-[0.98] w-fit group"
+                className="inline-flex items-center gap-2.5 px-7 py-3.5 bg-[#ED1B26] hover:bg-[#C4141E] text-white font-semibold text-sm sm:text-base rounded-md transition-all shadow-sm hover:scale-[1.02] active:scale-[0.98] w-fit group"
               >
                 <span>Explore Visa Services</span>
                 <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />

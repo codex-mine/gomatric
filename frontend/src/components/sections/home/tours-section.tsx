@@ -101,7 +101,7 @@ export function ToursSection() {
             <Link
               key={index}
               href={`/tours/${pkg.slug}`}
-              className="gsap-tour-card group relative flex flex-col bg-white rounded-[24px] overflow-hidden border border-slate-100 shadow-sm transition-all duration-300 hover:-translate-y-1 opacity-100"
+              className="gsap-tour-card group relative flex flex-col bg-white rounded-md overflow-hidden border border-slate-100 shadow-sm transition-all duration-300 hover:-translate-y-1 opacity-100"
             >
               {/* Image Container */}
               <div className="relative h-[250px] sm:h-[260px] w-full overflow-hidden bg-slate-900">

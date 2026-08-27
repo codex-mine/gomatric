@@ -112,7 +112,7 @@ const COOKIE_SECTIONS: CookieSection[] = [
         <p>
           For queries concerning our cookie policy or tracking technologies, please contact our team:
         </p>
-        <div className="mt-5 p-6 rounded-2xl bg-[#F8FAFC] border border-slate-200/80 text-sm text-slate-700 space-y-2 shadow-xs">
+        <div className="mt-5 p-6 rounded-md bg-[#F8FAFC] border border-slate-200/80 text-sm text-slate-700 space-y-2 shadow-xs">
           <div>
             <strong className="text-[#061474] font-semibold">Email:</strong>{" "}
             <a
@@ -192,7 +192,7 @@ export default function CookiePolicyPage() {
                       type="button"
                       onClick={() => handleNavClick(section.id)}
                       className={cn(
-                        "w-full flex items-center gap-3.5 py-2.5 px-3 rounded-xl text-left text-sm transition-all duration-200 cursor-pointer group",
+                        "w-full flex items-center gap-3.5 py-2.5 px-3 rounded-md text-left text-sm transition-all duration-200 cursor-pointer group",
                         isActive
                           ? "text-[#ED1B26] font-bold"
                           : "text-slate-600 hover:text-[#061474] font-medium"

@@ -62,7 +62,7 @@ export function CtaSection({
         <div className="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto">
           <Link
             href={resolvedPrimary.href}
-            className="w-full sm:w-auto h-12 px-8 rounded-[10px] bg-brand-accent hover:bg-brand-accent-dark text-white font-medium flex items-center justify-center transition-colors shadow-lg shadow-brand-accent/20"
+            className="w-full sm:w-auto h-12 px-8 rounded-md bg-brand-accent hover:bg-brand-accent-dark text-white font-medium flex items-center justify-center transition-colors shadow-lg shadow-brand-accent/20"
           >
             {resolvedPrimary.label}
           </Link>
@@ -71,7 +71,7 @@ export function CtaSection({
             <Link
               href={resolvedSecondary.href}
               className={cn(
-                "w-full sm:w-auto h-12 px-8 rounded-[10px] font-medium flex items-center justify-center transition-colors border",
+                "w-full sm:w-auto h-12 px-8 rounded-md font-medium flex items-center justify-center transition-colors border",
                 variant === 'navy' 
                   ? "border-white/20 hover:bg-white/10 text-white" 
                   : "border-white/20 hover:bg-white/10 text-white"

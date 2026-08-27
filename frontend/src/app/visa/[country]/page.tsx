@@ -37,7 +37,7 @@ export default function VisaCountryPage({ params }: { params: { country: string 
       <Section>
         <Container size="narrow">
           <div className="grid md:grid-cols-2 gap-6 mb-12">
-            <Card className="p-6 rounded-[14px]">
+            <Card className="p-6 rounded-md">
               <div className="flex items-start space-x-4">
                 <Clock className="w-6 h-6 text-brand-primary mt-1" />
                 <div>
@@ -46,7 +46,7 @@ export default function VisaCountryPage({ params }: { params: { country: string 
                 </div>
               </div>
             </Card>
-            <Card className="p-6 rounded-[14px]">
+            <Card className="p-6 rounded-md">
               <div className="flex items-start space-x-4">
                 <CreditCard className="w-6 h-6 text-brand-primary mt-1" />
                 <div>
@@ -55,7 +55,7 @@ export default function VisaCountryPage({ params }: { params: { country: string 
                 </div>
               </div>
             </Card>
-            <Card className="p-6 rounded-[14px]">
+            <Card className="p-6 rounded-md">
               <div className="flex items-start space-x-4">
                 <Info className="w-6 h-6 text-brand-primary mt-1" />
                 <div>
@@ -64,7 +64,7 @@ export default function VisaCountryPage({ params }: { params: { country: string 
                 </div>
               </div>
             </Card>
-            <Card className="p-6 rounded-[14px]">
+            <Card className="p-6 rounded-md">
               <div className="flex items-start space-x-4">
                 <FileText className="w-6 h-6 text-brand-primary mt-1" />
                 <div>
@@ -144,7 +144,7 @@ export default function VisaCountryPage({ params }: { params: { country: string 
             </div>
 
             <div className="pt-8">
-              <Button size="lg" className="w-full sm:w-auto h-14 px-8 rounded-[10px] text-lg bg-brand-accent hover:bg-brand-accent-dark">
+              <Button size="lg" className="w-full sm:w-auto h-14 px-8 rounded-md text-lg bg-brand-accent hover:bg-brand-accent-dark">
                 Apply for Visa →
               </Button>
             </div>

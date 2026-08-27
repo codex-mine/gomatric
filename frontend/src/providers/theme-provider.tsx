@@ -25,8 +25,12 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     setThemeState(initialTheme);
     if (initialTheme === "dark") {
       document.documentElement.classList.add("dark");
+      document.documentElement.setAttribute("data-theme", "dark");
+      document.documentElement.style.colorScheme = "dark";
     } else {
       document.documentElement.classList.remove("dark");
+      document.documentElement.setAttribute("data-theme", "light");
+      document.documentElement.style.colorScheme = "light";
     }
     setMounted(true);
   }, []);
@@ -36,8 +40,12 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     localStorage.setItem("gomatric-theme", newTheme);
     if (newTheme === "dark") {
       document.documentElement.classList.add("dark");
+      document.documentElement.setAttribute("data-theme", "dark");
+      document.documentElement.style.colorScheme = "dark";
     } else {
       document.documentElement.classList.remove("dark");
+      document.documentElement.setAttribute("data-theme", "light");
+      document.documentElement.style.colorScheme = "light";
     }
   };
 

@@ -45,7 +45,7 @@ export default function FAQPage() {
               placeholder="Search for answers..." 
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="pl-12 h-14 text-lg bg-surface border-transparent focus:border-brand-primary rounded-[10px]"
+              className="pl-12 h-14 text-lg bg-surface border-transparent focus:border-brand-primary rounded-md"
             />
           </div>
 

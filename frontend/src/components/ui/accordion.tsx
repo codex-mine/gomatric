@@ -62,7 +62,7 @@ const AccordionItem = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTML
 
     return (
       <AccordionItemContext.Provider value={{ value, isOpen }}>
-        <div ref={ref} className={cn("border border-border rounded-[10px] overflow-hidden bg-white", className)} {...props} />
+        <div ref={ref} className={cn("border border-border rounded-md overflow-hidden bg-white", className)} {...props} />
       </AccordionItemContext.Provider>
     )
   }

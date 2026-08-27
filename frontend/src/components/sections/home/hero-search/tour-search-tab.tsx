@@ -32,7 +32,7 @@ export function TourSearchTab() {
             value={destination}
             onChange={(e) => setDestination(e.target.value)}
             placeholder="Where to?"
-            className="w-full h-12 pl-10 pr-3 bg-white border border-slate-200 rounded-xl text-sm font-medium text-slate-800 placeholder:text-slate-400 outline-none focus:outline-none focus:ring-1 focus:ring-slate-300 focus:border-slate-300 transition-colors"
+            className="w-full h-12 pl-10 pr-3 bg-white border border-slate-200 rounded-md text-sm font-medium text-slate-800 placeholder:text-slate-400 outline-none focus:outline-none focus:ring-1 focus:ring-slate-300 focus:border-slate-300 transition-colors"
           />
         </div>
       </div>
@@ -48,7 +48,7 @@ export function TourSearchTab() {
             type="date"
             value={date}
             onChange={(e) => setDate(e.target.value)}
-            className="w-full h-12 pl-10 pr-3 bg-white border border-slate-200 rounded-xl text-sm font-medium text-slate-800 placeholder:text-slate-400 outline-none focus:outline-none focus:ring-1 focus:ring-slate-300 focus:border-slate-300 transition-colors"
+            className="w-full h-12 pl-10 pr-3 bg-white border border-slate-200 rounded-md text-sm font-medium text-slate-800 placeholder:text-slate-400 outline-none focus:outline-none focus:ring-1 focus:ring-slate-300 focus:border-slate-300 transition-colors"
           />
         </div>
       </div>
@@ -63,7 +63,7 @@ export function TourSearchTab() {
           <select
             value={travelers}
             onChange={(e) => setTravelers(e.target.value)}
-            className="w-full h-12 pl-10 pr-8 bg-white border border-slate-200 rounded-xl text-sm font-medium text-slate-800 appearance-none outline-none focus:outline-none focus:ring-1 focus:ring-slate-300 focus:border-slate-300 transition-colors"
+            className="w-full h-12 pl-10 pr-8 bg-white border border-slate-200 rounded-md text-sm font-medium text-slate-800 appearance-none outline-none focus:outline-none focus:ring-1 focus:ring-slate-300 focus:border-slate-300 transition-colors"
           >
             <option value="1 Guest">1 Guest</option>
             <option value="2 Guests">2 Guests</option>
@@ -78,7 +78,7 @@ export function TourSearchTab() {
       <div className="md:col-span-2">
         <button
           type="submit"
-          className="w-full h-12 px-4 bg-[#ED1B26] hover:bg-[#C4141E] text-white font-semibold text-sm rounded-xl flex items-center justify-center gap-1.5 shadow-md shadow-[#ED1B26]/20 transition-all hover:scale-[1.02] active:scale-[0.98] whitespace-nowrap"
+          className="w-full h-12 px-4 bg-[#ED1B26] hover:bg-[#C4141E] text-white font-semibold text-sm rounded-md flex items-center justify-center gap-1.5 shadow-md shadow-[#ED1B26]/20 transition-all hover:scale-[1.02] active:scale-[0.98] whitespace-nowrap"
         >
           <span>Search Tours</span>
           <ArrowRight className="w-4 h-4" />

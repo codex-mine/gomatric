@@ -97,7 +97,7 @@ export default async function DestinationDetailPage({ params }: { params: Promis
             <div className="grid md:grid-cols-3 gap-8">
               {(destination.popularAttractions || ['City Exploration', 'Cultural Highlights', 'Scenic Adventures']).map((exp, i) => (
                 <div key={i} className="group cursor-pointer">
-                  <div className="relative aspect-[4/5] rounded-[14px] overflow-hidden mb-6 bg-gradient-to-br from-brand-primary/20 to-brand-primary/5 flex items-end p-6">
+                  <div className="relative aspect-[4/5] rounded-md overflow-hidden mb-6 bg-gradient-to-br from-brand-primary/20 to-brand-primary/5 flex items-end p-6">
                     <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-500" />
                     <span className="relative z-10 font-sora text-3xl font-bold text-white/20">0{i + 1}</span>
                   </div>
@@ -109,7 +109,7 @@ export default async function DestinationDetailPage({ params }: { params: Promis
           </div>
 
           {/* Available Services */}
-          <div className="bg-surface rounded-[24px] p-8 md:p-12 mb-24">
+          <div className="bg-surface rounded-md p-8 md:p-12 mb-24">
             <h3 className="font-sora text-2xl font-bold mb-8 text-center">Services in {destination.name}</h3>
             <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
               <Link href={`/visa/${destination.slug || destination.id}`}>
@@ -155,7 +155,7 @@ export default async function DestinationDetailPage({ params }: { params: Promis
               <div className="grid md:grid-cols-3 gap-6">
                 {relatedTours.map((tour) => (
                   <Link key={tour.id} href={`/tours/${tour.slug || tour.id}`}>
-                    <Card className="overflow-hidden group hover:shadow-lg transition-all rounded-[14px]">
+                    <Card className="overflow-hidden group hover:shadow-lg transition-all rounded-md">
                       <div className="relative aspect-[4/3] bg-gradient-to-br from-brand-primary/20 to-brand-primary/5">
                         <Image src={tour.image?.src || '/images/placeholder.jpg'} alt={tour.title} fill className="object-cover group-hover:scale-105 transition-transform duration-500" />
                       </div>

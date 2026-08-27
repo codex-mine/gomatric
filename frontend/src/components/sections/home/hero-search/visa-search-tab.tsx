@@ -36,7 +36,7 @@ export function VisaSearchTab() {
           <select
             value={selectedCountry}
             onChange={(e) => setSelectedCountry(e.target.value)}
-            className="w-full h-12 pl-10 pr-8 bg-white border border-slate-200 rounded-xl text-sm font-medium text-slate-800 appearance-none outline-none focus:outline-none focus:ring-1 focus:ring-slate-300 focus:border-slate-300 transition-colors"
+            className="w-full h-12 pl-10 pr-8 bg-white border border-slate-200 rounded-md text-sm font-medium text-slate-800 appearance-none outline-none focus:outline-none focus:ring-1 focus:ring-slate-300 focus:border-slate-300 transition-colors"
           >
             {VISA_COUNTRIES.map((c) => (
               <option key={c.slug} value={c.slug}>
@@ -57,7 +57,7 @@ export function VisaSearchTab() {
           <select
             value={visaType}
             onChange={(e) => setVisaType(e.target.value)}
-            className="w-full h-12 pl-10 pr-8 bg-white border border-slate-200 rounded-xl text-sm font-medium text-slate-800 appearance-none outline-none focus:outline-none focus:ring-1 focus:ring-slate-300 focus:border-slate-300 transition-colors"
+            className="w-full h-12 pl-10 pr-8 bg-white border border-slate-200 rounded-md text-sm font-medium text-slate-800 appearance-none outline-none focus:outline-none focus:ring-1 focus:ring-slate-300 focus:border-slate-300 transition-colors"
           >
             <option value="Tourist (30 Days)">Tourist (30 Days)</option>
             <option value="Tourist (60 Days)">Tourist (60 Days)</option>
@@ -77,7 +77,7 @@ export function VisaSearchTab() {
           <select
             value={speed}
             onChange={(e) => setSpeed(e.target.value)}
-            className="w-full h-12 pl-10 pr-8 bg-white border border-slate-200 rounded-xl text-sm font-medium text-slate-800 appearance-none outline-none focus:outline-none focus:ring-1 focus:ring-slate-300 focus:border-slate-300 transition-colors"
+            className="w-full h-12 pl-10 pr-8 bg-white border border-slate-200 rounded-md text-sm font-medium text-slate-800 appearance-none outline-none focus:outline-none focus:ring-1 focus:ring-slate-300 focus:border-slate-300 transition-colors"
           >
             <option value="Standard (3-5 Days)">Standard (3-5 Days)</option>
             <option value="Express (24-48 Hours)">Express (24-48 Hours)</option>
@@ -90,7 +90,7 @@ export function VisaSearchTab() {
       <div className="md:col-span-2">
         <button
           type="submit"
-          className="w-full h-12 px-4 bg-[#ED1B26] hover:bg-[#C4141E] text-white font-semibold text-sm rounded-xl flex items-center justify-center gap-1.5 shadow-md shadow-[#ED1B26]/20 transition-all hover:scale-[1.02] active:scale-[0.98] whitespace-nowrap"
+          className="w-full h-12 px-4 bg-[#ED1B26] hover:bg-[#C4141E] text-white font-semibold text-sm rounded-md flex items-center justify-center gap-1.5 shadow-md shadow-[#ED1B26]/20 transition-all hover:scale-[1.02] active:scale-[0.98] whitespace-nowrap"
         >
           <span>Check Visa</span>
           <ArrowRight className="w-4 h-4" />

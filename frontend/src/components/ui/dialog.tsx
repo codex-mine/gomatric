@@ -42,7 +42,7 @@ function Dialog({ open, onOpenChange, children }: DialogProps) {
         aria-hidden="true"
       />
       <div 
-        className="relative z-50 grid w-full max-w-lg gap-4 bg-white p-6 shadow-lg sm:rounded-[14px] animate-in fade-in-0 zoom-in-95 duration-200"
+        className="relative z-50 grid w-full max-w-lg gap-4 bg-white p-6 shadow-lg sm:rounded-md animate-in fade-in-0 zoom-in-95 duration-200"
         role="dialog"
         aria-modal="true"
       >

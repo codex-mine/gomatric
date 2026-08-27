@@ -31,7 +31,7 @@ export default function DestinationsPage() {
           {/* Featured Destination */}
           {featured && (
             <Link href={`/destinations/${featured.slug || featured.id}`} className="block mb-16 group">
-              <div className="relative h-[500px] md:h-[600px] rounded-[24px] overflow-hidden">
+              <div className="relative h-[500px] md:h-[600px] rounded-md overflow-hidden">
                 <Image
                   src={featured.image?.src || '/images/placeholder.jpg'}
                   alt={featured.name}
@@ -62,7 +62,7 @@ export default function DestinationsPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
             {rest.map((dest, i) => (
               <Link key={dest.id} href={`/destinations/${dest.slug || dest.id}`} className="group block">
-                <div className={`relative rounded-[16px] overflow-hidden ${i % 4 === 0 || i % 4 === 3 ? 'aspect-square' : 'aspect-[3/4]'}`}>
+                <div className={`relative rounded-md overflow-hidden ${i % 4 === 0 || i % 4 === 3 ? 'aspect-square' : 'aspect-[3/4]'}`}>
                   <Image
                     src={dest.image?.src || '/images/placeholder.jpg'}
                     alt={dest.name}

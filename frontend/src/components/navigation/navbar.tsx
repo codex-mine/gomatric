@@ -111,8 +111,8 @@ export function Navbar() {
           className={cn(
             "pointer-events-auto bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border border-slate-200/80 dark:border-slate-800 shadow-sm flex items-center justify-between relative transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] will-change-[width,max-width,padding,transform]",
             isMinimized
-              ? "w-auto h-[48px] md:h-[52px] px-4 py-0 rounded-full justify-center shadow-sm ring-1 ring-slate-200/80 dark:ring-slate-700 cursor-pointer hover:scale-105"
-              : "w-full max-w-7xl h-[56px] md:h-[60px] rounded-2xl px-4 md:px-6 py-0 shadow-sm"
+              ? "w-auto h-[48px] md:h-[52px] px-4 py-0 rounded-md justify-center shadow-sm ring-1 ring-slate-200/80 dark:ring-slate-700 cursor-pointer hover:scale-105"
+              : "w-full max-w-7xl h-[56px] md:h-[60px] rounded-md px-4 md:px-6 py-0 shadow-sm"
           )}
         >
           {/* ======================================================== */}
@@ -199,13 +199,13 @@ export function Navbar() {
                   ref={dropdownRef}
                   className="absolute top-full -left-6 pt-3.5 w-80 z-50 pointer-events-auto"
                 >
-                  <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/90 dark:border-slate-800 shadow-sm p-3 space-y-1">
+                  <div className="bg-white dark:bg-slate-900 rounded-md border border-slate-200/90 dark:border-slate-800 shadow-sm p-3 space-y-1">
                     {VISA_DROPDOWN_ITEMS.map((item) => (
                       <Link
                         key={item.title}
                         href={item.href}
                         onClick={() => setIsVisaDropdownOpen(false)}
-                        className="block p-2.5 rounded-xl hover:bg-[#F8FAFC] dark:hover:bg-slate-800/80 transition-colors group"
+                        className="block p-2.5 rounded-md hover:bg-[#F8FAFC] dark:hover:bg-slate-800/80 transition-colors group"
                       >
                         <div className="font-semibold text-sm text-[#061474] dark:text-white group-hover:text-[#ED1B26] transition-colors">
                           {item.title}
@@ -287,7 +287,7 @@ export function Navbar() {
 
             <Link
               href="/booking"
-              className="h-9 sm:h-10 px-5 rounded-xl bg-[#061474] dark:bg-blue-600 hover:bg-[#030A3A] dark:hover:bg-blue-700 text-white font-semibold text-sm flex items-center justify-center gap-1.5 transition-all shadow-sm hover:shadow-md hover:scale-[1.02] active:scale-[0.98] group whitespace-nowrap"
+              className="h-9 sm:h-10 px-5 rounded-md bg-[#061474] dark:bg-blue-600 hover:bg-[#030A3A] dark:hover:bg-blue-700 text-white font-semibold text-sm flex items-center justify-center gap-1.5 transition-all shadow-sm hover:shadow-md hover:scale-[1.02] active:scale-[0.98] group whitespace-nowrap"
             >
               <span>Get Started</span>
               <ArrowRight className="w-3.5 h-3.5 text-white transition-transform duration-300 group-hover:translate-x-1" />
@@ -307,7 +307,7 @@ export function Navbar() {
             <button
               type="button"
               onClick={handleOpenMobileNav}
-              className="p-2 text-slate-700 dark:text-slate-300 hover:text-[#061474] dark:hover:text-white rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+              className="p-2 text-slate-700 dark:text-slate-300 hover:text-[#061474] dark:hover:text-white rounded-md hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
               aria-label="Search"
             >
               <Search className="w-5 h-5" />
@@ -315,7 +315,7 @@ export function Navbar() {
             <button
               type="button"
               onClick={handleOpenMobileNav}
-              className="p-2 text-slate-700 dark:text-slate-300 hover:text-[#061474] dark:hover:text-white rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+              className="p-2 text-slate-700 dark:text-slate-300 hover:text-[#061474] dark:hover:text-white rounded-md hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
               aria-label="Open mobile menu"
             >
               <Menu className="w-6 h-6" />

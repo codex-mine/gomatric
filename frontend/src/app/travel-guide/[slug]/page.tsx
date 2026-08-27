@@ -62,7 +62,7 @@ export default async function ArticleDetailPage({ params }: { params: Promise<{ 
       </Section>
 
       <Container size="default" className="mb-16">
-        <div className="relative aspect-[21/9] w-full rounded-[24px] overflow-hidden bg-brand-primary/10">
+        <div className="relative aspect-[21/9] w-full rounded-md overflow-hidden bg-brand-primary/10">
           <Image
             src={article.image?.src || article.coverImage?.src || '/images/placeholder.jpg'}
             alt={article.title}
@@ -75,7 +75,7 @@ export default async function ArticleDetailPage({ params }: { params: Promise<{ 
 
       <Section className="py-0">
         <Container size="narrow">
-          <div className="prose prose-lg prose-slate max-w-none prose-headings:font-sora prose-headings:font-bold prose-a:text-brand-primary hover:prose-a:text-brand-accent prose-img:rounded-[14px]">
+          <div className="prose prose-lg prose-slate max-w-none prose-headings:font-sora prose-headings:font-bold prose-a:text-brand-primary hover:prose-a:text-brand-accent prose-img:rounded-md">
             <p className="lead text-xl text-text-secondary mb-8">
               {article.excerpt}
             </p>
@@ -110,8 +110,8 @@ export default async function ArticleDetailPage({ params }: { params: Promise<{ 
             <h3 className="font-sora text-3xl font-bold mb-10 text-center">Related Articles</h3>
             <div className="grid md:grid-cols-2 gap-8">
               {relatedArticles.map((rel) => (
-                <Link key={rel.id} href={`/travel-guide/${rel.slug || rel.id}`} className="group block bg-white p-4 rounded-[16px] shadow-sm hover:shadow-md transition-shadow">
-                  <div className="relative aspect-video rounded-[10px] overflow-hidden mb-4 bg-brand-primary/10">
+                <Link key={rel.id} href={`/travel-guide/${rel.slug || rel.id}`} className="group block bg-white p-4 rounded-md shadow-sm hover:shadow-md transition-shadow">
+                  <div className="relative aspect-video rounded-md overflow-hidden mb-4 bg-brand-primary/10">
                     <Image src={rel.image?.src || rel.coverImage?.src || '/images/placeholder.jpg'} alt={rel.title} fill className="object-cover group-hover:scale-105 transition-transform duration-500" />
                   </div>
                   <Badge className="bg-brand-primary/5 text-brand-primary border-none mb-3 shadow-none">{rel.category}</Badge>

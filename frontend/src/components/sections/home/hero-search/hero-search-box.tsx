@@ -43,7 +43,7 @@ export function HeroSearchBox({ className }: { className?: string }) {
   return (
     <div
       className={cn(
-        "relative bg-white rounded-[20px] shadow-sm p-5 md:p-6 border border-slate-100 max-w-5xl mx-auto w-full text-left overflow-hidden transition-all duration-300",
+        "relative bg-white rounded-md shadow-sm p-5 md:p-6 border border-slate-100 max-w-5xl mx-auto w-full text-left overflow-hidden transition-all duration-300",
         className
       )}
     >

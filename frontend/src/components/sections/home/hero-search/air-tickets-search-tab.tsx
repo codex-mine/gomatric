@@ -30,7 +30,7 @@ export function AirTicketsSearchTab() {
             value={from}
             onChange={(e) => setFrom(e.target.value)}
             placeholder="Origin Airport"
-            className="w-full h-12 pl-10 pr-3 bg-white border border-slate-200 rounded-xl text-sm font-medium text-slate-800 placeholder:text-slate-400 outline-none focus:outline-none focus:ring-1 focus:ring-slate-300 focus:border-slate-300 transition-colors"
+            className="w-full h-12 pl-10 pr-3 bg-white border border-slate-200 rounded-md text-sm font-medium text-slate-800 placeholder:text-slate-400 outline-none focus:outline-none focus:ring-1 focus:ring-slate-300 focus:border-slate-300 transition-colors"
           />
         </div>
       </div>
@@ -47,7 +47,7 @@ export function AirTicketsSearchTab() {
             value={to}
             onChange={(e) => setTo(e.target.value)}
             placeholder="Destination Airport"
-            className="w-full h-12 pl-10 pr-3 bg-white border border-slate-200 rounded-xl text-sm font-medium text-slate-800 placeholder:text-slate-400 outline-none focus:outline-none focus:ring-1 focus:ring-slate-300 focus:border-slate-300 transition-colors"
+            className="w-full h-12 pl-10 pr-3 bg-white border border-slate-200 rounded-md text-sm font-medium text-slate-800 placeholder:text-slate-400 outline-none focus:outline-none focus:ring-1 focus:ring-slate-300 focus:border-slate-300 transition-colors"
           />
         </div>
       </div>
@@ -63,7 +63,7 @@ export function AirTicketsSearchTab() {
             type="date"
             value={departDate}
             onChange={(e) => setDepartDate(e.target.value)}
-            className="w-full h-12 pl-10 pr-3 bg-white border border-slate-200 rounded-xl text-sm font-medium text-slate-800 placeholder:text-slate-400 outline-none focus:outline-none focus:ring-1 focus:ring-slate-300 focus:border-slate-300 transition-colors"
+            className="w-full h-12 pl-10 pr-3 bg-white border border-slate-200 rounded-md text-sm font-medium text-slate-800 placeholder:text-slate-400 outline-none focus:outline-none focus:ring-1 focus:ring-slate-300 focus:border-slate-300 transition-colors"
           />
         </div>
       </div>
@@ -78,7 +78,7 @@ export function AirTicketsSearchTab() {
           <select
             value={passengerClass}
             onChange={(e) => setPassengerClass(e.target.value)}
-            className="w-full h-12 pl-10 pr-6 bg-white border border-slate-200 rounded-xl text-sm font-medium text-slate-800 appearance-none outline-none focus:outline-none focus:ring-1 focus:ring-slate-300 focus:border-slate-300 transition-colors"
+            className="w-full h-12 pl-10 pr-6 bg-white border border-slate-200 rounded-md text-sm font-medium text-slate-800 appearance-none outline-none focus:outline-none focus:ring-1 focus:ring-slate-300 focus:border-slate-300 transition-colors"
           >
             <option value="1 Passenger, Economy">1 Adult, Economy</option>
             <option value="2 Passengers, Economy">2 Adults, Economy</option>
@@ -93,7 +93,7 @@ export function AirTicketsSearchTab() {
       <div className="md:col-span-2">
         <button
           type="submit"
-          className="w-full h-12 px-4 bg-[#ED1B26] hover:bg-[#C4141E] text-white font-semibold text-sm rounded-xl flex items-center justify-center gap-1.5 shadow-md shadow-[#ED1B26]/20 transition-all hover:scale-[1.02] active:scale-[0.98] whitespace-nowrap"
+          className="w-full h-12 px-4 bg-[#ED1B26] hover:bg-[#C4141E] text-white font-semibold text-sm rounded-md flex items-center justify-center gap-1.5 shadow-md shadow-[#ED1B26]/20 transition-all hover:scale-[1.02] active:scale-[0.98] whitespace-nowrap"
         >
           <span>Find Flights</span>
           <ArrowRight className="w-4 h-4" />

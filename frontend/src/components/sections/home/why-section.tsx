@@ -68,7 +68,7 @@ export function WhySection() {
             const Icon = reason.icon;
             return (
               <div key={index} className="flex flex-col items-center text-center group">
-                <div className="w-16 h-16 rounded-2xl bg-white/10 flex items-center justify-center mb-6 text-brand-accent group-hover:bg-brand-accent group-hover:text-white transition-all duration-300 shadow-sm">
+                <div className="w-16 h-16 rounded-md bg-white/10 flex items-center justify-center mb-6 text-brand-accent group-hover:bg-brand-accent group-hover:text-white transition-all duration-300 shadow-sm">
                   <Icon size={32} strokeWidth={1.5} />
                 </div>
                 <h3 className="text-xl font-sora font-semibold mb-3">{reason.title}</h3>

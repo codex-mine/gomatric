@@ -125,7 +125,7 @@ export function ServicesSection() {
               <Link
                 key={index}
                 href={service.href}
-                className="gsap-service-card group relative bg-white border border-slate-200/80 rounded-[22px] p-7 md:p-8 hover:shadow-sm hover:border-slate-300 hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between overflow-hidden shadow-xs opacity-100"
+                className="gsap-service-card group relative bg-white border border-slate-200/80 rounded-md p-7 md:p-8 hover:shadow-sm hover:border-slate-300 hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between overflow-hidden shadow-xs opacity-100"
               >
                 {/* Top Crimson Highlight Bar on Hover */}
                 <div className="absolute top-0 left-0 right-0 h-1 bg-[#ED1B26] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -142,7 +142,7 @@ export function ServicesSection() {
 
                 <div>
                   {/* Icon Box */}
-                  <div className="w-12 h-12 rounded-xl bg-[#061474]/5 group-hover:bg-[#061474] text-[#061474] group-hover:text-white flex items-center justify-center mb-5 transition-all duration-300 shadow-xs">
+                  <div className="w-12 h-12 rounded-md bg-[#061474]/5 group-hover:bg-[#061474] text-[#061474] group-hover:text-white flex items-center justify-center mb-5 transition-all duration-300 shadow-xs">
                     <Icon className="w-6 h-6 transition-transform duration-300 group-hover:scale-110" />
                   </div>
 

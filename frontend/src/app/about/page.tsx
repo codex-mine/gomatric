@@ -49,7 +49,7 @@ export default function AboutPage() {
               { title: "Customer First", desc: "Your journey is our priority. We're here to help 24/7." },
               { title: "Global Reach", desc: "Connecting you to destinations all around the world." },
             ].map((value, i) => (
-              <div key={i} className="p-8 border border-border rounded-[14px] bg-white">
+              <div key={i} className="p-8 border border-border rounded-md bg-white">
                 <h3 className="font-sora text-xl font-bold text-brand-primary mb-3">{value.title}</h3>
                 <p className="text-text-secondary">{value.desc}</p>
               </div>

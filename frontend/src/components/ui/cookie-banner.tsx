@@ -22,7 +22,7 @@ export function CookieBanner() {
   };
 
   return (
-    <div className="fixed bottom-4 left-4 z-50 max-w-sm bg-brand-primary-dark text-white p-5 rounded-[14px] shadow-2xl border border-white/10 backdrop-blur-md">
+    <div className="fixed bottom-4 left-4 z-50 max-w-sm bg-brand-primary-dark text-white p-5 rounded-md shadow-2xl border border-white/10 backdrop-blur-md">
       <p className="text-sm text-white/90 mb-3 leading-relaxed">
         We use cookies to enhance your browsing experience and analyze our traffic.
       </p>

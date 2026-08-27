@@ -37,8 +37,8 @@ export default function VisaPage() {
           />
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {popularCountries.map((country) => (
-              <Card key={country.id} className="group overflow-hidden rounded-[14px] p-6 hover:shadow-lg transition-all border-border relative">
-                <div className="aspect-square bg-slate-100 rounded-[10px] mb-6 overflow-hidden relative">
+              <Card key={country.id} className="group overflow-hidden rounded-md p-6 hover:shadow-lg transition-all border-border relative">
+                <div className="aspect-square bg-slate-100 rounded-md mb-6 overflow-hidden relative">
                   <Image
                     src={country.image?.src || '/images/placeholder.jpg'}
                     alt={`${country.country} visa`}
@@ -116,7 +116,7 @@ export default function VisaPage() {
           <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {otherCountries.map((country) => (
               <Link key={country.id} href={`/visa/${country.slug}`}>
-                <Card className="p-4 hover:border-brand-primary/20 hover:shadow-md transition-all rounded-[14px]">
+                <Card className="p-4 hover:border-brand-primary/20 hover:shadow-md transition-all rounded-md">
                   <div className="flex items-center space-x-4">
                     <div className="w-12 h-12 rounded-full bg-surface overflow-hidden relative">
                       <Image

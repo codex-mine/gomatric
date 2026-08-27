@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 /* ========================================
    GoMatric Design Tokens
    ======================================== */
@@ -30,34 +32,38 @@
   --error: #DC2626;
   --info: #2563EB;
 
-  /* Radius */
+  /* Radius Tokens - GoMatric 10px Standard */
   --radius-xs: 4px;
   --radius-sm: 6px;
   --radius-md: 10px;
-  --radius-lg: 14px;
-  --radius-xl: 20px;
-  --radius-2xl: 28px;
+  --radius-lg: 10px;
+  --radius-xl: 10px;
+  --radius-2xl: 10px;
+  --radius-card: 10px;
+  --radius-button: 10px;
+  --radius-input: 10px;
+  --radius-navbar: 10px;
   --radius-pill: 999px;
 }
 
 .dark {
-  /* Brand Colors */
+  /* Brand Colors in Dark */
   --brand-primary: #3B82F6;
   --brand-primary-dark: #1D4ED8;
   --brand-primary-hover: #60A5FA;
-  --brand-accent: #EF4444;
-  --brand-accent-dark: #DC2626;
+  --brand-accent: #ED1B26;
+  --brand-accent-dark: #C4141E;
 
-  /* Backgrounds */
-  --background: #0B1120;
+  /* Dark Backgrounds */
+  --background: #080D1A;
   --surface: #0F172A;
 
-  /* Text */
+  /* Dark Text */
   --text-primary: #F8FAFC;
-  --text-secondary: #CBD5E1;
-  --text-muted: #94A3B8;
+  --text-secondary: #94A3B8;
+  --text-muted: #64748B;
 
-  /* Border */
+  /* Dark Border */
   --border: #1E293B;
 }
 
@@ -87,13 +93,17 @@
   --color-error: var(--error);
   --color-info: var(--info);
 
-  /* Radius */
+  /* Radius Tokens */
   --radius-xs: var(--radius-xs);
   --radius-sm: var(--radius-sm);
   --radius-md: var(--radius-md);
   --radius-lg: var(--radius-lg);
   --radius-xl: var(--radius-xl);
   --radius-2xl: var(--radius-2xl);
+  --radius-card: var(--radius-card);
+  --radius-button: var(--radius-button);
+  --radius-input: var(--radius-input);
+  --radius-navbar: var(--radius-navbar);
   --radius-pill: var(--radius-pill);
 
   /* Fonts */
@@ -115,6 +125,7 @@ body {
   font-family: var(--font-plus-jakarta), system-ui, -apple-system, sans-serif;
   color: var(--text-primary);
   background-color: var(--background);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 /* Headings use Sora */
@@ -124,7 +135,7 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Selection */
 ::selection {
-  background-color: rgba(6, 20, 116, 0.15);
+  background-color: rgba(237, 27, 38, 0.25);
   color: var(--text-primary);
 }
 
@@ -144,6 +155,92 @@ h1, h2, h3, h4, h5, h6 {
 
 ::-webkit-scrollbar-thumb:hover {
   background: var(--text-muted);
+}
+
+/* ========================================
+   Universal Dark Mode Section Adaptations
+   ======================================== */
+
+.dark body {
+  background-color: #080D1A;
+  color: #F8FAFC;
+}
+
+.dark main {
+  background-color: #080D1A;
+}
+
+/* White surfaces in light mode become dark cards in dark mode */
+.dark .bg-white {
+  background-color: #0F172A !important;
+}
+
+.dark .bg-\[\#F8FAFC\] {
+  background-color: #080D1A !important;
+}
+
+.dark .bg-\[\#F8FAFC\]\/50 {
+  background-color: rgba(15, 23, 42, 0.5) !important;
+}
+
+.dark .bg-\[\#F8FAFC\]\/80 {
+  background-color: rgba(15, 23, 42, 0.8) !important;
+}
+
+.dark .bg-\[\#F8FAFC\]\/90 {
+  background-color: rgba(15, 23, 42, 0.9) !important;
+}
+
+/* Deep navy text headings in light mode become crisp white/slate in dark mode */
+.dark .text-\[\#061474\] {
+  color: #F8FAFC !important;
+}
+
+.dark .text-\[\#061474\]\/40 {
+  color: rgba(248, 250, 252, 0.35) !important;
+}
+
+.dark .text-\[\#061474\]\/60 {
+  color: rgba(248, 250, 252, 0.55) !important;
+}
+
+.dark .text-\[\#061474\]\/70 {
+  color: rgba(248, 250, 252, 0.7) !important;
+}
+
+.dark .text-\[\#061474\]\/80 {
+  color: rgba(248, 250, 252, 0.85) !important;
+}
+
+/* Body and muted text adjustments */
+.dark .text-slate-700,
+.dark .text-slate-600 {
+  color: #94A3B8 !important;
+}
+
+.dark .text-slate-500 {
+  color: #64748B !important;
+}
+
+/* Borders in dark mode */
+.dark .border-slate-100,
+.dark .border-slate-200,
+.dark .border-slate-200\/80,
+.dark .border-slate-200\/90 {
+  border-color: #1E293B !important;
+}
+
+.dark .bg-slate-50,
+.dark .bg-slate-100 {
+  background-color: #1E293B !important;
+}
+
+.dark .hover\:bg-slate-100:hover {
+  background-color: #1E293B !important;
+}
+
+.dark .hover\:bg-\[\#F8FAFC\]:hover {
+  background-color: #1E293B !important;
 }
 
 /* Lenis smooth scrolling rules */

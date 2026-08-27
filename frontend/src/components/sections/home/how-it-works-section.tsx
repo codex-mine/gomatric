@@ -172,7 +172,7 @@ export function HowItWorksSection() {
 
               {/* Right Card 01 */}
               <div className="lg:col-span-5">
-                <div className="gsap-how-card relative overflow-hidden bg-white/[0.05] hover:bg-white/[0.09] backdrop-blur-md border border-white/15 hover:border-[#ED1B26]/60 rounded-[24px] p-7 md:p-8 transition-all duration-500 shadow-sm group">
+                <div className="gsap-how-card relative overflow-hidden bg-white/[0.05] hover:bg-white/[0.09] backdrop-blur-md border border-white/15 hover:border-[#ED1B26]/60 rounded-md p-7 md:p-8 transition-all duration-500 shadow-sm group">
                   {/* Background Animated Travel Vector Shape */}
                   <div className="absolute -bottom-8 -right-8 w-32 h-32 pointer-events-none opacity-[0.06] group-hover:opacity-[0.14] group-hover:scale-110 group-hover:rotate-12 transition-all duration-500 text-white">
                     <svg viewBox="0 0 100 100" fill="none" className="w-full h-full stroke-current">
@@ -183,7 +183,7 @@ export function HowItWorksSection() {
                   </div>
 
                   <div className="flex items-center justify-between gap-4 mb-4 relative z-10">
-                    <div className="w-12 h-12 rounded-xl bg-[#ED1B26]/15 border border-[#ED1B26]/30 flex items-center justify-center text-[#ED1B26] group-hover:scale-110 transition-transform">
+                    <div className="w-12 h-12 rounded-md bg-[#ED1B26]/15 border border-[#ED1B26]/30 flex items-center justify-center text-[#ED1B26] group-hover:scale-110 transition-transform">
                       <Compass className="w-6 h-6" />
                     </div>
                     <span className="text-xs font-bold text-[#ED1B26] px-3 py-1 rounded-full bg-[#ED1B26]/10 border border-[#ED1B26]/20">
@@ -206,7 +206,7 @@ export function HowItWorksSection() {
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
               {/* Left Card 02 */}
               <div className="lg:col-span-5">
-                <div className="gsap-how-card relative overflow-hidden bg-white/[0.05] hover:bg-white/[0.09] backdrop-blur-md border border-white/15 hover:border-[#ED1B26]/60 rounded-[24px] p-7 md:p-8 transition-all duration-500 shadow-sm group">
+                <div className="gsap-how-card relative overflow-hidden bg-white/[0.05] hover:bg-white/[0.09] backdrop-blur-md border border-white/15 hover:border-[#ED1B26]/60 rounded-md p-7 md:p-8 transition-all duration-500 shadow-sm group">
                   {/* Background Animated Travel Vector Shape */}
                   <div className="absolute -bottom-8 -right-8 w-32 h-32 pointer-events-none opacity-[0.06] group-hover:opacity-[0.14] group-hover:scale-110 group-hover:-rotate-12 transition-all duration-500 text-white">
                     <svg viewBox="0 0 100 100" fill="none" className="w-full h-full stroke-current">
@@ -218,7 +218,7 @@ export function HowItWorksSection() {
                   </div>
 
                   <div className="flex items-center justify-between gap-4 mb-4 relative z-10">
-                    <div className="w-12 h-12 rounded-xl bg-[#ED1B26]/15 border border-[#ED1B26]/30 flex items-center justify-center text-[#ED1B26] group-hover:scale-110 transition-transform">
+                    <div className="w-12 h-12 rounded-md bg-[#ED1B26]/15 border border-[#ED1B26]/30 flex items-center justify-center text-[#ED1B26] group-hover:scale-110 transition-transform">
                       <FileCheck2 className="w-6 h-6" />
                     </div>
                     <span className="text-xs font-bold text-[#ED1B26] px-3 py-1 rounded-full bg-[#ED1B26]/10 border border-[#ED1B26]/20">
@@ -267,7 +267,7 @@ export function HowItWorksSection() {
 
               {/* Right Card 03 */}
               <div className="lg:col-span-5">
-                <div className="gsap-how-card relative overflow-hidden bg-white/[0.05] hover:bg-white/[0.09] backdrop-blur-md border border-white/15 hover:border-[#ED1B26]/60 rounded-[24px] p-7 md:p-8 transition-all duration-500 shadow-sm group">
+                <div className="gsap-how-card relative overflow-hidden bg-white/[0.05] hover:bg-white/[0.09] backdrop-blur-md border border-white/15 hover:border-[#ED1B26]/60 rounded-md p-7 md:p-8 transition-all duration-500 shadow-sm group">
                   {/* Background Animated Travel Vector Shape */}
                   <div className="absolute -bottom-8 -right-8 w-32 h-32 pointer-events-none opacity-[0.06] group-hover:opacity-[0.14] group-hover:scale-110 group-hover:rotate-12 transition-all duration-500 text-white">
                     <svg viewBox="0 0 100 100" fill="none" className="w-full h-full stroke-current">
@@ -278,7 +278,7 @@ export function HowItWorksSection() {
                   </div>
 
                   <div className="flex items-center justify-between gap-4 mb-4 relative z-10">
-                    <div className="w-12 h-12 rounded-xl bg-[#ED1B26]/15 border border-[#ED1B26]/30 flex items-center justify-center text-[#ED1B26] group-hover:scale-110 transition-transform">
+                    <div className="w-12 h-12 rounded-md bg-[#ED1B26]/15 border border-[#ED1B26]/30 flex items-center justify-center text-[#ED1B26] group-hover:scale-110 transition-transform">
                       <ShieldCheck className="w-6 h-6" />
                     </div>
                     <span className="text-xs font-bold text-[#ED1B26] px-3 py-1 rounded-full bg-[#ED1B26]/10 border border-[#ED1B26]/20">
@@ -301,7 +301,7 @@ export function HowItWorksSection() {
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
               {/* Left Card 04 */}
               <div className="lg:col-span-5">
-                <div className="gsap-how-card relative overflow-hidden bg-white/[0.05] hover:bg-white/[0.09] backdrop-blur-md border border-[#ED1B26]/40 hover:border-[#ED1B26] rounded-[24px] p-7 md:p-8 transition-all duration-500 shadow-sm group">
+                <div className="gsap-how-card relative overflow-hidden bg-white/[0.05] hover:bg-white/[0.09] backdrop-blur-md border border-[#ED1B26]/40 hover:border-[#ED1B26] rounded-md p-7 md:p-8 transition-all duration-500 shadow-sm group">
                   {/* Background Animated Travel Vector Shape */}
                   <div className="absolute -bottom-8 -right-8 w-32 h-32 pointer-events-none opacity-[0.06] group-hover:opacity-[0.14] group-hover:scale-110 group-hover:-rotate-6 transition-all duration-500 text-[#ED1B26]">
                     <svg viewBox="0 0 100 100" fill="none" className="w-full h-full stroke-current">
@@ -313,7 +313,7 @@ export function HowItWorksSection() {
                   </div>
 
                   <div className="flex items-center justify-between gap-4 mb-4 relative z-10">
-                    <div className="w-12 h-12 rounded-xl bg-[#ED1B26] flex items-center justify-center text-white group-hover:scale-110 transition-transform shadow-sm">
+                    <div className="w-12 h-12 rounded-md bg-[#ED1B26] flex items-center justify-center text-white group-hover:scale-110 transition-transform shadow-sm">
                       <Plane className="w-6 h-6" />
                     </div>
                     <span className="text-xs font-bold text-[#ED1B26] px-3 py-1 rounded-full bg-[#ED1B26]/15 border border-[#ED1B26]/30">

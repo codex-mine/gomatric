@@ -65,7 +65,7 @@ export default function BookingPage() {
             </div>
           </div>
 
-          <div className="bg-white border border-border rounded-[14px] p-8 md:p-12 shadow-sm">
+          <div className="bg-white border border-border rounded-md p-8 md:p-12 shadow-sm">
             <form onSubmit={handleSubmit(onSubmit)}>
               
               {/* Step 1: Journey */}
@@ -79,7 +79,7 @@ export default function BookingPage() {
                     </div>
                     <div className="space-y-2">
                       <label className="text-sm font-semibold text-text-primary">Service Type</label>
-                      <select {...register("serviceType")} className="w-full h-12 px-3 border border-input rounded-[10px] bg-background text-sm">
+                      <select {...register("serviceType")} className="w-full h-12 px-3 border border-input rounded-md bg-background text-sm">
                         <option value="Visa">Visa Services</option>
                         <option value="Tour">Tour Package</option>
                         <option value="Flight">Flight Ticket</option>
@@ -130,7 +130,7 @@ export default function BookingPage() {
               {currentStep === 2 && (
                 <div className="space-y-6 animate-in fade-in slide-in-from-bottom-4">
                   <h3 className="font-sora text-2xl font-bold text-brand-primary mb-6">Upload Documents</h3>
-                  <div className="border-2 border-dashed border-border rounded-[14px] p-12 flex flex-col items-center justify-center text-center hover:bg-surface transition-colors cursor-pointer">
+                  <div className="border-2 border-dashed border-border rounded-md p-12 flex flex-col items-center justify-center text-center hover:bg-surface transition-colors cursor-pointer">
                     <div className="w-16 h-16 bg-brand-primary/10 text-brand-primary rounded-full flex items-center justify-center mb-4">
                       <UploadCloud className="w-8 h-8" />
                     </div>
@@ -140,7 +140,7 @@ export default function BookingPage() {
                   </div>
                   <div className="space-y-3">
                     <p className="text-sm font-semibold text-text-primary">Uploaded Files</p>
-                    <div className="flex items-center gap-4 p-4 border border-border rounded-[10px] bg-surface">
+                    <div className="flex items-center gap-4 p-4 border border-border rounded-md bg-surface">
                       <File className="w-6 h-6 text-text-muted" />
                       <div className="flex-grow">
                         <p className="text-sm font-medium">passport_copy.pdf</p>
@@ -156,7 +156,7 @@ export default function BookingPage() {
               {currentStep === 3 && (
                 <div className="space-y-6 animate-in fade-in slide-in-from-bottom-4">
                   <h3 className="font-sora text-2xl font-bold text-brand-primary mb-6">Review Information</h3>
-                  <div className="bg-surface p-6 rounded-[14px] space-y-6">
+                  <div className="bg-surface p-6 rounded-md space-y-6">
                     <div className="grid grid-cols-2 gap-4 border-b border-border pb-6">
                       <div>
                         <p className="text-sm text-text-muted">Destination</p>
@@ -203,11 +203,11 @@ export default function BookingPage() {
                   <p className="text-text-secondary text-lg mb-8 max-w-md mx-auto">
                     Your booking request has been received. Your reference number is:
                   </p>
-                  <div className="inline-block bg-surface border border-border px-8 py-4 rounded-[10px] text-2xl font-bold font-sora text-brand-primary mb-10 tracking-widest">
+                  <div className="inline-block bg-surface border border-border px-8 py-4 rounded-md text-2xl font-bold font-sora text-brand-primary mb-10 tracking-widest">
                     GM-2026-X8F9
                   </div>
                   <div>
-                    <Button type="button" onClick={() => window.location.href='/tracking'} className="h-12 px-8 rounded-[10px]">
+                    <Button type="button" onClick={() => window.location.href='/tracking'} className="h-12 px-8 rounded-md">
                       Track My Journey →
                     </Button>
                   </div>

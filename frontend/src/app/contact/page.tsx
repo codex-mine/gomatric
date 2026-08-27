@@ -67,7 +67,7 @@ export default function ContactPage() {
             <div className="lg:col-span-5 space-y-6">
               
               {/* Card 1: Call Us */}
-              <div className="bg-white rounded-[22px] p-6 sm:p-7 border border-slate-100 shadow-sm transition-all group">
+              <div className="bg-white rounded-md p-6 sm:p-7 border border-slate-100 shadow-sm transition-all group">
                 <div className="flex items-start gap-4">
                   <div className="w-10 h-10 rounded-xl bg-[#061474]/5 flex items-center justify-center text-[#061474] shrink-0 group-hover:bg-[#061474] group-hover:text-white transition-colors">
                     <Phone className="w-5 h-5" />
@@ -90,7 +90,7 @@ export default function ContactPage() {
               </div>
 
               {/* Card 2: Email */}
-              <div className="bg-white rounded-[22px] p-6 sm:p-7 border border-slate-100 shadow-sm transition-all group">
+              <div className="bg-white rounded-md p-6 sm:p-7 border border-slate-100 shadow-sm transition-all group">
                 <div className="flex items-start gap-4">
                   <div className="w-10 h-10 rounded-xl bg-[#061474]/5 flex items-center justify-center text-[#061474] shrink-0 group-hover:bg-[#061474] group-hover:text-white transition-colors">
                     <Mail className="w-5 h-5" />
@@ -113,7 +113,7 @@ export default function ContactPage() {
               </div>
 
               {/* Card 3: Global Office & Map */}
-              <div className="bg-white rounded-[22px] p-6 sm:p-7 pb-0 sm:pb-0 border border-slate-100 shadow-sm transition-all overflow-hidden group">
+              <div className="bg-white rounded-md p-6 sm:p-7 pb-0 sm:pb-0 border border-slate-100 shadow-sm transition-all overflow-hidden group">
                 <div className="flex items-start gap-4 mb-4">
                   <div className="w-10 h-10 rounded-xl bg-[#061474]/5 flex items-center justify-center text-[#061474] shrink-0 group-hover:bg-[#061474] group-hover:text-white transition-colors">
                     <MapPin className="w-5 h-5" />
@@ -156,13 +156,13 @@ export default function ContactPage() {
             {/* Right Column: Send an Inquiry Form (Span 7)              */}
             {/* ======================================================== */}
             <div className="lg:col-span-7">
-              <div className="bg-white rounded-[26px] p-8 sm:p-10 md:p-12 border border-slate-100 shadow-sm">
+              <div className="bg-white rounded-md p-8 sm:p-10 md:p-12 border border-slate-100 shadow-sm">
                 <h2 className="font-sora text-2xl sm:text-3xl font-bold text-[#061474] mb-8">
                   Send an Inquiry
                 </h2>
 
                 {submitted && (
-                  <div className="mb-6 p-4 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 flex items-center gap-3">
+                  <div className="mb-6 p-4 rounded-md bg-emerald-50 border border-emerald-200 text-emerald-800 flex items-center gap-3">
                     <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0" />
                     <p className="text-sm font-medium">
                       Thank you! Your inquiry has been received. Our concierge will be in touch shortly.
@@ -180,7 +180,7 @@ export default function ContactPage() {
                       </label>
                       <Input
                         placeholder="Jane"
-                        className="h-12 bg-white border border-slate-200 rounded-xl px-4 text-slate-800 placeholder:text-slate-400 focus:border-slate-300 focus:ring-1 focus:ring-slate-300 focus:outline-none"
+                        className="h-12 bg-white border border-slate-200 rounded-md px-4 text-slate-800 placeholder:text-slate-400 focus:border-slate-300 focus:ring-1 focus:ring-slate-300 focus:outline-none"
                         error={!!errors.firstName}
                         {...register("firstName")}
                       />
@@ -195,7 +195,7 @@ export default function ContactPage() {
                       </label>
                       <Input
                         placeholder="Doe"
-                        className="h-12 bg-white border border-slate-200 rounded-xl px-4 text-slate-800 placeholder:text-slate-400 focus:border-slate-300 focus:ring-1 focus:ring-slate-300 focus:outline-none"
+                        className="h-12 bg-white border border-slate-200 rounded-md px-4 text-slate-800 placeholder:text-slate-400 focus:border-slate-300 focus:ring-1 focus:ring-slate-300 focus:outline-none"
                         error={!!errors.lastName}
                         {...register("lastName")}
                       />
@@ -213,7 +213,7 @@ export default function ContactPage() {
                     <Input
                       type="email"
                       placeholder="jane@example.com"
-                      className="h-12 bg-white border border-slate-200 rounded-xl px-4 text-slate-800 placeholder:text-slate-400 focus:border-slate-300 focus:ring-1 focus:ring-slate-300 focus:outline-none"
+                      className="h-12 bg-white border border-slate-200 rounded-md px-4 text-slate-800 placeholder:text-slate-400 focus:border-slate-300 focus:ring-1 focus:ring-slate-300 focus:outline-none"
                       error={!!errors.email}
                       {...register("email")}
                     />
@@ -228,7 +228,7 @@ export default function ContactPage() {
                       Area of Interest
                     </label>
                     <select
-                      className="w-full h-12 bg-white border border-slate-200 rounded-xl px-4 text-slate-800 focus:border-slate-300 focus:ring-1 focus:ring-slate-300 focus:outline-none cursor-pointer"
+                      className="w-full h-12 bg-white border border-slate-200 rounded-md px-4 text-slate-800 focus:border-slate-300 focus:ring-1 focus:ring-slate-300 focus:outline-none cursor-pointer"
                       {...register("areaOfInterest")}
                     >
                       <option value="Bespoke Itinerary">Bespoke Itinerary</option>
@@ -251,7 +251,7 @@ export default function ContactPage() {
                     <Textarea
                       placeholder="Tell us about your travel dreams..."
                       rows={5}
-                      className="bg-white border border-slate-200 rounded-xl p-4 text-slate-800 placeholder:text-slate-400 focus:border-slate-300 focus:ring-1 focus:ring-slate-300 focus:outline-none min-h-[140px]"
+                      className="bg-white border border-slate-200 rounded-md p-4 text-slate-800 placeholder:text-slate-400 focus:border-slate-300 focus:ring-1 focus:ring-slate-300 focus:outline-none min-h-[140px]"
                       error={!!errors.message}
                       {...register("message")}
                     />
@@ -265,7 +265,7 @@ export default function ContactPage() {
                     <button
                       type="submit"
                       disabled={isSubmitting}
-                      className="inline-flex items-center justify-center gap-2.5 px-8 py-3.5 bg-[#ED1B26] hover:bg-[#C4141E] text-white font-semibold text-sm sm:text-base rounded-xl transition-all shadow-md shadow-[#ED1B26]/25 hover:shadow-lg hover:scale-[1.01] active:scale-[0.99] cursor-pointer"
+                      className="inline-flex items-center justify-center gap-2.5 px-8 py-3.5 bg-[#ED1B26] hover:bg-[#C4141E] text-white font-semibold text-sm sm:text-base rounded-md transition-all shadow-md shadow-[#ED1B26]/25 hover:shadow-lg hover:scale-[1.01] active:scale-[0.99] cursor-pointer"
                     >
                       <span>{isSubmitting ? "Submitting..." : "Submit Inquiry"}</span>
                       <ArrowRight className="w-4 h-4" />
