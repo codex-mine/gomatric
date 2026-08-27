@@ -61,7 +61,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           dangerouslySetInnerHTML={{
             __html: `
               try {
-                const theme = localStorage.getItem('gomatric-theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+                const theme = localStorage.getItem('gomatric-theme') || 'light';
                 if (theme === 'dark') {
                   document.documentElement.classList.add('dark');
                   document.documentElement.setAttribute('data-theme', 'dark');

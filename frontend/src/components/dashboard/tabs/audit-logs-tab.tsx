@@ -1,127 +1,69 @@
 "use client";
 
-import { History, Shield, Lock, AlertTriangle, CheckCircle2 } from "lucide-react";
-import { DataTable, Column } from "../ui/data-table";
+import Link from "next/link";
+import {
+  History,
+  Search,
+  ShieldCheck,
+  Lock,
+} from "lucide-react";
+import { EmptyState } from "../ui/empty-state";
 import { Role } from "@/lib/permissions";
 
-interface AuditLogRow {
-  id: string;
-  action: string;
-  user: string;
-  role: string;
-  ipAddress: string;
-  timestamp: string;
-  status: "SUCCESS" | "WARNING" | "FAILED";
+interface AuditLogsTabProps {
+  role?: Role;
 }
 
-const MOCK_AUDIT_LOGS: AuditLogRow[] = [
-  {
-    id: "LOG-9921",
-    action: "Visa Application #GBR-9921 approved",
-    user: "Alexander Rossi",
-    role: "ADMIN",
-    ipAddress: "192.168.1.45",
-    timestamp: "2026-08-27 15:42:10",
-    status: "SUCCESS",
-  },
-  {
-    id: "LOG-9922",
-    action: "Role change: Sarah Connor updated to [MANAGER]",
-    user: "Alexander Rossi",
-    role: "ADMIN",
-    ipAddress: "192.168.1.45",
-    timestamp: "2026-08-27 14:15:02",
-    status: "SUCCESS",
-  },
-  {
-    id: "LOG-9923",
-    action: "Failed login attempt (3 consecutive invalid passwords)",
-    user: "unknown@client.com",
-    role: "UNKNOWN",
-    ipAddress: "103.205.12.8",
-    timestamp: "2026-08-27 12:05:44",
-    status: "FAILED",
-  },
-  {
-    id: "LOG-9924",
-    action: "Tour package published: Bali Sunset 7D6N",
-    user: "Sarah Connor",
-    role: "MANAGER",
-    ipAddress: "192.168.1.88",
-    timestamp: "2026-08-27 11:20:18",
-    status: "SUCCESS",
-  },
-];
-
-export function AuditLogsTab({ role }: { role: Role }) {
-  const columns: Column<AuditLogRow>[] = [
-    {
-      header: "Action / Event",
-      cell: (item) => (
-        <div className="space-y-0.5">
-          <span className="font-semibold text-slate-900 dark:text-white block">
-            {item.action}
-          </span>
-          <span className="text-[11px] text-slate-400 font-mono">
-            #{item.id}
-          </span>
-        </div>
-      ),
-    },
-    {
-      header: "Actor & Role",
-      cell: (item) => (
-        <div className="text-xs">
-          <span className="font-bold text-slate-800 dark:text-slate-200 block">
-            {item.user}
-          </span>
-          <span className="text-[10px] font-bold text-slate-400">
-            [{item.role}]
-          </span>
-        </div>
-      ),
-    },
-    {
-      header: "IP Address",
-      accessorKey: "ipAddress",
-      className: "font-mono text-xs text-slate-500",
-    },
-    {
-      header: "Timestamp",
-      accessorKey: "timestamp",
-      className: "text-xs text-slate-400 font-mono",
-    },
-    {
-      header: "Status",
-      cell: (item) => (
-        <span
-          className={`inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-bold ${
-            item.status === "SUCCESS"
-              ? "bg-emerald-50 dark:bg-emerald-950/50 text-emerald-700 dark:text-emerald-400"
-              : "bg-red-50 dark:bg-red-950/50 text-red-700 dark:text-red-400"
-          }`}
-        >
-          {item.status === "SUCCESS" ? (
-            <CheckCircle2 className="w-3 h-3" />
-          ) : (
-            <AlertTriangle className="w-3 h-3" />
-          )}
-          <span>{item.status}</span>
-        </span>
-      ),
-    },
-  ];
-
+export function AuditLogsTab({ role = "ADMIN" }: AuditLogsTabProps) {
   return (
     <div className="space-y-6">
-      <DataTable
-        title="Security & System Audit Logs"
-        description="Immutable chronological security ledger recording administrative triggers and role adjustments"
-        data={MOCK_AUDIT_LOGS}
-        columns={columns}
-        searchPlaceholder="Search action, actor, IP address..."
-        searchKeys={["action", "user", "ipAddress", "id"]}
+      
+      {/* 1. Header with Title */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div>
+          <h1 className="font-sora font-extrabold text-2xl sm:text-3xl text-slate-900 dark:text-white tracking-tight">
+            Security Audit Logs
+          </h1>
+          <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1">
+            System security log stream, staff role modifications, and authentication telemetry.
+          </p>
+        </div>
+      </div>
+
+      {/* 2. Filter Bar */}
+      <div className="bg-white dark:bg-slate-900 border border-slate-200/90 dark:border-slate-800 rounded-2xl p-4 shadow-xs flex flex-col sm:flex-row items-center justify-between gap-3">
+        <div className="relative w-full sm:w-72">
+          <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+          <input
+            type="text"
+            disabled
+            placeholder="Search audit trail..."
+            className="w-full h-10 pl-9 pr-3.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50/70 dark:bg-slate-800/60 text-xs sm:text-sm text-slate-800 dark:text-white placeholder:text-slate-400 outline-none opacity-60 cursor-not-allowed"
+          />
+        </div>
+
+        <div className="text-xs font-semibold text-slate-400">
+          Showing 0 entries
+        </div>
+      </div>
+
+      {/* 3. Empty State */}
+      <EmptyState
+        icon={ShieldCheck}
+        badge="Security & Compliance"
+        title="Audit Logs Clean"
+        description="Privilege escalations, role assignment changes, sensitive document accesses, and login events will be logged here."
+        action={
+          <Link
+            href="/dashboard/users"
+            className="h-10 px-5 rounded-xl bg-[#061474] hover:bg-[#030A3A] text-white font-semibold text-xs flex items-center gap-2 transition-colors"
+          >
+            <Lock className="w-3.5 h-3.5" />
+            <span>Manage User Permissions</span>
+          </Link>
+        }
       />
+
     </div>
   );
 }

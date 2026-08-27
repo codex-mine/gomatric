@@ -11,14 +11,14 @@ import { ServicesSearchTab } from "./services-search-tab";
 type TabType = "tours" | "visa" | "flights" | "services";
 
 const TABS: { id: TabType; label: string }[] = [
-  { id: "tours", label: "Tours" },
   { id: "visa", label: "Visa" },
-  { id: "flights", label: "Air Tickets" },
-  { id: "services", label: "Travel Services" },
+  { id: "tours", label: "Tours" },
+  // { id: "flights", label: "Air Tickets" },
+  // { id: "services", label: "Travel Services" },
 ];
 
 export function HeroSearchBox({ className }: { className?: string }) {
-  const [activeTab, setActiveTab] = useState<TabType>("tours");
+  const [activeTab, setActiveTab] = useState<TabType>("visa");
   const panelRef = useRef<HTMLDivElement>(null);
   const vectorRef = useRef<HTMLDivElement>(null);
 

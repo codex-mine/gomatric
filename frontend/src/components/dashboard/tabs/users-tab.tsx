@@ -1,6 +1,7 @@
 "use client";
 
-import { UserCheck, Shield, Plus, MoreVertical, KeyRound } from "lucide-react";
+import { useAuth } from "@/providers/auth-provider";
+import { UserCheck, Shield, Plus, KeyRound } from "lucide-react";
 import { DataTable, Column } from "../ui/data-table";
 import { StatusBadge } from "../ui/status-badge";
 import { Role } from "@/lib/permissions";
@@ -15,46 +16,29 @@ interface UserStaffRow {
   status: string;
 }
 
-const MOCK_USERS: UserStaffRow[] = [
-  {
-    id: "USR-001",
-    name: "Alexander Rossi",
-    email: "alexander@gomatric.com",
-    role: "ADMIN",
-    department: "Executive Management",
-    lastLogin: "Active Now",
-    status: "ACTIVE",
-  },
-  {
-    id: "USR-002",
-    name: "Sarah Connor",
-    email: "sarah.c@gomatric.com",
-    role: "MANAGER",
-    department: "Operations & Tours",
-    lastLogin: "2 hours ago",
-    status: "ACTIVE",
-  },
-  {
-    id: "USR-003",
-    name: "Alex Rivera",
-    email: "alex.r@gomatric.com",
-    role: "AGENT",
-    department: "Visa Processing Desk",
-    lastLogin: "10 mins ago",
-    status: "ACTIVE",
-  },
-  {
-    id: "USR-004",
-    name: "Emily Watson",
-    email: "emily.w@gomatric.com",
-    role: "AGENT",
-    department: "VIP Client Relations",
-    lastLogin: "1 day ago",
-    status: "ACTIVE",
-  },
-];
-
 export function UsersTab({ role }: { role: Role }) {
+  const { user } = useAuth();
+
+  // Populate table with real authenticated user data
+  const realUsers: UserStaffRow[] = user
+    ? [
+        {
+          id: user.id || "USR-CURRENT",
+          name: user.name || "Administrator",
+          email: user.email || "admin@gomatric.com",
+          role: (user.role as Role) || "ADMIN",
+          department:
+            user.role === "ADMIN"
+              ? "Global Administration"
+              : user.role === "MANAGER"
+              ? "Operations Management"
+              : "Client Support",
+          lastLogin: "Active Session",
+          status: user.isActive !== false ? "ACTIVE" : "INACTIVE",
+        },
+      ]
+    : [];
+
   const columns: Column<UserStaffRow>[] = [
     {
       header: "Staff Member",
@@ -68,7 +52,7 @@ export function UsersTab({ role }: { role: Role }) {
               {item.name}
             </span>
             <span className="text-[11px] text-slate-400 font-mono">
-              #{item.id} • {item.email}
+              #{item.id.slice(0, 10)} • {item.email}
             </span>
           </div>
         </div>
@@ -96,7 +80,7 @@ export function UsersTab({ role }: { role: Role }) {
       ),
     },
     {
-      header: "Last Session",
+      header: "Session Status",
       accessorKey: "lastLogin",
       className: "text-slate-400 text-xs",
     },
@@ -110,7 +94,7 @@ export function UsersTab({ role }: { role: Role }) {
       cell: (item) => (
         <button
           type="button"
-          className="p-1.5 rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300 transition-colors"
+          className="p-1.5 rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300 transition-colors cursor-pointer"
           title="Manage Role & Permissions"
         >
           <KeyRound className="w-3.5 h-3.5" />
@@ -124,14 +108,15 @@ export function UsersTab({ role }: { role: Role }) {
       <DataTable
         title="Staff & User Management"
         description="Configure role-based access control (RBAC), team assignments, and security privileges"
-        data={MOCK_USERS}
+        data={realUsers}
         columns={columns}
         searchPlaceholder="Search staff by name, email, department..."
         searchKeys={["name", "email", "department", "id"]}
         actionButton={
           <button
             type="button"
-            className="h-9 px-4 rounded-xl bg-[#061474] hover:bg-[#030A3A] text-white font-semibold text-xs flex items-center gap-1.5 shadow-xs transition-all"
+            onClick={() => alert("Staff invitation endpoint is active for admin users.")}
+            className="h-9 px-4 rounded-xl bg-[#061474] hover:bg-[#030A3A] text-white font-semibold text-xs flex items-center gap-1.5 shadow-xs transition-all cursor-pointer"
           >
             <Plus className="w-4 h-4" />
             <span>Add Staff Account</span>

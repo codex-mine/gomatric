@@ -17,10 +17,9 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    // Check saved theme or system preference
+    // Check saved theme (default to light mode)
     const savedTheme = localStorage.getItem("gomatric-theme") as Theme | null;
-    const systemPrefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-    const initialTheme: Theme = savedTheme ? savedTheme : systemPrefersDark ? "dark" : "light";
+    const initialTheme: Theme = savedTheme ? savedTheme : "light";
 
     setThemeState(initialTheme);
     if (initialTheme === "dark") {

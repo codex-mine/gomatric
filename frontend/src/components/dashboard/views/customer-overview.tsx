@@ -3,199 +3,220 @@
 import Link from "next/link";
 import {
   FileText,
-  Plane,
-  Award,
-  MapPin,
-  CheckCircle2,
   Clock,
   ArrowRight,
-  Download,
-  UploadCloud,
   Compass,
-  AlertCircle,
-  FileCheck2,
+  Settings,
+  Bell,
+  Sparkles,
+  ShieldCheck,
+  User,
+  ExternalLink,
+  Calendar,
+  KeyRound,
+  CheckCircle2,
+  Mail,
 } from "lucide-react";
-import { useRouter } from "next/navigation";
+import { useAuth } from "@/providers/auth-provider";
 import { StatCard } from "../ui/stat-card";
-import { StatusBadge } from "../ui/status-badge";
-import { ActivityTimeline, ActivityItem } from "../ui/activity-timeline";
 
-interface CustomerOverviewProps {
-  onNavigateTab?: (tabId: string) => void;
-}
+export function CustomerOverview() {
+  const { user } = useAuth();
 
-export function CustomerOverview({ onNavigateTab }: CustomerOverviewProps) {
-  const router = useRouter();
-  const handleNavigate = (tabId: string) => {
-    if (onNavigateTab) {
-      onNavigateTab(tabId);
-    } else {
-      router.push(`/dashboard/${tabId}`);
-    }
-  };
-  const customerActivities: ActivityItem[] = [
-    {
-      id: "1",
-      title: "Bank statement verified by Visa Specialist for",
-      subject: "UK Standard Visitor Visa",
-      time: "Today, 10:30 AM",
-      type: "application",
-      statusColor: "bg-emerald-50 text-emerald-600 dark:bg-emerald-950/60 dark:text-emerald-400",
-    },
-    {
-      id: "2",
-      title: "Confirmed tour itinerary issued for",
-      subject: "Bali Tropical Paradise (5D4N)",
-      time: "Yesterday",
-      type: "tour",
-      statusColor: "bg-blue-50 text-blue-600 dark:bg-blue-950/60 dark:text-blue-400",
-    },
-    {
-      id: "3",
-      title: "Payment receipt #REC-9918 generated for",
-      subject: "$1,450 (Visa + Hotel Vouchers)",
-      time: "3 days ago",
-      type: "payment",
-      statusColor: "bg-purple-50 text-purple-600 dark:bg-purple-950/60 dark:text-purple-400",
-    },
-  ];
+  // Format real registration date if available
+  const memberSinceFormatted = user?.createdAt
+    ? new Date(user.createdAt).toLocaleDateString("en-US", {
+        month: "short",
+        year: "numeric",
+      })
+    : "Recently";
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 max-w-6xl">
       
-      {/* 1. Customer Personal Metrics */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 sm:gap-5">
+      {/* 1. Customer Real Welcome Header Banner */}
+      <div className="bg-gradient-to-r from-[#030A3A] to-[#0A1A6B] rounded-2xl p-6 sm:p-8 text-white relative overflow-hidden shadow-sm">
+        {/* Background decorative watermark */}
+        <div className="absolute right-0 top-0 bottom-0 w-80 opacity-10 pointer-events-none select-none hidden md:block">
+          <svg viewBox="0 0 200 200" fill="none" className="w-full h-full stroke-white">
+            <circle cx="100" cy="100" r="80" strokeWidth="1.5" strokeDasharray="6 6" />
+            <circle cx="100" cy="100" r="50" strokeWidth="1" />
+            <polygon points="100,20 106,94 180,100 106,106 100,180 94,106 20,100 94,94" strokeWidth="1.5" />
+          </svg>
+        </div>
+
+        <div className="relative z-10 space-y-3">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 text-white text-xs font-semibold backdrop-blur-xs">
+            <Sparkles className="w-3.5 h-3.5 text-[#ED1B26]" />
+            <span>GoMatric Customer Account</span>
+          </div>
+
+          <h1 className="font-sora font-extrabold text-2xl sm:text-3xl tracking-tight">
+            Welcome back, {user?.name || "Traveler"}!
+          </h1>
+
+          <p className="text-xs sm:text-sm text-white/80 max-w-xl leading-relaxed">
+            Manage your personal profile, notification preferences, and account security. Self-service visa applications and live booking management will be available directly in your dashboard soon.
+          </p>
+
+          <div className="flex flex-wrap items-center gap-3 pt-2">
+            <Link
+              href="/dashboard/settings"
+              className="h-10 px-5 rounded-xl bg-[#ED1B26] hover:bg-[#C4141E] text-white text-xs font-bold flex items-center gap-2 shadow-md shadow-red-600/20 transition-all hover:scale-[1.02]"
+            >
+              <Settings className="w-3.5 h-3.5" />
+              <span>Manage Profile & Settings</span>
+            </Link>
+
+            <Link
+              href="/dashboard/notifications"
+              className="h-10 px-5 rounded-xl bg-white/10 hover:bg-white/20 text-white text-xs font-bold flex items-center gap-2 backdrop-blur-xs transition-colors"
+            >
+              <Bell className="w-3.5 h-3.5" />
+              <span>Notifications</span>
+            </Link>
+          </div>
+        </div>
+      </div>
+
+      {/* 2. Real Customer Account Metrics (Strictly based on Authenticated User) */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
         <StatCard
-          title="Active Visa Files"
-          value="1 File"
-          change="Under Review"
+          title="Account Status"
+          value={user?.isEmailVerified ? "Verified" : "Active"}
+          change={user?.isEmailVerified ? "Email Confirmed" : "Standard"}
           isPositive={true}
-          subtext="UK Standard Visitor Visa"
-          icon={FileText}
-          iconColor="text-[#ED1B26] bg-red-50 dark:bg-red-950/60 dark:text-red-400"
+          subtext={user?.email || "customer@gomatric.com"}
+          icon={User}
+          iconColor="text-emerald-600 bg-emerald-50 dark:bg-emerald-950/60 dark:text-emerald-400"
         />
 
         <StatCard
-          title="Confirmed Bookings"
-          value="2 Trips"
-          change="Upcoming"
+          title="Assigned Role"
+          value="Customer"
+          change="Client Access"
           isPositive={true}
-          subtext="Bali (Oct) • Dubai (Dec)"
-          icon={Plane}
-          iconColor="text-blue-600 bg-blue-50 dark:bg-blue-950/60 dark:text-blue-400"
+          subtext="Personal Portal"
+          icon={ShieldCheck}
+          iconColor="text-[#061474] bg-blue-50 dark:bg-blue-950/60 dark:text-blue-400"
         />
 
         <StatCard
-          title="Voyager Loyalty Points"
-          value="3,400 Pts"
-          change="$170 Value"
+          title="Member Since"
+          value={memberSinceFormatted}
+          change="Registered"
           isPositive={true}
-          subtext="Redeemable on next tour"
-          icon={Award}
+          subtext="GoMatric Client"
+          icon={Calendar}
           iconColor="text-amber-600 bg-amber-50 dark:bg-amber-950/60 dark:text-amber-400"
         />
 
         <StatCard
-          title="Countries Visited"
-          value="8 Countries"
-          change="Gold Member"
+          title="Security & Session"
+          value="Protected"
+          change="Active"
           isPositive={true}
-          subtext="GoMatric Voyager Club"
-          icon={MapPin}
+          subtext="Encrypted JWT Auth"
+          icon={KeyRound}
           iconColor="text-purple-600 bg-purple-50 dark:bg-purple-950/60 dark:text-purple-400"
         />
       </div>
 
-      {/* 2. Visa Progress Tracker + Next Upcoming Trip */}
+      {/* 3. Account Navigation & Coming Soon Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         
-        {/* Live Visa Progress Roadmap Card */}
-        <div className="lg:col-span-2 bg-white dark:bg-slate-900 border border-slate-200/90 dark:border-slate-800 rounded-2xl p-6 sm:p-7 shadow-xs space-y-6">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-            <div>
-              <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400 block">
-                Active Application (Ref: #GBR-9921)
-              </span>
-              <h2 className="font-sora font-bold text-xl text-slate-900 dark:text-white mt-0.5">
-                UK Standard Visitor Visa (6 Months)
-              </h2>
-            </div>
-            <StatusBadge status="IN_REVIEW" label="Dossier In Review" size="lg" />
-          </div>
+        {/* Left (2/3): Real Available Account Options */}
+        <div className="lg:col-span-2 space-y-4">
+          <div className="bg-white dark:bg-slate-900 border border-slate-200/90 dark:border-slate-800 rounded-2xl p-6 shadow-xs space-y-4">
+            <h2 className="font-sora font-bold text-base sm:text-lg text-slate-900 dark:text-white">
+              Account Management
+            </h2>
 
-          {/* Stepper Progress Bar */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 relative pt-2">
-            {[
-              { title: "Application Submitted", date: "Aug 20", done: true },
-              { title: "Documents Verified", date: "Aug 24", done: true },
-              { title: "VFS Biometrics", date: "Aug 29 (Scheduled)", done: false, active: true },
-              { title: "Passport Decision", date: "Est. Sep 10", done: false },
-            ].map((step, idx) => (
-              <div key={idx} className="space-y-2 relative">
-                <div className="flex items-center gap-2">
-                  <div
-                    className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold shrink-0 ${
-                      step.done
-                        ? "bg-emerald-600 text-white"
-                        : step.active
-                        ? "bg-[#061474] text-white ring-4 ring-blue-100 dark:ring-blue-900/50"
-                        : "bg-slate-100 dark:bg-slate-800 text-slate-400"
-                    }`}
-                  >
-                    {step.done ? <CheckCircle2 className="w-4 h-4" /> : idx + 1}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {/* Profile Card */}
+              <Link
+                href="/dashboard/settings"
+                className="p-5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50/60 dark:bg-slate-800/40 hover:bg-slate-100/70 dark:hover:bg-slate-800 transition-all group flex flex-col justify-between space-y-3"
+              >
+                <div className="flex items-start justify-between">
+                  <div className="w-10 h-10 rounded-xl bg-[#061474]/10 dark:bg-blue-900/40 text-[#061474] dark:text-blue-400 flex items-center justify-center">
+                    <User className="w-5 h-5" />
                   </div>
-                  <div className={`h-1 flex-1 rounded-full ${step.done ? "bg-emerald-500" : "bg-slate-100 dark:bg-slate-800"}`} />
+                  <ArrowRight className="w-4 h-4 text-slate-400 group-hover:text-slate-900 dark:group-hover:text-white group-hover:translate-x-0.5 transition-all" />
                 </div>
                 <div>
-                  <h4 className="font-semibold text-xs text-slate-800 dark:text-slate-200">
-                    {step.title}
-                  </h4>
-                  <span className="text-[10px] text-slate-400 block">{step.date}</span>
+                  <h3 className="font-sora font-bold text-sm text-slate-900 dark:text-white">
+                    Profile & Settings
+                  </h3>
+                  <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 leading-relaxed">
+                    Update your full name, email address, contact information, and security password.
+                  </p>
                 </div>
-              </div>
-            ))}
+              </Link>
+
+              {/* Notifications Card */}
+              <Link
+                href="/dashboard/notifications"
+                className="p-5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50/60 dark:bg-slate-800/40 hover:bg-slate-100/70 dark:hover:bg-slate-800 transition-all group flex flex-col justify-between space-y-3"
+              >
+                <div className="flex items-start justify-between">
+                  <div className="w-10 h-10 rounded-xl bg-red-500/10 text-[#ED1B26] flex items-center justify-center">
+                    <Bell className="w-5 h-5" />
+                  </div>
+                  <ArrowRight className="w-4 h-4 text-slate-400 group-hover:text-slate-900 dark:group-hover:text-white group-hover:translate-x-0.5 transition-all" />
+                </div>
+                <div>
+                  <h3 className="font-sora font-bold text-sm text-slate-900 dark:text-white">
+                    Notifications & Alerts
+                  </h3>
+                  <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 leading-relaxed">
+                    Review incoming travel advisory messages, security alerts, and system notices.
+                  </p>
+                </div>
+              </Link>
+            </div>
           </div>
 
-          {/* Action Row inside Card */}
-          <div className="pt-4 border-t border-slate-100 dark:border-slate-800 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
-            <p className="text-slate-500">
-              Assigned Specialist: <strong className="text-slate-800 dark:text-white">Alex Rivera</strong> (alex@gomatric.com)
-            </p>
-
-            <div className="flex items-center gap-2">
-              <Link
-                href="/tracking"
-                className="px-3.5 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 font-semibold hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors"
-              >
-                Track Status
-              </Link>
-              <button
-                type="button"
-                onClick={() => handleNavigate("applications")}
-                className="px-4 py-2 rounded-xl bg-[#061474] hover:bg-[#030A3A] text-white font-semibold shadow-xs transition-colors cursor-pointer"
-              >
-                View Full File
-              </button>
+          {/* Coming Soon Features Banner */}
+          <div className="bg-amber-50/60 dark:bg-amber-950/20 border border-amber-200/80 dark:border-amber-900/50 rounded-2xl p-5 sm:p-6 flex items-start gap-4">
+            <div className="w-10 h-10 rounded-xl bg-amber-500/20 text-amber-700 dark:text-amber-400 flex items-center justify-center shrink-0 mt-0.5">
+              <Clock className="w-5 h-5" />
+            </div>
+            <div className="space-y-1.5">
+              <div className="flex items-center gap-2">
+                <h3 className="font-sora font-bold text-sm text-amber-950 dark:text-amber-200">
+                  New Customer Features Coming Soon
+                </h3>
+                <span className="px-2 py-0.5 rounded-md bg-amber-200/60 dark:bg-amber-900/60 text-amber-900 dark:text-amber-200 text-[10px] font-bold">
+                  IN PROGRESS
+                </span>
+              </div>
+              <p className="text-xs text-amber-800 dark:text-amber-300 leading-relaxed">
+                Direct self-service application dossier tracking, live tour booking management, and downloadable invoice repositories will be activated for customer accounts in the upcoming release.
+              </p>
             </div>
           </div>
         </div>
 
-        {/* Quick Customer Shortcuts */}
-        <div className="bg-white dark:bg-slate-900 border border-slate-200/90 dark:border-slate-800 rounded-2xl p-6 shadow-xs space-y-5">
+        {/* Right (1/3): Public Services Shortcuts */}
+        <div className="bg-white dark:bg-slate-900 border border-slate-200/90 dark:border-slate-800 rounded-2xl p-6 shadow-xs space-y-4">
           <h3 className="font-sora font-bold text-base text-slate-900 dark:text-white">
-            Travel Shortcuts
+            Explore Services
           </h3>
+          <p className="text-xs text-slate-500 dark:text-slate-400">
+            Browse verified visa offerings or explore curated tour packages.
+          </p>
 
-          <div className="space-y-3">
+          <div className="space-y-2.5 pt-1">
             <Link
               href="/visa"
-              className="w-full h-11 px-4 rounded-xl bg-[#ED1B26] hover:bg-[#C4141E] text-white font-semibold text-xs flex items-center justify-between shadow-xs transition-all hover:scale-[1.01]"
+              className="w-full h-11 px-4 rounded-xl bg-[#ED1B26] hover:bg-[#C4141E] text-white font-semibold text-xs flex items-center justify-between shadow-sm transition-all hover:scale-[1.01]"
             >
               <div className="flex items-center gap-2">
                 <FileText className="w-4 h-4" />
-                <span>Apply for Another Visa</span>
+                <span>Browse Visa Catalog</span>
               </div>
-              <ArrowRight className="w-4 h-4" />
+              <ExternalLink className="w-3.5 h-3.5" />
             </Link>
 
             <Link
@@ -204,33 +225,25 @@ export function CustomerOverview({ onNavigateTab }: CustomerOverviewProps) {
             >
               <div className="flex items-center gap-2">
                 <Compass className="w-4 h-4 text-blue-500" />
-                <span>Explore Tour Destinations</span>
+                <span>Explore Tour Packages</span>
               </div>
-              <ArrowRight className="w-4 h-4 text-slate-400" />
+              <ExternalLink className="w-3.5 h-3.5 text-slate-400" />
             </Link>
 
-            <button
-              type="button"
-              onClick={() => handleNavigate("payments")}
-              className="w-full h-11 px-4 rounded-xl bg-slate-50 dark:bg-slate-800/80 hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200 font-semibold text-xs flex items-center justify-between border border-slate-200 dark:border-slate-700 transition-all cursor-pointer"
+            <Link
+              href="/contact"
+              className="w-full h-11 px-4 rounded-xl bg-slate-50 dark:bg-slate-800/80 hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200 font-semibold text-xs flex items-center justify-between border border-slate-200 dark:border-slate-700 transition-all"
             >
               <div className="flex items-center gap-2">
-                <Download className="w-4 h-4 text-emerald-500" />
-                <span>Download Invoices & Vouchers</span>
+                <Mail className="w-4 h-4 text-amber-500" />
+                <span>Contact Travel Concierge</span>
               </div>
-              <ArrowRight className="w-4 h-4 text-slate-400" />
-            </button>
+              <ExternalLink className="w-3.5 h-3.5 text-slate-400" />
+            </Link>
           </div>
         </div>
 
       </div>
-
-      {/* 3. Chronological Customer Log */}
-      <ActivityTimeline
-        items={customerActivities}
-        title="My Account Timeline"
-        subtitle="Recent status changes, document validations, and booking receipts"
-      />
 
     </div>
   );

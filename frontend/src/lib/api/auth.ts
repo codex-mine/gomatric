@@ -10,6 +10,8 @@ export interface AuthUser {
   isActive?: boolean;
   isEmailVerified: boolean;
   permissions?: string[];
+  createdAt?: string;
+  updatedAt?: string;
 }
 
 export interface AuthTokens {

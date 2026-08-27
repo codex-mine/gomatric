@@ -1,129 +1,71 @@
 "use client";
 
-import { CreditCard, Download, ExternalLink, CheckCircle2, Clock } from "lucide-react";
-import { DataTable, Column } from "../ui/data-table";
-import { StatusBadge } from "../ui/status-badge";
+import Link from "next/link";
+import {
+  CreditCard,
+  Search,
+  Download,
+  DollarSign,
+  ArrowRight,
+} from "lucide-react";
+import { PermissionGuard } from "../ui/permission-guard";
+import { EmptyState } from "../ui/empty-state";
 import { Role } from "@/lib/permissions";
 
-interface PaymentRow {
-  id: string;
-  invoiceNo: string;
-  customerName: string;
-  serviceDescription: string;
-  amount: string;
-  method: string;
-  date: string;
-  status: string;
+interface PaymentsTabProps {
+  role?: Role;
 }
 
-const MOCK_PAYMENTS: PaymentRow[] = [
-  {
-    id: "PAY-101",
-    invoiceNo: "INV-2026-089",
-    customerName: "Jane Doe",
-    serviceDescription: "UK Standard Visitor Visa (x1)",
-    amount: "$200.00",
-    method: "Credit Card (Stripe)",
-    date: "2026-08-22",
-    status: "PAID",
-  },
-  {
-    id: "PAY-102",
-    invoiceNo: "INV-2026-090",
-    customerName: "Michael Chang",
-    serviceDescription: "USA B1/B2 Visa Consultation",
-    amount: "$250.00",
-    method: "Bank Transfer",
-    date: "2026-08-24",
-    status: "PAID",
-  },
-  {
-    id: "PAY-103",
-    invoiceNo: "INV-2026-091",
-    customerName: "Sarah Connor",
-    serviceDescription: "Dubai Explorer Luxury Tour (x4)",
-    amount: "$3,800.00",
-    method: "Credit Card (Visa)",
-    date: "2026-08-25",
-    status: "PAID",
-  },
-  {
-    id: "PAY-104",
-    invoiceNo: "INV-2026-092",
-    customerName: "Carlos Martinez",
-    serviceDescription: "Japan Sightseeing Visa Stamping",
-    amount: "$75.00",
-    method: "Digital Wallet",
-    date: "2026-08-26",
-    status: "UNPAID",
-  },
-];
-
-export function PaymentsTab({ role }: { role: Role }) {
-  const columns: Column<PaymentRow>[] = [
-    {
-      header: "Invoice No / Customer",
-      cell: (item) => (
-        <div className="space-y-0.5">
-          <span className="font-bold text-slate-900 dark:text-white block">
-            {item.invoiceNo}
-          </span>
-          <span className="text-[11px] text-slate-400">
-            {item.customerName}
-          </span>
-        </div>
-      ),
-    },
-    {
-      header: "Service",
-      accessorKey: "serviceDescription",
-      className: "text-slate-700 dark:text-slate-300 text-xs",
-    },
-    {
-      header: "Payment Method",
-      accessorKey: "method",
-      className: "text-slate-500 text-xs hidden md:table-cell",
-    },
-    {
-      header: "Amount",
-      accessorKey: "amount",
-      className: "font-sora font-bold text-slate-900 dark:text-white",
-      sortable: true,
-    },
-    {
-      header: "Date",
-      accessorKey: "date",
-      className: "text-slate-400 text-xs hidden lg:table-cell",
-    },
-    {
-      header: "Status",
-      cell: (item) => <StatusBadge status={item.status} size="sm" />,
-    },
-    {
-      header: "Action",
-      className: "text-right",
-      cell: (item) => (
-        <button
-          type="button"
-          className="p-1.5 rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300 transition-colors"
-          title="Download PDF Invoice"
-        >
-          <Download className="w-3.5 h-3.5" />
-        </button>
-      ),
-    },
-  ];
-
+export function PaymentsTab({ role = "ADMIN" }: PaymentsTabProps) {
   return (
     <div className="space-y-6">
-      <DataTable
-        title="Invoices & Transactions"
-        description="Comprehensive accounting ledger of client payments, gateway receipts, and refunds"
-        data={MOCK_PAYMENTS}
-        columns={columns}
-        searchPlaceholder="Search invoice #, customer name..."
-        searchKeys={["invoiceNo", "customerName", "serviceDescription"]}
+      
+      {/* 1. Header with Title & Action Controls */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div>
+          <h1 className="font-sora font-extrabold text-2xl sm:text-3xl text-slate-900 dark:text-white tracking-tight">
+            Payments & Invoices
+          </h1>
+          <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1">
+            Track gateway transactions, invoice generation, customer refunds, and payment receipts.
+          </p>
+        </div>
+      </div>
+
+      {/* 2. Filter Bar */}
+      <div className="bg-white dark:bg-slate-900 border border-slate-200/90 dark:border-slate-800 rounded-2xl p-4 shadow-xs flex flex-col sm:flex-row items-center justify-between gap-3">
+        <div className="relative w-full sm:w-72">
+          <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+          <input
+            type="text"
+            disabled
+            placeholder="Search payments..."
+            className="w-full h-10 pl-9 pr-3.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50/70 dark:bg-slate-800/60 text-xs sm:text-sm text-slate-800 dark:text-white placeholder:text-slate-400 outline-none opacity-60 cursor-not-allowed"
+          />
+        </div>
+
+        <div className="text-xs font-semibold text-slate-400">
+          Showing 0 entries
+        </div>
+      </div>
+
+      {/* 3. Empty State */}
+      <EmptyState
+        icon={CreditCard}
+        badge="Billing Ledger"
+        title="No Payment Records Found"
+        description="Client invoice payments, gateway settlements, and refunded transactions will appear here once processed."
+        action={
+          <Link
+            href="/dashboard/services"
+            className="h-10 px-5 rounded-xl bg-[#061474] hover:bg-[#030A3A] text-white font-semibold text-xs flex items-center gap-2 transition-colors"
+          >
+            <DollarSign className="w-3.5 h-3.5 text-emerald-400" />
+            <span>View Visa Fee Structures</span>
+          </Link>
+        }
       />
+
     </div>
   );
 }
