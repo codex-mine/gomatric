@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useMutation } from '@tanstack/react-query';
 import {
   visasApi,
   Country,
@@ -77,5 +77,24 @@ export function useApplicantDocuments(
     queryFn: () => visasApi.getApplicantDocuments(serviceId!, applicantType),
     enabled: !!serviceId,
     staleTime: 1000 * 60 * 5,
+  });
+}
+
+export function useCreateVisaService() {
+  return useMutation({
+    mutationFn: (data: Record<string, any>) => visasApi.createVisaService(data),
+  });
+}
+
+export function useUpdateVisaService() {
+  return useMutation({
+    mutationFn: ({ id, data }: { id: string; data: Record<string, any> }) =>
+      visasApi.updateVisaService(id, data),
+  });
+}
+
+export function useDeleteVisaService() {
+  return useMutation({
+    mutationFn: (id: string) => visasApi.deleteVisaService(id),
   });
 }

@@ -44,10 +44,14 @@ class ApiClient {
 
     if (!response.ok) {
       const errorData = await response.json().catch(() => ({}));
+      const formattedMessage = Array.isArray(errorData.message)
+        ? errorData.message.join(" • ")
+        : errorData.message || "An unexpected error occurred";
+
       const error: ApiError = {
-        message: errorData.message || "An unexpected error occurred",
+        message: formattedMessage,
         statusCode: response.status,
-        errors: errorData.errors,
+        errors: errorData.errors || (Array.isArray(errorData.message) ? errorData.message : undefined),
       };
       throw error;
     }

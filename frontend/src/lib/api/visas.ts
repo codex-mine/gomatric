@@ -12,7 +12,8 @@ export type ApplicantType =
   | 'UNEMPLOYED';
 
 export interface Country {
-  _id: string;
+  _id?: string;
+  id?: string;
   name: string;
   slug: string;
   code: string;
@@ -29,7 +30,8 @@ export interface Country {
 }
 
 export interface VisaType {
-  _id: string;
+  _id?: string;
+  id?: string;
   name: string;
   slug: string;
   category: string;
@@ -394,5 +396,25 @@ export const visasApi = {
     if (Array.isArray(res)) return res;
     if (res && Array.isArray(res.data)) return res.data;
     return [];
+  },
+
+  async createVisaService(data: Record<string, any>): Promise<VisaService> {
+    const res = await apiClient.post<any>('/visa-services', data);
+    if (res && typeof res === 'object' && 'data' in res && !Array.isArray(res.data)) {
+      return res.data as VisaService;
+    }
+    return res as VisaService;
+  },
+
+  async updateVisaService(id: string, data: Record<string, any>): Promise<VisaService> {
+    const res = await apiClient.patch<any>(`/visa-services/${encodeURIComponent(id)}`, data);
+    if (res && typeof res === 'object' && 'data' in res && !Array.isArray(res.data)) {
+      return res.data as VisaService;
+    }
+    return res as VisaService;
+  },
+
+  async deleteVisaService(id: string): Promise<any> {
+    return apiClient.delete(`/visa-services/${encodeURIComponent(id)}`);
   },
 };

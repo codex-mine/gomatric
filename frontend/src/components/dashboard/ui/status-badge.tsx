@@ -1,0 +1,155 @@
+import React from "react";
+
+export type StatusType =
+  | "PENDING"
+  | "IN_REVIEW"
+  | "DOCUMENTS_REQUIRED"
+  | "SUBMITTED"
+  | "SUBMITTED_TO_EMBASSY"
+  | "APPROVED"
+  | "REJECTED"
+  | "CANCELLED"
+  | "PAID"
+  | "UNPAID"
+  | "REFUNDED"
+  | "CONFIRMED"
+  | "ACTIVE"
+  | "INACTIVE";
+
+interface StatusBadgeProps {
+  status: string | StatusType;
+  label?: string;
+  size?: "sm" | "md" | "lg";
+  className?: string;
+}
+
+const STATUS_CONFIG: Record<
+  string,
+  { label: string; bg: string; text: string; border: string; dot: string }
+> = {
+  // Application & Booking Statuses
+  APPROVED: {
+    label: "Approved",
+    bg: "bg-emerald-50 dark:bg-emerald-950/40",
+    text: "text-emerald-700 dark:text-emerald-300",
+    border: "border-emerald-200 dark:border-emerald-800/60",
+    dot: "bg-emerald-500",
+  },
+  CONFIRMED: {
+    label: "Confirmed",
+    bg: "bg-emerald-50 dark:bg-emerald-950/40",
+    text: "text-emerald-700 dark:text-emerald-300",
+    border: "border-emerald-200 dark:border-emerald-800/60",
+    dot: "bg-emerald-500",
+  },
+  ACTIVE: {
+    label: "Active",
+    bg: "bg-emerald-50 dark:bg-emerald-950/40",
+    text: "text-emerald-700 dark:text-emerald-300",
+    border: "border-emerald-200 dark:border-emerald-800/60",
+    dot: "bg-emerald-500",
+  },
+  PAID: {
+    label: "Paid",
+    bg: "bg-emerald-50 dark:bg-emerald-950/40",
+    text: "text-emerald-700 dark:text-emerald-300",
+    border: "border-emerald-200 dark:border-emerald-800/60",
+    dot: "bg-emerald-500",
+  },
+  SUBMITTED: {
+    label: "Submitted",
+    bg: "bg-blue-50 dark:bg-blue-950/40",
+    text: "text-blue-700 dark:text-blue-300",
+    border: "border-blue-200 dark:border-blue-800/60",
+    dot: "bg-blue-500",
+  },
+  SUBMITTED_TO_EMBASSY: {
+    label: "Embassy Processing",
+    bg: "bg-blue-50 dark:bg-blue-950/40",
+    text: "text-blue-700 dark:text-blue-300",
+    border: "border-blue-200 dark:border-blue-800/60",
+    dot: "bg-blue-500",
+  },
+  IN_REVIEW: {
+    label: "In Review",
+    bg: "bg-indigo-50 dark:bg-indigo-950/40",
+    text: "text-indigo-700 dark:text-indigo-300",
+    border: "border-indigo-200 dark:border-indigo-800/60",
+    dot: "bg-indigo-500",
+  },
+  PENDING: {
+    label: "Pending",
+    bg: "bg-amber-50 dark:bg-amber-950/40",
+    text: "text-amber-700 dark:text-amber-300",
+    border: "border-amber-200 dark:border-amber-800/60",
+    dot: "bg-amber-500",
+  },
+  UNPAID: {
+    label: "Unpaid",
+    bg: "bg-amber-50 dark:bg-amber-950/40",
+    text: "text-amber-700 dark:text-amber-300",
+    border: "border-amber-200 dark:border-amber-800/60",
+    dot: "bg-amber-500",
+  },
+  DOCUMENTS_REQUIRED: {
+    label: "Docs Required",
+    bg: "bg-orange-50 dark:bg-orange-950/40",
+    text: "text-orange-700 dark:text-orange-300",
+    border: "border-orange-200 dark:border-orange-800/60",
+    dot: "bg-orange-500",
+  },
+  REJECTED: {
+    label: "Rejected",
+    bg: "bg-red-50 dark:bg-red-950/40",
+    text: "text-red-700 dark:text-red-400",
+    border: "border-red-200 dark:border-red-800/60",
+    dot: "bg-red-500",
+  },
+  CANCELLED: {
+    label: "Cancelled",
+    bg: "bg-slate-100 dark:bg-slate-800",
+    text: "text-slate-600 dark:text-slate-400",
+    border: "border-slate-200 dark:border-slate-700",
+    dot: "bg-slate-400",
+  },
+  REFUNDED: {
+    label: "Refunded",
+    bg: "bg-purple-50 dark:bg-purple-950/40",
+    text: "text-purple-700 dark:text-purple-300",
+    border: "border-purple-200 dark:border-purple-800/60",
+    dot: "bg-purple-500",
+  },
+  INACTIVE: {
+    label: "Inactive",
+    bg: "bg-slate-100 dark:bg-slate-800",
+    text: "text-slate-500 dark:text-slate-400",
+    border: "border-slate-200 dark:border-slate-700",
+    dot: "bg-slate-400",
+  },
+};
+
+export function StatusBadge({ status, label, size = "md", className = "" }: StatusBadgeProps) {
+  const normStatus = (status || "").toUpperCase();
+  const config = STATUS_CONFIG[normStatus] || {
+    label: status || "Unknown",
+    bg: "bg-slate-100 dark:bg-slate-800",
+    text: "text-slate-700 dark:text-slate-300",
+    border: "border-slate-200 dark:border-slate-700",
+    dot: "bg-slate-400",
+  };
+
+  const sizeClasses = {
+    sm: "px-2 py-0.5 text-[10px]",
+    md: "px-2.5 py-0.5 text-xs",
+    lg: "px-3 py-1 text-xs",
+  };
+
+  return (
+    <span
+      className={`inline-flex items-center gap-1.5 rounded-full font-semibold border ${config.bg} ${config.text} ${config.border} ${sizeClasses[size]} ${className}`}
+    >
+      <span className={`w-1.5 h-1.5 rounded-full shrink-0 ${config.dot}`} />
+      <span>{label || config.label}</span>
+    </span>
+  );
+}

@@ -43,14 +43,14 @@ export function HeroSearchBox({ className }: { className?: string }) {
   return (
     <div
       className={cn(
-        "relative bg-white rounded-md shadow-sm p-5 md:p-6 border border-slate-100 max-w-5xl mx-auto w-full text-left overflow-hidden transition-all duration-300",
+        "relative bg-white rounded-md shadow-lg p-5 md:p-6 border border-slate-100 max-w-5xl mx-auto w-full text-left overflow-visible z-20 transition-all duration-300",
         className
       )}
     >
       {/* =================================================================== */}
       {/* DYNAMIC TAB-SPECIFIC BACKGROUND TRAVEL VECTORS                      */}
       {/* =================================================================== */}
-      <div ref={vectorRef} className="absolute inset-0 pointer-events-none select-none z-0 overflow-hidden">
+      <div ref={vectorRef} className="absolute inset-0 pointer-events-none select-none z-0 overflow-hidden rounded-md">
         
         {/* 1. TOURS: Mountain Peaks, Hiking Trail & Compass Rose */}
         {activeTab === "tours" && (
@@ -253,7 +253,7 @@ export function HeroSearchBox({ className }: { className?: string }) {
       </div>
 
       {/* Tab Panels */}
-      <div ref={panelRef} className="relative z-10">
+      <div ref={panelRef} className="relative z-20 overflow-visible">
         {activeTab === "tours" && <TourSearchTab />}
         {activeTab === "visa" && <VisaSearchTab />}
         {activeTab === "flights" && <AirTicketsSearchTab />}

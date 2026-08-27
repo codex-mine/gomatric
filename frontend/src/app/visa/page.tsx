@@ -39,7 +39,9 @@ function VisaResultsContent() {
 
   const [searchDestination, setSearchDestination] = useState(queryParam);
   const [selectedCountrySlug, setSelectedCountrySlug] = useState(countryParam);
-  const [selectedTypes, setSelectedTypes] = useState<string[]>(typeParam ? [typeParam] : []);
+  const [selectedTypes, setSelectedTypes] = useState<string[]>(
+    typeParam ? typeParam.split(",").map((t) => t.trim()).filter(Boolean) : []
+  );
   const [selectedSpeed, setSelectedSpeed] = useState<string>(processingParam || "any");
   const [selectedSort, setSelectedSort] = useState(sortParam);
   const [favorites, setFavorites] = useState<Record<string, boolean>>({});
@@ -48,7 +50,9 @@ function VisaResultsContent() {
   useEffect(() => {
     setSearchDestination(queryParam);
     setSelectedCountrySlug(countryParam);
-    setSelectedTypes(typeParam ? [typeParam] : []);
+    setSelectedTypes(
+      typeParam ? typeParam.split(",").map((t) => t.trim()).filter(Boolean) : []
+    );
     setSelectedSpeed(processingParam || "any");
     setSelectedSort(sortParam);
   }, [countryParam, typeParam, processingParam, queryParam, sortParam]);
