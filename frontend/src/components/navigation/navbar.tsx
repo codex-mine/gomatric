@@ -114,37 +114,34 @@ export function Navbar() {
           )}
         >
           {/* ======================================================== */}
-          {/* Logo Section                                             */}
+          {/* Logo Section (Horizontal fav.png + GoMatric text)        */}
           {/* ======================================================== */}
           <div className="flex items-center shrink-0">
             <Link
               href="/"
               className="flex items-center gap-2.5 group select-none"
             >
-              {/* Minimized Favicon Icon */}
-              {isMinimized ? (
-                <div className="relative w-8 h-8 rounded-full overflow-hidden shrink-0 shadow-sm ring-1 ring-[#ED1B26]/20 group-hover:scale-105 transition-transform duration-300">
-                  <Image
-                    src="/fav.png"
-                    alt="GoMatric"
-                    fill
-                    sizes="32px"
-                    className="object-contain"
-                  />
-                </div>
-              ) : (
-                /* Full Brand Logo */
-                <div className="relative h-8 md:h-9 w-auto flex items-center shrink-0">
-                  <Image
-                    src="/logo.png"
-                    alt="GoMatric Logo"
-                    width={145}
-                    height={36}
-                    priority
-                    className="h-8 md:h-9 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
-                  />
-                </div>
-              )}
+              {/* Large Crisp Emblem Icon */}
+              <div className="relative w-9 h-9 sm:w-10 sm:h-10 rounded-full overflow-hidden shrink-0 transition-transform duration-300 group-hover:scale-105 shadow-xs">
+                <Image
+                  src="/fav.png"
+                  alt="GoMatric"
+                  fill
+                  sizes="40px"
+                  priority
+                  className="object-contain"
+                />
+              </div>
+
+              {/* Horizontal Brand Typography */}
+              <span
+                className={cn(
+                  "font-sora font-bold text-xl sm:text-[22px] text-[#061474] tracking-tight transition-all duration-500 whitespace-nowrap",
+                  isMinimized ? "opacity-0 w-0 max-w-0 overflow-hidden" : "opacity-100 w-auto"
+                )}
+              >
+                GoMatric
+              </span>
             </Link>
           </div>
 

@@ -6,9 +6,15 @@ interface LogoProps {
   className?: string;
   variant?: "navy" | "white";
   onClick?: () => void;
+  showText?: boolean;
 }
 
-export function Logo({ className, variant = "navy", onClick }: LogoProps) {
+export function Logo({
+  className,
+  variant = "navy",
+  onClick,
+  showText = true,
+}: LogoProps) {
   const isWhite = variant === "white";
 
   return (
@@ -17,19 +23,29 @@ export function Logo({ className, variant = "navy", onClick }: LogoProps) {
       onClick={onClick}
       className={cn("flex items-center gap-2.5 group select-none", className)}
     >
-      <div className="relative h-8 md:h-9 w-auto flex items-center shrink-0">
+      {/* Large Crisp Emblem Icon */}
+      <div className="relative w-9 h-9 sm:w-10 sm:h-10 rounded-full overflow-hidden shrink-0 transition-transform duration-300 group-hover:scale-105 shadow-xs">
         <Image
-          src="/logo.png"
-          alt="GoMatric Logo"
-          width={150}
-          height={38}
+          src="/fav.png"
+          alt="GoMatric"
+          fill
+          sizes="40px"
           priority
-          className={cn(
-            "h-8 md:h-9 w-auto object-contain transition-transform duration-300 group-hover:scale-105",
-            isWhite && "brightness-0 invert"
-          )}
+          className="object-contain"
         />
       </div>
+
+      {/* Horizontal Brand Typography */}
+      {showText && (
+        <span
+          className={cn(
+            "font-sora font-bold text-xl sm:text-[22px] tracking-tight transition-colors duration-300",
+            isWhite ? "text-white" : "text-[#061474]"
+          )}
+        >
+          GoMatric
+        </span>
+      )}
     </Link>
   );
 }
