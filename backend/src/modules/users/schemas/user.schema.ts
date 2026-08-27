@@ -28,6 +28,15 @@ export class User {
   @Prop({ default: true })
   isActive: boolean;
 
+  @Prop({ default: false, index: true })
+  isEmailVerified: boolean;
+
+  @Prop()
+  emailVerificationCode?: string;
+
+  @Prop()
+  emailVerificationExpires?: Date;
+
   @Prop()
   refreshTokenHash?: string;
 
@@ -36,6 +45,9 @@ export class User {
 
   @Prop()
   passwordResetToken?: string;
+
+  @Prop()
+  passwordResetCode?: string;
 
   @Prop()
   passwordResetExpires?: Date;

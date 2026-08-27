@@ -3,7 +3,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { ThrottlerModule } from '@nestjs/throttler';
 import { APP_FILTER, APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
 
-import { appConfig, authConfig, databaseConfig, throttlerConfig, validateConfig } from './config';
+import { appConfig, authConfig, databaseConfig, mailConfig, throttlerConfig, validateConfig } from './config';
 import { DatabaseModule } from './database/database.module';
 
 // Common Providers & Guards
@@ -39,7 +39,7 @@ import { HealthModule } from './modules/health/health.module';
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
-      load: [appConfig, authConfig, databaseConfig, throttlerConfig],
+      load: [appConfig, authConfig, databaseConfig, mailConfig, throttlerConfig],
       validate: validateConfig,
     }),
     ThrottlerModule.forRootAsync({

@@ -1,17 +1,26 @@
 "use client";
 
-import { useState } from "react";
+import { useState, Suspense } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { ArrowRight, Plane, Loader2, CheckCircle2 } from "lucide-react";
+import { ArrowRight, Loader2, CheckCircle2, AlertCircle } from "lucide-react";
 import { AuthShell } from "@/components/auth/auth-shell";
 import { AuthFormField } from "@/components/auth/auth-form-field";
+import { GuestGuard } from "@/components/auth/guest-guard";
 import { loginSchema, LoginFormData } from "@/lib/validations/auth";
+import { useAuth } from "@/providers/auth-provider";
 
-export default function LoginPage() {
+function LoginForm() {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const redirectUrl = searchParams.get("redirect") || "/dashboard";
+
+  const { login } = useAuth();
   const [isLoading, setIsLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
 
   const {
@@ -28,18 +37,28 @@ export default function LoginPage() {
 
   const onSubmit = async (data: LoginFormData) => {
     setIsLoading(true);
+    setErrorMessage(null);
     setSuccessMessage(null);
 
-    // Explicitly log the submitted form data as requested
-    console.log("Auth Submitted Data [Sign In]:", {
-      email: data.email,
-      timestamp: new Date().toISOString(),
-    });
-
-    // Simulate authentication API call
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    setIsLoading(false);
-    setSuccessMessage("Signed in successfully! Redirecting to your dashboard...");
+    try {
+      const response = await login(data);
+      setSuccessMessage("Signed in successfully! Redirecting...");
+      
+      // If email is not verified, redirect to verify-email
+      if (response.user && !response.user.isEmailVerified) {
+        setTimeout(() => {
+          router.push(`/verify-email?email=${encodeURIComponent(data.email)}`);
+        }, 800);
+      } else {
+        setTimeout(() => {
+          router.push(redirectUrl);
+        }, 800);
+      }
+    } catch (err: any) {
+      setErrorMessage(err.message || "Failed to sign in. Please check your credentials.");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -80,6 +99,14 @@ export default function LoginPage() {
             </p>
           </div>
         </div>
+
+        {/* Error Alert */}
+        {errorMessage && (
+          <div className="mb-6 p-4 rounded-md bg-red-50 dark:bg-red-950/40 border border-red-200 dark:border-red-800/60 flex items-center gap-2.5 text-red-800 dark:text-red-300 text-xs sm:text-sm animate-fadeIn">
+            <AlertCircle className="w-4 h-4 shrink-0 text-red-600 dark:text-red-400" />
+            <span>{errorMessage}</span>
+          </div>
+        )}
 
         {/* Success Alert */}
         {successMessage && (
@@ -194,5 +221,23 @@ export default function LoginPage() {
 
       </div>
     </AuthShell>
+  );
+}
+
+export default function LoginPage() {
+  return (
+    <GuestGuard>
+      <Suspense
+        fallback={
+          <AuthShell>
+            <div className="w-full bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-md p-10 flex items-center justify-center min-h-[350px]">
+              <Loader2 className="w-6 h-6 animate-spin text-[#061474] dark:text-blue-400" />
+            </div>
+          </AuthShell>
+        }
+      >
+        <LoginForm />
+      </Suspense>
+    </GuestGuard>
   );
 }

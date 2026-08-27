@@ -10,8 +10,9 @@ export function useDestinations() {
     queryKey: ["destinations"],
     queryFn: async () => {
       try {
-        const res = await apiClient.get<{ data: Destination[] }>("/destinations");
-        return res.data;
+        const res = await apiClient.get<any>("/destinations");
+        const list = Array.isArray(res) ? res : (res?.data || res?.items);
+        return list && list.length > 0 ? list : mockDestinations;
       } catch {
         return mockDestinations;
       }
@@ -24,8 +25,9 @@ export function useDestination(slug: string) {
     queryKey: ["destinations", slug],
     queryFn: async () => {
       try {
-        const res = await apiClient.get<{ data: Destination }>(`/destinations/${slug}`);
-        return res.data;
+        const res = await apiClient.get<any>(`/destinations/${slug}`);
+        const item = res?.data !== undefined ? res.data : res;
+        return item || mockDestinations.find((d) => (d.slug || d.id) === slug) || null;
       } catch {
         return mockDestinations.find((d) => (d.slug || d.id) === slug) || null;
       }

@@ -1,16 +1,26 @@
 "use client";
 
-import { useState, useRef, useEffect, KeyboardEvent, ClipboardEvent } from "react";
+import { useState, useRef, useEffect, KeyboardEvent, ClipboardEvent, Suspense } from "react";
 import Link from "next/link";
-import { ArrowRight, Loader2, CheckCircle2, ShieldCheck, RefreshCw } from "lucide-react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { ArrowRight, Loader2, CheckCircle2, ShieldCheck, RefreshCw, AlertCircle } from "lucide-react";
 import { AuthShell } from "@/components/auth/auth-shell";
+import { authApi } from "@/lib/api/auth";
+import { useAuth } from "@/providers/auth-provider";
 
-export default function VerifyEmailPage() {
+function VerifyEmailContent() {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const email = searchParams.get("email") || "";
+
+  const { verifyEmail } = useAuth();
   const [digits, setDigits] = useState<string[]>(["", "", "", "", "", ""]);
   const [isLoading, setIsLoading] = useState(false);
   const [isVerified, setIsVerified] = useState(false);
+  const [countdown, setCountdown] = useState(3);
   const [resendCooldown, setResendCooldown] = useState(45);
   const [error, setError] = useState<string | null>(null);
+  const [infoMessage, setInfoMessage] = useState<string | null>(null);
 
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
 
@@ -22,6 +32,22 @@ export default function VerifyEmailPage() {
     }, 1000);
     return () => clearInterval(timer);
   }, [resendCooldown]);
+
+  // 3-second redirect countdown to dashboard on successful verification
+  useEffect(() => {
+    if (!isVerified) return;
+
+    if (countdown <= 0) {
+      router.push("/dashboard");
+      return;
+    }
+
+    const timer = setTimeout(() => {
+      setCountdown((prev) => prev - 1);
+    }, 1000);
+
+    return () => clearTimeout(timer);
+  }, [isVerified, countdown, router]);
 
   const handleDigitChange = (index: number, value: string) => {
     const cleanValue = value.replace(/\D/g, "").slice(-1);
@@ -65,25 +91,36 @@ export default function VerifyEmailPage() {
       return;
     }
 
+    if (!email) {
+      setError("Email address is missing. Please return to the registration or login page.");
+      return;
+    }
+
     setIsLoading(true);
     setError(null);
 
-    // Explicitly log the submitted form data as requested
-    console.log("Auth Submitted Data [Verify Email]:", {
-      code: verificationCode,
-      timestamp: new Date().toISOString(),
-    });
-
-    // Simulate verification API call
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    setIsLoading(false);
-    setIsVerified(true);
+    try {
+      await verifyEmail(email, verificationCode);
+      setIsVerified(true);
+    } catch (err: any) {
+      setError(err.message || "Invalid or expired verification code.");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
-  const handleResend = () => {
-    if (resendCooldown > 0) return;
+  const handleResend = async () => {
+    if (resendCooldown > 0 || !email) return;
     setResendCooldown(60);
-    console.log("Auth Action: Resend Verification Code triggered");
+    setError(null);
+    setInfoMessage(null);
+
+    try {
+      const res = await authApi.resendVerification({ email });
+      setInfoMessage(res.message || "A new 6-digit code has been sent to your email.");
+    } catch (err: any) {
+      setError(err.message || "Failed to resend code. Please try again later.");
+    }
   };
 
   return (
@@ -105,30 +142,50 @@ export default function VerifyEmailPage() {
             Check your email.
           </h1>
           <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1 max-w-sm mx-auto leading-relaxed">
-            We&apos;ve sent a 6-digit verification code to your email. Enter it below to activate your account.
+            We&apos;ve sent a 6-digit verification code to{" "}
+            {email ? <strong className="text-slate-700 dark:text-slate-200">{email}</strong> : "your email"}.
+            Enter it below to activate your account.
           </p>
         </div>
+
+        {/* Info Message Alert */}
+        {infoMessage && (
+          <div className="mb-6 p-4 rounded-md bg-blue-50 dark:bg-blue-950/40 border border-blue-200 dark:border-blue-800/60 flex items-center gap-2.5 text-blue-800 dark:text-blue-300 text-xs sm:text-sm animate-fadeIn">
+            <CheckCircle2 className="w-4 h-4 shrink-0 text-blue-600 dark:text-blue-400" />
+            <span>{infoMessage}</span>
+          </div>
+        )}
+
+        {/* Error Alert */}
+        {error && (
+          <div className="mb-6 p-4 rounded-md bg-red-50 dark:bg-red-950/40 border border-red-200 dark:border-red-800/60 flex items-center gap-2.5 text-red-800 dark:text-red-300 text-xs sm:text-sm animate-fadeIn">
+            <AlertCircle className="w-4 h-4 shrink-0 text-red-600 dark:text-red-400" />
+            <span>{error}</span>
+          </div>
+        )}
 
         {/* Success View */}
         {isVerified ? (
           <div className="space-y-6 animate-fadeIn">
             <div className="p-4 rounded-md bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800/60 text-emerald-800 dark:text-emerald-300 text-sm flex items-start gap-3">
-              <CheckCircle2 className="w-4 h-4 shrink-0 text-emerald-600 dark:text-emerald-400 mt-0.5" />
+              <CheckCircle2 className="w-5 h-5 shrink-0 text-emerald-600 dark:text-emerald-400 mt-0.5" />
               <div>
                 <p className="font-semibold text-emerald-900 dark:text-emerald-200">
                   Email verified successfully!
                 </p>
                 <p className="text-xs text-emerald-700 dark:text-emerald-400 mt-0.5">
-                  Your GoMatric account is fully activated. You can now explore tours and visa applications.
+                  Your GoMatric account is fully activated. Redirecting to your dashboard in{" "}
+                  <strong className="text-emerald-950 dark:text-emerald-100 font-bold">{countdown}</strong>{" "}
+                  {countdown === 1 ? "second" : "seconds"}...
                 </p>
               </div>
             </div>
 
             <Link
-              href="/"
+              href="/dashboard"
               className="w-full h-12 rounded-md bg-[#061474] hover:bg-[#030A3A] dark:bg-blue-600 dark:hover:bg-blue-700 text-white font-semibold text-sm flex items-center justify-center gap-2 transition-all shadow-sm cursor-pointer"
             >
-              <span>Continue to Homepage</span>
+              <span>Go to Dashboard ({countdown}s)</span>
               <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
@@ -216,5 +273,21 @@ export default function VerifyEmailPage() {
 
       </div>
     </AuthShell>
+  );
+}
+
+export default function VerifyEmailPage() {
+  return (
+    <Suspense
+      fallback={
+        <AuthShell>
+          <div className="w-full bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-md p-10 flex items-center justify-center min-h-[350px]">
+            <Loader2 className="w-6 h-6 animate-spin text-[#061474] dark:text-blue-400" />
+          </div>
+        </AuthShell>
+      }
+    >
+      <VerifyEmailContent />
+    </Suspense>
   );
 }

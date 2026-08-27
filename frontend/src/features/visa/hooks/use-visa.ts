@@ -10,8 +10,9 @@ export function useVisaCountries() {
     queryKey: ["visa-countries"],
     queryFn: async () => {
       try {
-        const res = await apiClient.get<{ data: VisaCountry[] }>("/visa/countries");
-        return res.data;
+        const res = await apiClient.get<any>("/visa/countries");
+        const list = Array.isArray(res) ? res : (res?.data || res?.items);
+        return list && list.length > 0 ? list : mockVisaCountries;
       } catch {
         return mockVisaCountries;
       }
@@ -24,8 +25,9 @@ export function useVisaRequirements(countrySlug: string) {
     queryKey: ["visa-requirements", countrySlug],
     queryFn: async () => {
       try {
-        const res = await apiClient.get<{ data: VisaRequirement }>(`/visa/requirements/${countrySlug}`);
-        return res.data;
+        const res = await apiClient.get<any>(`/visa/requirements/${countrySlug}`);
+        const item = res?.data !== undefined ? res.data : res;
+        return item || mockVisaRequirements.find((r) => r.country.toLowerCase() === countrySlug.toLowerCase()) || null;
       } catch {
         return mockVisaRequirements.find((r) => r.country.toLowerCase() === countrySlug.toLowerCase()) || null;
       }

@@ -13,10 +13,13 @@ import {
   MessageCircle,
   Bookmark,
   Share2,
+  User as UserIcon,
+  LogOut,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Logo } from "./logo";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
+import { useAuth } from "@/providers/auth-provider";
 
 interface MobileNavProps {
   isOpen: boolean;
@@ -72,6 +75,7 @@ const MENU_SECTIONS: NavSection[] = [
 ];
 
 export function MobileNav({ isOpen, onClose }: MobileNavProps) {
+  const { user, isAuthenticated, logout } = useAuth();
   const pathname = usePathname();
   const router = useRouter();
   const [searchQuery, setSearchQuery] = useState("");
@@ -270,27 +274,49 @@ export function MobileNav({ isOpen, onClose }: MobileNavProps) {
             })}
           </nav>
 
-          {/* Need Help Card Box */}
-          <div className="gsap-mobile-item    ">
-            
-
+          {/* Auth & CTA Action Box */}
+          <div className="gsap-mobile-item">
             <div className="space-y-2.5">
-              <Link
-                href="/contact"
-                onClick={onClose}
-                className="w-full py-3 px-4 bg-white border border-[#061474]/20 hover:border-[#061474] text-[#061474] font-semibold text-sm rounded-xl text-center block transition-all shadow-sm"
-              >
-                Contact Us
-              </Link>
+              {isAuthenticated && user ? (
+                <div className="p-3 bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 rounded-md flex items-center justify-between gap-3">
+                  <Link
+                    href="/dashboard"
+                    onClick={onClose}
+                    className="flex items-center gap-2 text-sm font-semibold text-[#061474] dark:text-white truncate"
+                  >
+                    <div className="w-8 h-8 rounded-full bg-[#061474] text-white flex items-center justify-center text-xs font-bold shrink-0">
+                      {user.name ? user.name[0].toUpperCase() : "U"}
+                    </div>
+                    <div className="truncate">
+                      <p className="truncate leading-none">{user.name}</p>
+                      <span className="text-[11px] font-normal text-slate-500 dark:text-slate-400">
+                        Go to Dashboard →
+                      </span>
+                    </div>
+                  </Link>
 
-              <Link
-                href="/booking"
-                onClick={onClose}
-                className="w-full py-3 px-4 bg-[#061474] hover:bg-[#030A3A] text-white font-semibold text-sm rounded-xl text-center flex items-center justify-center gap-2 group transition-all shadow-sm"
-              >
-                <span>Get Started</span>
-                <ArrowRight className="w-4 h-4 text-[#ED1B26] transition-transform duration-300 group-hover:translate-x-1" />
-              </Link>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      logout();
+                      onClose();
+                    }}
+                    title="Sign Out"
+                    className="p-2 rounded-md hover:bg-red-50 dark:hover:bg-red-950/40 text-slate-500 hover:text-[#ED1B26] transition-colors"
+                  >
+                    <LogOut className="w-4 h-4" />
+                  </button>
+                </div>
+              ) : (
+                <Link
+                  href="/login"
+                  onClick={onClose}
+                  className="w-full py-3.5 px-4 bg-[#061474] hover:bg-[#030A3A] dark:bg-blue-600 dark:hover:bg-blue-700 text-white font-semibold text-sm rounded-md text-center flex items-center justify-center gap-2 group transition-all shadow-sm"
+                >
+                  <span>Get Started</span>
+                  <ArrowRight className="w-4 h-4 text-white transition-transform duration-300 group-hover:translate-x-1" />
+                </Link>
+              )}
             </div>
           </div>
         </div>

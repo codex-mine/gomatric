@@ -3,6 +3,7 @@ import { NestFactory } from '@nestjs/core';
 import { ConfigService } from '@nestjs/config';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import helmet from 'helmet';
+import * as cookieParser from 'cookie-parser';
 import { AppModule } from './app.module';
 
 async function bootstrap() {
@@ -16,8 +17,9 @@ async function bootstrap() {
   const nodeEnv = configService.get<string>('app.nodeEnv') || 'development';
   const swaggerEnabled = configService.get<boolean>('app.swaggerEnabled');
 
-  // Security Headers
+  // Security Headers & Cookies
   app.use(helmet());
+  app.use(cookieParser());
 
   // CORS Configuration
   const allowedOrigins =

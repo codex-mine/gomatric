@@ -5,10 +5,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import gsap from "gsap";
-import { ChevronDown, ArrowRight, Menu, Search } from "lucide-react";
+import { ChevronDown, ArrowRight, Menu, Search, User as UserIcon, LogOut } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { MobileNav } from "./mobile-nav";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
+import { useAuth } from "@/providers/auth-provider";
 
 interface DropdownItem {
   title: string;
@@ -26,6 +27,7 @@ const VISA_DROPDOWN_ITEMS: DropdownItem[] = [
 ];
 
 export function Navbar() {
+  const { user, isAuthenticated, logout } = useAuth();
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
   const [isVisaDropdownOpen, setIsVisaDropdownOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -111,7 +113,7 @@ export function Navbar() {
           className={cn(
             "pointer-events-auto bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border border-slate-200/80 dark:border-slate-800 shadow-sm flex items-center justify-between relative transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] will-change-[width,max-width,padding,transform]",
             isMinimized
-              ? "w-auto h-[48px] md:h-[52px] px-4 py-0 rounded-md justify-center shadow-sm ring-1 ring-slate-200/80 dark:ring-slate-700 cursor-pointer hover:scale-105"
+              ? "w-full lg:w-auto h-[52px] md:h-[56px] lg:h-[52px] px-4 py-0 rounded-md justify-between lg:justify-center shadow-sm lg:ring-1 lg:ring-slate-200/80 dark:lg:ring-slate-700 cursor-default lg:cursor-pointer lg:hover:scale-105"
               : "w-full max-w-7xl h-[56px] md:h-[60px] rounded-md px-4 md:px-6 py-0 shadow-sm"
           )}
         >
@@ -276,7 +278,7 @@ export function Navbar() {
           {/* ======================================================== */}
           <div
             className={cn(
-              "items-center gap-4 transition-all duration-500 ease-out",
+              "items-center gap-3 transition-all duration-500 ease-out",
               isMinimized
                 ? "hidden opacity-0 pointer-events-none"
                 : "hidden lg:flex opacity-100 pointer-events-auto delay-100"
@@ -285,23 +287,44 @@ export function Navbar() {
             {/* Dark / Light Mode Toggle Button */}
             <ThemeToggle />
 
-            <Link
-              href="/booking"
-              className="h-9 sm:h-10 px-5 rounded-md bg-[#061474] dark:bg-blue-600 hover:bg-[#030A3A] dark:hover:bg-blue-700 text-white font-semibold text-sm flex items-center justify-center gap-1.5 transition-all shadow-sm hover:shadow-md hover:scale-[1.02] active:scale-[0.98] group whitespace-nowrap"
-            >
-              <span>Get Started</span>
-              <ArrowRight className="w-3.5 h-3.5 text-white transition-transform duration-300 group-hover:translate-x-1" />
-            </Link>
+            {isAuthenticated && user ? (
+              <div className="flex items-center gap-2">
+                <Link
+                  href="/dashboard"
+                  className="flex items-center gap-2 px-3 py-1.5 rounded-md bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 border border-slate-200/80 dark:border-slate-700 text-xs font-semibold text-slate-800 dark:text-slate-200 transition-colors"
+                  title="My Dashboard"
+                >
+                  <div className="w-6 h-6 rounded-full bg-[#061474] dark:bg-blue-600 text-white flex items-center justify-center text-xs font-bold shrink-0">
+                    {user.name ? user.name.charAt(0).toUpperCase() : "U"}
+                  </div>
+                  <span className="max-w-[100px] truncate">{user.name.split(" ")[0]}</span>
+                </Link>
+                <button
+                  type="button"
+                  onClick={() => logout()}
+                  title="Sign Out"
+                  className="p-2 rounded-md hover:bg-red-50 dark:hover:bg-red-950/40 text-slate-500 hover:text-[#ED1B26] transition-colors cursor-pointer"
+                  aria-label="Sign Out"
+                >
+                  <LogOut className="w-4 h-4" />
+                </button>
+              </div>
+            ) : (
+              <Link
+                href="/login"
+                className="h-9 sm:h-10 px-5 rounded-md bg-[#061474] dark:bg-blue-600 hover:bg-[#030A3A] dark:hover:bg-blue-700 text-white font-semibold text-sm flex items-center justify-center gap-1.5 transition-all shadow-sm hover:shadow-md hover:scale-[1.02] active:scale-[0.98] group whitespace-nowrap"
+              >
+                <span>Get Started</span>
+                <ArrowRight className="w-3.5 h-3.5 text-white transition-transform duration-300 group-hover:translate-x-1" />
+              </Link>
+            )}
           </div>
 
           {/* ======================================================== */}
           {/* Mobile Right Controls: Theme + Search + Hamburger        */}
           {/* ======================================================== */}
           <div
-            className={cn(
-              "items-center gap-1.5",
-              isMinimized ? "hidden" : "flex lg:hidden"
-            )}
+            className="flex lg:hidden items-center gap-1.5"
           >
             <ThemeToggle />
             <button

@@ -52,6 +52,34 @@ export class EnvironmentVariables {
   @IsString()
   @IsOptional()
   SWAGGER_ENABLED: string = 'true';
+
+  @IsString()
+  @IsOptional()
+  SMTP_HOST?: string = 'smtp.gmail.com';
+
+  @IsNumber()
+  @IsOptional()
+  SMTP_PORT?: number = 587;
+
+  @IsString()
+  @IsOptional()
+  SMTP_USERNAME?: string;
+
+  @IsString()
+  @IsOptional()
+  SMTP_PASSWORD?: string;
+
+  @IsString()
+  @IsOptional()
+  SMTP_USE_TLS?: string = 'true';
+
+  @IsString()
+  @IsOptional()
+  SMTP_FROM_EMAIL?: string = 'salespilot.ai1@gmail.com';
+
+  @IsString()
+  @IsOptional()
+  SMTP_FROM_NAME?: string = 'Codex Edumine';
 }
 
 export function validateConfig(config: Record<string, unknown>) {

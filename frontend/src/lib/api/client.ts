@@ -16,14 +16,21 @@ class ApiClient {
   ): Promise<T> {
     const url = `${this.baseUrl}${endpoint}`;
 
+    let token: string | null = null;
+    if (typeof window !== "undefined") {
+      token = localStorage.getItem("gomatric_access_token");
+    }
+
     const headers: Record<string, string> = {
       "Content-Type": "application/json",
+      ...(token ? { Authorization: `Bearer ${token}` } : {}),
       ...options?.headers,
     };
 
     const config: RequestInit = {
       method,
       headers,
+      credentials: "include",
       signal: options?.signal,
     };
 
@@ -47,7 +54,13 @@ class ApiClient {
       return undefined as T;
     }
 
-    return response.json();
+    const json = await response.json();
+    // Support NestJS TransformResponseInterceptor: { success: true, data: ... }
+    if (json && typeof json === "object" && "success" in json && "data" in json) {
+      return json.data as T;
+    }
+
+    return json as T;
   }
 
   async get<T>(endpoint: string, options?: RequestOptions): Promise<T> {
